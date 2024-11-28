@@ -1,0 +1,89 @@
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos para el encabezado */
+  .header-container {
+    background-color: #007BFF; /* Color de fondo azul */
+    color: white;
+    padding: 20px;
+    text-align: center; /* Centrar el texto */
+  }
+  
+  /* Estilo para el título */
+  .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  /* Estilo de la lista de navegación */
+  .nav-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para los enlaces */
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Estilo de los enlaces en el encabezado */
+  .nav-list li {
+    margin: 0 10px;
+  }
+  
+  /* Estilo de los botones como enlaces de navegación */
+  .btn {
+    color: black; /* Cambia el color del texto de los botones a negro */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none; /* Sin borde para que parezca un enlace */
+    background-color: transparent; /* Fondo transparente */
+  }
+  
+  .btn:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Estilo específico para botones de Login y Registro */
+  .btn-outline-primary {
+    color: black; /* Texto negro */
+    border: 2px solid black; /* Borde negro */
+    background-color: transparent; /* Fondo transparente */
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: black; /* Fondo negro al pasar el mouse */
+    color: white; /* Texto blanco al pasar el mouse */
+  }
+  
+  /* Estilo para los botones de Registro y Logout */
+  .btn-primary {
+    color: black; /* Texto negro */
+    background-color: transparent; /* Sin fondo */
+    border: 2px solid black; /* Borde negro */
+  }
+  
+  .btn-primary:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo claro al pasar el mouse */
+  }
+  

@@ -1,0 +1,10 @@
+export enum Seguros {
+    AUTOS = "AUTOS",
+    VIDA = "VIDA",
+    PYME = "PYME",
+    RESPONSABILIDAD_CIVIL = "RESPONSABILIDAD_CIVIL",
+    SALUD = "SALUD",
+    PROTECCION_CREDITO = "PROTECCION_CREDITO",
+    HOGAR = "HOGAR"
+  }
+  

@@ -1,0 +1,125 @@
+/* Estilo general */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Tipografía global */
+  }
+  
+  body {
+    background-color: #f4f4f9; /* Color de fondo similar al de reserva-cita */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la ventana */
+    margin: 0; /* Sin margen en el body */
+  }
+  
+  /* Estilo del contenedor principal */
+  .container {
+    width: 80%; /* Ancho del contenedor */
+    max-width: 600px; /* Ancho máximo */
+    margin: 0 auto; /* Centramos el contenedor */
+    padding: 20px;
+  }
+  
+  /* Estilo de la tarjeta del formulario */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Para alinear elementos en columna */
+    align-items: stretch; /* Centrar elementos horizontalmente */
+  }
+  
+  /* Estilo del encabezado del formulario */
+  h5 {
+    font-size: 1.75em; /* Tamaño de fuente */
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007BFF; /* Cambia a azul */
+  }
+  
+  /* Estilo de las etiquetas */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333; /* Color de etiqueta */
+  }
+  
+  /* Estilo de los campos de entrada */
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 15px; /* Espacio entre los campos */
+  }
+  
+  input:focus {
+    border-color: #4CAF50; /* Color del borde al hacer foco */
+    outline: none; /* Sin contorno */
+  }
+  
+  /* Estilo del botón de registro */
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px; /* Ajuste del padding para que se vea más consistente */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%; /* Botón ocupa todo el ancho */
+    margin-top: 10px; /* Espacio encima del botón */
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Color del botón al pasar el mouse */
+  }
+  
+  button:disabled {
+    background-color: #ccc; /* Color del botón deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+  }
+
+ /* Estilo del botón de retroceso */
+.back-button {
+  background-color: #FF4C4C; /* Rojo */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start; /* Alinea el botón a la izquierda */
+  margin-bottom: 10px; /* Espacio debajo del botón */
+}
+
+.back-button:hover {
+  background-color: #FF3333; /* Color del botón al pasar el mouse */
+}
+  
+.alert {
+    color: #d9534f;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .alert-danger {
+    border: 1px solid #d9534f;
+  }
+  
+  /* Estilo del texto centrado */
+  .text-center {
+    text-align: center; /* Centrar texto */
+  }
+  
