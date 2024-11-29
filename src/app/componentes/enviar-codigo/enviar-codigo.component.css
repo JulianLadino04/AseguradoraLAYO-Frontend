@@ -1,0 +1,115 @@
+/* Estilo general */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: none; /* Eliminar la sombra */
+    border-radius: 0; /* Eliminar el borde redondeado */
+    border: none; /* Asegurarse de que no haya borde */
+  }
+  
+  h5 {
+    font-size: 1.75em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007BFF;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Limitar ancho del campo de entrada y centrarlo */
+  input[type="text"] {
+    max-width: 300px; /* Ajustar según sea necesario */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin: 0 auto 15px auto; /* Centrado horizontal */
+  }
+  
+  input:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  /* Estilos generales del botón */
+  .button {
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 38px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Botón principal */
+  .button-main {
+    background-color: #4CAF50;
+    width: 100%;
+  }
+  
+  .button-main:hover {
+    background-color: #45a049;
+  }
+  
+  /* Botón atrás con color distinto */
+  .button-back {
+    background-color: #FF4C4C;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .button-back:hover {
+    background-color: #FF3333;
+  }
+  
+  .card-header {
+    background-color: #fff; /* Fondo blanco para el encabezado */
+    padding: 20px; /* Mantiene el mismo relleno */
+    border-bottom: 1px solid #ddd; /* Añade una línea inferior para separar visualmente */
+    border: none; /* Eliminar bordes del encabezado */
+  }
+  
+  h5 {
+    font-size: 1.75em;
+    margin: 0; /* Ajusta el margen para una mejor alineación */
+    text-align: center;
+    color: #007BFF;
+  }
+  

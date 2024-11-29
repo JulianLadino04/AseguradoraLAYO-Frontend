@@ -26,17 +26,28 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0; /* Remueve el padding extra del card para usar solo el padding en las sub-divisiones */
+  }
+  
+  .card-header {
+    background-color: #007BFF;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 15px;
+    text-align: center;
   }
   
   h5 {
-    font-size: 1.75em;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #007BFF;
+    font-size: 1.5em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-body {
+    padding: 20px;
   }
   
   label {
@@ -52,7 +63,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-    margin-bottom: 15px;
   }
   
   input:focus {
@@ -85,7 +95,43 @@
     text-align: center;
   }
   
-  .text-success {
-    color: green;
+  .alert {
+    color: #d9534f;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 15px;
   }
+  
+  .alert-danger {
+    border: 1px solid #d9534f;
+  }
+  
+  .fa-user-plus,
+  .fa-plus {
+    margin-right: 5px;
+  }
+  
+  .g-3 > .col-6,
+  .g-3 > .col-12 {
+    padding: 10px 0;
+  }
+
+  /* Estilo del botón de retroceso */
+.back-button {
+  background-color: #FF4C4C; /* Rojo */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start; /* Alinea el botón a la izquierda */
+  margin-bottom: 10px; /* Espacio debajo del botón */
+}
+
+.back-button:hover {
+  background-color: #FF3333; /* Color del botón al pasar el mouse */
+}
   

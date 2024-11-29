@@ -9,9 +9,12 @@ const TOKEN_KEY = "AuthToken";
   providedIn: 'root'
 })
 export class TokenService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLogged());
+  private isLoggedInSubject: BehaviorSubject<boolean>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    // Inicializa el estado de autenticación al verificar si hay un token en el sessionStorage
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(this.isLogged());
+  }
 
   public setToken(token: string) {
     window.sessionStorage.setItem(TOKEN_KEY, token);
@@ -23,7 +26,7 @@ export class TokenService {
   }
 
   public isLogged(): boolean {
-    return !!this.getToken();
+    return !!this.getToken();  // Retorna true si el token está presente, de lo contrario false
   }
 
   public getIsLoggedIn(): Observable<boolean> {
@@ -37,70 +40,72 @@ export class TokenService {
       window.location.reload();
     });
   }
- 
 
-private decodePayload(token: string): any {
-  const payload = token!.split(".")[1];
-  const payloadDecoded = Buffer.from(payload, 'base64').toString('ascii');
-  const values = JSON.parse(payloadDecoded);
-  return values;
-}
+  public login(token: string) {
+    this.setToken(token);
+    this.router.navigate(["/"]);
+  }
 
-public getIDCuenta(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    return values.id;
+  private decodePayload(token: string): any {
+    const payload = token!.split(".")[1];
+    const payloadDecoded = Buffer.from(payload, 'base64').toString('ascii');
+    const values = JSON.parse(payloadDecoded);
+    return values;
   }
-  return "";
- }
- 
 
- public getRol(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    return values.rol;
+  public getIDCuenta(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.id;
+    }
+    return "";
   }
-  return "";
- }
- 
 
- public getCorreo(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    return values.sub;
+  public getRol(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.rol;
+    }
+    return "";
   }
-  return "";
- }
- public getNombre(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    return values.nombre;
-  }
-  return "";
-}
 
-public getTelefono(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    console.log(values.telefono);
-    return values.telefono;
+  public getCorreo(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.sub;
+    }
+    return "";
   }
-  return "";
-}
 
-public getDireccion(): string {
-  const token = this.getToken();
-  if (token) {
-    const values = this.decodePayload(token);
-    console.log(values.direccion);
-    return values.direccion; 
+  public getNombre(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.nombre;
+    }
+    return "";
   }
-  return "";
-}
- 
+
+  public getTelefono(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      console.log(values.telefono);
+      return values.telefono;
+    }
+    return "";
+  }
+
+  public getDireccion(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      console.log(values.direccion);
+      return values.direccion; 
+    }
+    return "";
+  }
 }

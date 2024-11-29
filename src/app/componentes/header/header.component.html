@@ -11,7 +11,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <!-- Imagen del logo -->
-        <img src="assets/images/telefono.png" 
+        <img src="/images/aseguradora.png" 
             class="rounded-circle me-3" 
             alt="Logo Aseguradora LAYO" 
             height="40" 
@@ -26,25 +26,21 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="/registro">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/login">Iniciar Sesion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/inicio">Inicio</a>
-            </li>
 
             <!-- Opciones de menú para el rol CLIENTE -->
-            <!-- Aquí puedes incluir las opciones para el rol CLIENTE -->
             @if (rol === 'CLIENTE') {
-              <!-- Opciones específicas para CLIENTE -->
+              <li class="nav-item">
+                <a class="nav-link active" href="/pagina'principal">Principal</a>
+              </li>
+  
             }
 
             <!-- Opciones de menú para el rol ADMINISTRADOR -->
             @if (rol === 'ADMINISTRADOR') {
-              <!-- Opciones específicas para ADMINISTRADOR -->
+              <li class="nav-item">
+                <a class="nav-link active" href="/cotizaciones-admin">Cotizaciones</a>
+              </li>
+              
             }
 
           </ul>
@@ -52,7 +48,7 @@
           <!-- Mostrar Login y Registro si el usuario no está autenticado, y Logout solo si está autenticado -->
           <div class="d-flex align-items-center">
             <div class="text-center me-3">
-              @if (!isLogged && currentRoute === '/inicio') {
+              @if (!isLogged) {
                 <!-- Botones Login y Registro si el usuario no está autenticado -->
                 <button type="button" routerLink="/login" class="btn btn-outline-primary me-2">Login</button>
                 <button type="button" routerLink="/registro" class="btn btn-primary">Registro</button>

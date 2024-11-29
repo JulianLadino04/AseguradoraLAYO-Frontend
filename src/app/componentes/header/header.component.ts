@@ -15,16 +15,13 @@ export class HeaderComponent implements OnInit {
   isLogged = false;
   email: string = "";
   rol: string = "";
-  currentRoute: string = ""; // Nueva variable para la ruta actual
-  isLoggedIn = false;
-
+  
   constructor(private tokenService: TokenService, private router: Router) {}
 
   ngOnInit() {
     // Suscribirse a los cambios de autenticación
     this.tokenService.getIsLoggedIn().subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      this.isLogged = isLoggedIn; // Sincronizar con isLogged para compatibilidad con el HTML
+      this.isLogged = isLoggedIn; // Sincroniza solo isLogged, no es necesario usar isLoggedIn
       if (isLoggedIn) {
         this.email = this.tokenService.getCorreo(); // Asegúrate de tener este método en tu servicio
         this.rol = this.tokenService.getRol(); // Asegúrate de tener este método en tu servicio
@@ -33,20 +30,13 @@ export class HeaderComponent implements OnInit {
         this.rol = "";
       }
     });
-
-    // Suscribirse a los cambios de ruta
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentRoute = event.urlAfterRedirects;
-      });
   }
 
   public logout() {
     this.tokenService.logout();
-    this.isLogged = false;
-    this.isLoggedIn = false;
+    this.isLogged = false; // Reiniciar el estado de autenticación
     this.email = "";
     this.rol = "";
+    this.router.navigate(['/inicio']); // Redirigir al inicio después de logout
   }
 }
