@@ -37,6 +37,6 @@ export class HeaderComponent implements OnInit {
     this.isLogged = false; // Reiniciar el estado de autenticación
     this.email = "";
     this.rol = "";
-    this.router.navigate(['/inicio']); // Redirigir al inicio después de logout
+    this.router.navigate(['/login']); // Redirigir al inicio después de logout
   }
 }

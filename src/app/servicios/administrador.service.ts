@@ -46,6 +46,10 @@ export class AdministradorService {
     return this.http.get<MensajeDTO>(`${this.baseURL}/vida/listar`);
   }
 
+  public listarPeticiones(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.baseURL}/peticion/listar`);
+  }
+
   // Métodos para eliminar
 
   public eliminarAuto(placa: string): Observable<MensajeDTO> {
@@ -78,5 +82,9 @@ export class AdministradorService {
 
   public eliminarSoat(placa: string): Observable<MensajeDTO> {
     return this.http.delete<MensajeDTO>(`${this.baseURL}/soat/eliminar/${placa}`);
+  }
+
+  public eliminarPeticion(cedula: string): Observable<MensajeDTO> {
+    return this.http.delete<MensajeDTO>(`${this.baseURL}/peticion/eliminar/${cedula}`);
   }
 }

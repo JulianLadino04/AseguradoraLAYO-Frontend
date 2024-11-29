@@ -10,6 +10,7 @@ import { CrearSoatDTO } from '../dto/SoatDTOs/CrearSoatDTO';
 import { CrearCotizacionAutoDTO } from '../dto/AutoDTOs/CrearCotizacionAutoDTO';
 import { CrearCotizacionProteccionCreditoDTO } from '../dto/ProteccionCreditoDTOs/ObtenerProteccionCreditoDTO';
 import { CrearCotizacionResponsabilidadCivilDTO } from '../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO';
+import { CrearPeticionDTO } from '../dto/PeticionDTOs/CrearPeticionDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,10 @@ export class ClienteService {
   // Crear Cotización para Soat
   public crearCotizacionSoat(soatDTO: CrearSoatDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.baseURL}/soat/cotizar`, soatDTO);
+  }
+
+  // Crear Peticion
+  public crearPeticion(peticionDTO: CrearPeticionDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.baseURL}/peticion/crear`, peticionDTO);
   }
 }
