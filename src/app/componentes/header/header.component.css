@@ -7,12 +7,13 @@
   }
   
   /* Estilos para el encabezado */
-  .header-container {
-    background-color: #007BFF; /* Color de fondo azul */
-    color: white;
-    padding: 20px;
-    text-align: center; /* Centrar el texto */
-  }
+.header-container {
+  background-color: #cce7ff; /* Color de fondo azul */
+  color: white;
+  padding: 20px;
+  text-align: center; /* Centrar el texto */
+}
+
   
   /* Estilo para el título */
   .title {

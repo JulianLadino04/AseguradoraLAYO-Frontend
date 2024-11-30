@@ -1,1 +1,75 @@
-<p>seguros works!</p>
+<div class="container my-5">
+    <!-- Título -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2 style="color: black; font-size: 3rem;">¿Cuál seguro deseas cotizar?</h2>
+        </div>
+    </div>
+
+    <!-- Fila de botones -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <!-- Botón 1: Seguro Autos y Motos -->
+        <div class="col">
+            <button [routerLink]="'/seguro-autos-motos'" class="btn btn-primary btn-lg w-100">Seguro Autos y Motos</button>
+            <div class="description mt-3">
+                <p>Seguro para autos y motos, con coberturas en daños, robos y accidentes.</p>
+            </div>
+        </div>
+
+        <!-- Botón 2: Hogar -->
+        <div class="col">
+            <button [routerLink]="'/hogar'" class="btn btn-primary btn-lg w-100">Hogar</button>
+            <div class="description mt-3">
+                <p>Cobertura integral para proteger tu hogar contra incendios, robos y desastres naturales.</p>
+            </div>
+        </div>
+
+        <!-- Botón 3: Protección Crédito -->
+        <div class="col">
+            <button [routerLink]="'/proteccion-credito'" class="btn btn-primary btn-lg w-100">Protección Crédito</button>
+            <div class="description mt-3">
+                <p>Protege tu historial crediticio y tu capacidad de pago con nuestra cobertura de protección.</p>
+            </div>
+        </div>
+
+        <!-- Botón 4: Pyme -->
+        <div class="col">
+            <button [routerLink]="'/pyme'" class="btn btn-primary btn-lg w-100">Pyme</button>
+            <div class="description mt-3">
+                <p>Seguro diseñado para pequeñas y medianas empresas, con coberturas adaptadas a tus necesidades.</p>
+            </div>
+        </div>
+
+        <!-- Botón 5: Responsabilidad Civil -->
+        <div class="col">
+            <button [routerLink]="'/responsabilidad-civil'" class="btn btn-primary btn-lg w-100">Responsabilidad Civil</button>
+            <div class="description mt-3">
+                <p>Cobertura contra daños a terceros, protegiendo tu patrimonio en caso de responsabilidad civil.</p>
+            </div>
+        </div>
+
+        <!-- Botón 6: Salud -->
+        <div class="col">
+            <button [routerLink]="'/salud'" class="btn btn-primary btn-lg w-100">Salud</button>
+            <div class="description mt-3">
+                <p>Seguro de salud integral, que cubre consultas, exámenes y emergencias médicas.</p>
+            </div>
+        </div>
+
+        <!-- Botón 7: Vida -->
+        <div class="col">
+            <button [routerLink]="'/vida'" class="btn btn-primary btn-lg w-100">Vida</button>
+            <div class="description mt-3">
+                <p>Seguro de vida con beneficios a tus seres queridos en caso de fallecimiento.</p>
+            </div>
+        </div>
+
+        <!-- Botón 8: Soat -->
+        <div class="col">
+            <button [routerLink]="'/soat'" class="btn btn-primary btn-lg w-100">Soat</button>
+            <div class="description mt-3">
+                <p>Seguro obligatorio para vehículos, cubriendo daños personales en accidentes de tránsito.</p>
+            </div>
+        </div>
+    </div>
+</div>

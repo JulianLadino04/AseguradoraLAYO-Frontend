@@ -1,0 +1,8 @@
+/* Estilo para el título específico de Aseguradora LAYO */
+#titulo-principal h2 {
+    font-size: 3rem; /* Aumentar el tamaño del título */
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  

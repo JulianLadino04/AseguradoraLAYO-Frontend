@@ -1,0 +1,55 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .w-100 {
+    width: 100%;
+  }
+  
+  .row-cols-2 {
+    column-gap: 20px; /* Espaciado entre las columnas */
+  }
+  
+  .row-cols-md-4 {
+    column-gap: 20px;
+  }
+  
+  .g-4 {
+    gap: 1.5rem; /* Ajuste de espaciado entre las filas y columnas */
+  }
+
+/* Estilo para los botones */
+.btn-primary {
+  background-color: #000000; /* Negro */
+  border-color: #000000; /* Borde en el mismo tono */
+  color: white; /* Texto blanco */
+}
+
+.btn-primary:hover {
+  background-color: #333333; /* Gris oscuro para el hover */
+  border-color: #333333; /* Borde en el mismo tono */
+}
+
+/* Estilo para el título */
+h2 {
+  font-size: 3rem; /* Aumentar el tamaño del título */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Estilo para las descripciones debajo de cada botón */
+.description {
+  font-size: 1.1rem;
+  color: #555; /* Color gris oscuro */
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
+
+
+  

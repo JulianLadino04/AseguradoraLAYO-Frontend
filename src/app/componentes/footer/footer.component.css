@@ -1,56 +1,98 @@
-/* Estilos solo para el contenedor cuando el usuario está autenticado */
+ /* Fondo azul claro fuera del formulario */
+.background-container {
+  background-color: #007bff; /* Azul claro */
+  margin: 0;
+  padding: 20px 0; /* Espaciado vertical para separar el formulario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+/* Estilos para el contenedor del formulario */
 .logged-container {
-  background-color: #1a1a2e; /* Fondo azul oscuro */
+  background-color: #000; /* Fondo negro */
   color: #ffffff; /* Color del texto */
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
-  margin: 0 auto; /* Centrar el formulario */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  width: 90%; /* Asegura que sea responsive */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilo del título */
-.logged-container .title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
+  /* Estilo del título */
+  .logged-container .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
 
-/* Estilos de los grupos del formulario */
-.logged-container .form-group {
-  margin-bottom: 15px;
-}
+  /* Estilos de los grupos del formulario */
+  .logged-container .form-group {
+    margin-bottom: 15px;
+  }
 
-/* Estilos de etiquetas */
-.logged-container label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
+  /* Estilos de etiquetas */
+  .logged-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
 
-/* Estilos de los campos de entrada */
-.logged-container .form-control {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-}
+  /* Estilos de los campos de entrada */
+  .logged-container .form-control {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  }
 
-/* Estilos del botón */
-.logged-container .submit-button {
-  background-color: #007bff; /* Color azul para el botón */
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-  margin-top: 10px;
-}
+  /* Estilos del botón */
+  .logged-container .submit-button {
+    background-color: #007bff; /* Color azul para el botón */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+  }
 
-/* Efecto hover en el botón */
-.logged-container .submit-button:hover {
-  background-color: #0056b3;
-}
+  /* Efecto hover en el botón */
+  .logged-container .submit-button:hover {
+    background-color: #0056b3;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-success {
+    color: green;
+  }
+  
+  
