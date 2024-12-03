@@ -65,4 +65,17 @@ export class ClienteService {
   public crearPeticion(peticionDTO: CrearPeticionDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.baseURL}/peticion/crear`, peticionDTO);
   }
+  public obtenerEnumsAseguradora(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.baseURL}/aseguradoras`);
+  }
+  
+  public obtenerEnumsTipoVehiculo(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.baseURL}/tipos-vehiculo`);
+  }
+  
+  public obtenerEnumsTipoInmueble(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.baseURL}/tipos-inmueble`);
+  }
+  
+
 }

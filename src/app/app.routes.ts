@@ -10,8 +10,9 @@ import { CotizacionesAdminComponent } from './componentes/cotizaciones-admin/cot
 import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
 import { ContactenosComponent } from './componentes/contactenos/contactenos.component';
 import { NosotrosComponent } from './componentes/nosotros/nosotros.component';
-import { AlianzasComponent } from './alianzas/alianzas.component';
+import { AlianzasComponent } from './componentes/alianzas/alianzas.component';
 import { SegurosComponent } from './componentes/seguros/seguros.component';
+import { AutosComponent } from './componentes/autos/autos.component';
 export const routes: Routes = [
 
 //Publico
@@ -27,6 +28,8 @@ export const routes: Routes = [
 { path: 'nosotros', component: NosotrosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'alianzas', component: AlianzasComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'contactenos', component: ContactenosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'autos', component: AutosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+
 
 //Administrador
 { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
