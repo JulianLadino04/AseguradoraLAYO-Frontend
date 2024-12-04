@@ -8,10 +8,12 @@
 </head>
 <body class="p-0 m-0 bg-white">
   <section class="py-5 container">
-    <h1 class="text-center mb-4">Cotización de Auto</h1>
+    <h1 class="text-center mb-4">Cotización de Auto o Moto
+    </h1>
     <div class="col-md-12 mt-3" [formGroup]="cotizacionAutoForm" (ngSubmit)="crearCotizacionAuto()">
       <form class="row g-4 needs-validation" novalidate>
-        <div class="row g-3">      
+        <div class="row g-3">
+          <!-- Aseguradora -->
           <div class="col-md-6 text-start">
             <label class="form-label">Aseguradora</label>
             <select class="form-select" formControlName="aseguradora">
@@ -24,6 +26,7 @@
             </select>
           </div>
 
+          <!-- Tipo de Vehículo -->
           <div class="col-md-6 text-start">
             <label class="form-label">Tipo de Vehículo</label>
             <select class="form-select" formControlName="tipo">
@@ -36,51 +39,91 @@
             </select>
           </div>
 
+          <!-- Placa -->
           <div class="col-md-6 text-start">
             <label class="form-label">Placa</label>
             <input type="text" class="form-control" formControlName="placa" placeholder="Placa">
+            @if (cotizacionAutoForm.get('placa')?.touched && cotizacionAutoForm.get('placa')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">La placa no puede tener más de 6 caracteres.</div>
+            }
+            @if (cotizacionAutoForm.get('placa')?.touched && cotizacionAutoForm.get('placa')?.hasError('minlength')) {
+              <div class="alert alert-danger" role="alert">La placa debe tener 6 caracteres.</div>
+            }
           </div>
 
+          <!-- Nombre -->
           <div class="col-md-6 text-start">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+            @if (cotizacionAutoForm.get('nombre')?.touched && cotizacionAutoForm.get('nombre')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">El nombre no puede tener más de 30 caracteres.</div>
+            }
           </div>
 
+          <!-- Cédula -->
           <div class="col-md-6 text-start">
             <label class="form-label">Cédula</label>
             <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
+            @if (cotizacionAutoForm.get('cedula')?.touched && cotizacionAutoForm.get('cedula')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">La cédula no puede tener más de 10 caracteres.</div>
+            }
+            @if (cotizacionAutoForm.get('cedula')?.touched && cotizacionAutoForm.get('cedula')?.hasError('minlength')) {
+              <div class="alert alert-danger" role="alert">La cédula debe tener 10 caracteres.</div>
+            }
           </div>
 
+          <!-- Correo -->
           <div class="col-md-6 text-start">
             <label class="form-label">Correo</label>
             <input type="email" class="form-control" formControlName="correo" placeholder="Correo Electrónico">
+            @if (cotizacionAutoForm.get('correo')?.touched && cotizacionAutoForm.get('correo')?.hasError('email')) {
+              <div class="alert alert-danger" role="alert">El correo no es válido.</div>
+            }
           </div>
 
+          <!-- Teléfono -->
           <div class="col-md-6 text-start">
             <label class="form-label">Teléfono</label>
             <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
+            @if (cotizacionAutoForm.get('telefono')?.touched && cotizacionAutoForm.get('telefono')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">El teléfono no puede tener más de 10 caracteres.</div>
+            }
+            @if (cotizacionAutoForm.get('telefono')?.touched && cotizacionAutoForm.get('telefono')?.hasError('minlength')) {
+              <div class="alert alert-danger" role="alert">El teléfono debe tener 10 caracteres.</div>
+            }
           </div>
 
+          <!-- Dirección -->
           <div class="col-md-6 text-start">
             <label class="form-label">Dirección</label>
             <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
+            @if (cotizacionAutoForm.get('direccion')?.touched && cotizacionAutoForm.get('direccion')?.hasError('maxlength')) {
+              <div class="alert alert-danger" role="alert">La dirección no puede tener más de 50 caracteres.</div>
+            }
           </div>
 
+          <!-- Ciudad de Circulación -->
           <div class="col-md-6 text-start">
             <label class="form-label">Ciudad de Circulación</label>
             <input type="text" class="form-control" formControlName="ciudadCirculacion" placeholder="Ciudad de Circulación">
           </div>
 
+          <!-- Fecha de Nacimiento -->
           <div class="col-md-6 text-start">
             <label class="form-label">Fecha de Nacimiento</label>
             <input type="datetime-local" class="form-control" formControlName="fechaNacimiento">
+            @if (cotizacionAutoForm.get('fechaNacimiento')?.touched && cotizacionAutoForm.get('fechaNacimiento')?.hasError('required')) {
+              <div class="alert alert-danger" role="alert">La fecha de nacimiento es requerida.</div>
+            }
           </div>
 
+          <!-- Botones -->
           <div class="col-12 text-center">
-              <button class="btn btn-success mt-4 me-2" type="submit">Solicitar Cotización</button>
-              <button class="btn btn-danger mt-4" (click)="volver()">Volver</button>          </div>
+            <button class="btn btn-success mt-4 me-2" type="submit">Solicitar Cotización</button>
+            <button class="btn btn-danger mt-4" (click)="volver()">Volver</button>
+          </div>
         </div>
-      </form> <!-- El cierre correcto aquí -->
+      </form> 
       <div class="dropdown-dividers"></div>
     </div>
   </section>

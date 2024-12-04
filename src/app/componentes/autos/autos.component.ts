@@ -38,20 +38,34 @@ export class AutosComponent {
   private crearFormulario() {
     this.cotizacionAutoForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
-      placa: ['', Validators.required, Validators.maxLength(6), Validators.minLength(6)],
-      nombre: ['', Validators.required, Validators.maxLength(30)],
-      cedula: ['', Validators.required,  Validators.maxLength(10), Validators.minLength(10)],
+      placa: ['', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]],
+      nombre: ['', [Validators.required, Validators.maxLength(30)]],
+      cedula: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       correo: ['', [Validators.required, Validators.email]],
-      direccion: ['', Validators.required,  Validators.maxLength(30)],
-      telefono: ['', [Validators.required, Validators.maxLength(10)]],
+      direccion: ['', [Validators.required, Validators.maxLength(30)]],
+      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       ciudadCirculacion: ['', Validators.required],
       tipo: ['', Validators.required],
       fechaNacimiento: ['', Validators.required]
     });
   }
+  
 
   public crearCotizacionAuto() {
     const cotizacionData = this.cotizacionAutoForm.value as CrearCotizacionAutoDTO;
+
+    // Verificar si algún campo es nulo o vacío
+    for (let control in this.cotizacionAutoForm.controls) {
+      if (this.cotizacionAutoForm.controls[control].value == null || this.cotizacionAutoForm.controls[control].value === '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Campos Obligatorios',
+          text: 'Todos los campos son obligatorios.',
+          confirmButtonText: 'Aceptar'
+        });
+        return; // Detener la ejecución si algún campo está vacío
+      }
+    }
   
     this.clienteService.crearCotizacionAuto(cotizacionData).subscribe({
       next: (data) => {
@@ -73,6 +87,10 @@ export class AutosComponent {
         });
       }
     });
+  }
+
+  public campoEsValido(campo: string): boolean {
+    return this.cotizacionAutoForm.controls[campo].valid && this.cotizacionAutoForm.controls[campo].touched;
   }
 
   volver() {
