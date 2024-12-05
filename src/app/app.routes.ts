@@ -14,6 +14,8 @@ import { AlianzasComponent } from './componentes/alianzas/alianzas.component';
 import { SegurosComponent } from './componentes/seguros/seguros.component';
 import { AutosComponent } from './componentes/autos/autos.component';
 import { HogarComponent } from './componentes/hogar/hogar.component';
+import { ProteccionCreditoComponent } from './componentes/proteccion-credito/proteccion-credito.component';
+import { PymeComponent } from './componentes/pyme/pyme.component';
 
 export const routes: Routes = [
 
@@ -32,8 +34,8 @@ export const routes: Routes = [
 { path: 'contactenos', component: ContactenosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'autos', component: AutosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'hogar', component: HogarComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
-
-
+{ path: 'proteccion-credito', component: ProteccionCreditoComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'pyme', component: PymeComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 
 //Administrador
 { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },

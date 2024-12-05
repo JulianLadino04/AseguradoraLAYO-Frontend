@@ -8,96 +8,99 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
       .asesor-info {
-        padding: 30px;
+        padding: 20px; /* Relleno reducido */
         border: 1px solid #ddd;
         border-radius: 10px;
-        margin-bottom: 40px;
+        margin-bottom: 30px; /* Espacio reducido entre tarjetas */
         text-align: center;
-        font-size: 1.25rem; /* Aumentar el tamaño de la fuente */
+        font-size: 1.25rem;
       }
       .asesor-info img {
-        width: 25px; /* Aumentar el tamaño de los íconos */
+        width: 25px;
         height: 25px;
-        margin-right: 15px;
+        margin-right: 10px; /* Espacio menor entre iconos y texto */
       }
       .asesor-info h4 {
-        font-size: 1.75rem; /* Aumentar el tamaño del nombre */
-        margin-bottom: 15px;
-      }
-      .asesor-info label {
-        font-size: 1.25rem; /* Aumentar el tamaño de la fuente de los detalles */
-        margin: 10px 0;
+        font-size: 1.5rem; /* Tamaño ajustado del nombre */
+        margin-bottom: 10px;
       }
       .title {
-        font-size: 3.5rem; /* Aumentar el tamaño del título */
+        font-size: 3rem; /* Tamaño reducido del título */
         font-weight: bold;
         text-align: center;
-        margin-bottom: 50px;
+        margin: 20px 0 20px 0; /* Márgenes reducidos superior e inferior */
       }
-      /* Centrando todo el contenedor */
       .container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh; /* Ocupa toda la altura de la pantalla */
+        height: auto; /* Altura automática */
       }
       .row {
         display: flex;
-        justify-content: center; /* Centra las columnas */
+        justify-content: center;
+      }
+      figure.figure {
+        margin: 10px 0; /* Reducción del margen de la imagen */
       }
     </style>
   </head>
   <body>
-
     <div class="container">
       <!-- Título Asesores -->
       <div class="title">Asesores</div>
+    
+      <!-- Imagen del logo al principio de la página -->
+      <div class="text-center" style="margin-bottom: 30px;">
+        <figure class="figure">
+          <img src="/images/logo.png" 
+               class="rounded-circle" 
+               alt="Logo" 
+               height="190px" 
+               width="190px"> <!-- Tamaño reducido de la imagen -->
+        </figure>
+      </div>
+    </div>    
 
-      <div class="row">
-        <!-- Asesor 1: Carlos Andres Ladino Taborda -->
-        <div class="col-md-5">
-          <div class="asesor-info">
-            <h4>Carlos Andres Ladino Taborda</h4>
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/phone.png" alt="Logo celular">
-              3122866247
-            </label>
-            <!-- Correo adicional para Carlos -->
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
-              ladino79&commat;hotmail.com
-            </label>
-            <!-- Correo principal para Carlos -->
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
-              aseguradoralayo&commat;gmail.com
-            </label>
-          </div>
+    <div class="row">
+      <!-- Asesor 1: Carlos Andres Ladino Taborda -->
+      <div class="col-md-5">
+        <div class="asesor-info">
+          <h4>Carlos Andres Ladino Taborda</h4>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/phone.png" alt="Logo celular">
+            3122866247
+          </label>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
+            ladino79&commat;hotmail.com
+          </label>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
+            aseguradoralayo&commat;gmail.com
+          </label>
         </div>
-        
-        <!-- Asesor 2: Nini Yhojana Moreno Bobadilla -->
-        <div class="col-md-5">
-          <div class="asesor-info">
-            <h4>Nini Yhojana Moreno Bobadilla</h4>
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/phone.png" alt="Logo celular">
-              3148219899
-            </label>
-            <!-- Correo adicional para Nini -->
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
-              yhoja1&commat;hotmail.com
-            </label>
-            <!-- Correo principal para Nini -->
-            <label class="d-block">
-              <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
-              aseguradoralayo&commat;gmail.com
-            </label>
-          </div>
+      </div>
+      
+      <!-- Asesor 2: Nini Yhojana Moreno Bobadilla -->
+      <div class="col-md-5">
+        <div class="asesor-info">
+          <h4>Nini Yhojana Moreno Bobadilla</h4>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/phone.png" alt="Logo celular">
+            3148219899
+          </label>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
+            yhoja1&commat;hotmail.com
+          </label>
+          <label class="d-block">
+            <img src="https://img.icons8.com/ios/452/email.png" alt="Logo correo">
+            aseguradoralayo&commat;gmail.com
+          </label>
         </div>
       </div>
     </div>
-
   </body>
 </html>

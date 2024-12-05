@@ -41,10 +41,8 @@ export class RegistroComponent {
   }
 
   public registrar() {
-    
     const crearCuenta = this.registroForm.value as CrearCuentaDTO;
-   
-   
+    
     this.publicoService.crearCuenta(crearCuenta).subscribe({
       next: (data) => {
         Swal.fire({
@@ -53,7 +51,15 @@ export class RegistroComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        this.router.navigate(['/activar-cuenta']); // Redirige a la página de Activar Cuenta
+        
+        // Verifica si el correo es admin@gmail.com
+        if (crearCuenta.correo === 'admin@gmail.com') {
+          // Si es admin, redirige al login
+          this.router.navigate(['/login']);
+        } else {
+          // Si no es admin, redirige a la página de Activar Cuenta
+          this.router.navigate(['/activar-cuenta']);
+        }
       },
       error: (error) => {
         Swal.fire({
@@ -61,10 +67,11 @@ export class RegistroComponent {
           text: error.error.respuesta,
           icon: 'error',
           confirmButtonText: 'Aceptar'
-        })
+        });
       }
     });
-   }
+  }
+  
    public volver(){
     this.router.navigate(['/login']);
    }

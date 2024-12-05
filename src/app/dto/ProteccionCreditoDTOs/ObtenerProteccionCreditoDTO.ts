@@ -1,6 +1,6 @@
 import { Aseguradora } from '../Enums/Aseguradora';
 
-export interface CrearCotizacionProteccionCreditoDTO {
+export interface ObtenerProteccionCreditoDTO {
   aseguradora: Aseguradora;
   nombre: string;
   cedula: string;

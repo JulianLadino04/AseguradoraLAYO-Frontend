@@ -1,6 +1,6 @@
  /* Fondo azul claro fuera del formulario */
 .background-container {
-  background-color: #007bff; /* Azul claro */
+  background-color: #7ecb7e; /* Azul claro */
   margin: 0;
   padding: 20px 0; /* Espaciado vertical para separar el formulario */
   display: flex;
@@ -63,11 +63,11 @@
 
   /* Efecto hover en el botón */
   .logged-container .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #7e92a8;
   }
 
   button {
-    background-color: #4CAF50;
+    background-color: #0056b3;
     color: white;
     padding: 10px;
     border: none;
@@ -79,7 +79,7 @@
   }
   
   button:hover {
-    background-color: #45a049;
+    background-color: #7e92a8;
   }
   
   button:disabled {
@@ -92,7 +92,7 @@
   }
   
   .text-success {
-    color: green;
+    color: rgb(77, 127, 156);
   }
   
   

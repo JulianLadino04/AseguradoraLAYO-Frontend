@@ -8,7 +8,7 @@ import { CrearCotizacionSaludDTO } from '../dto/SaludDTOs/CrearCotizacionSaludDT
 import { CrearCotizacionVidaDTO } from '../dto/VidaDTOs/CrearCotizacionVidaDTO';
 import { CrearSoatDTO } from '../dto/SoatDTOs/CrearSoatDTO';
 import { CrearCotizacionAutoDTO } from '../dto/AutoDTOs/CrearCotizacionAutoDTO';
-import { CrearCotizacionProteccionCreditoDTO } from '../dto/ProteccionCreditoDTOs/ObtenerProteccionCreditoDTO';
+import { CrearCotizacionProteccionCreditoDTO } from '../dto/ProteccionCreditoDTOs/CrearCotizacionProteccionCreditoDTO';
 import { CrearCotizacionResponsabilidadCivilDTO } from '../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO';
 import { CrearPeticionDTO } from '../dto/PeticionDTOs/CrearPeticionDTO';
 
