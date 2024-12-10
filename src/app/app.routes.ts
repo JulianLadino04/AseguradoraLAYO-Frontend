@@ -16,6 +16,10 @@ import { AutosComponent } from './componentes/autos/autos.component';
 import { HogarComponent } from './componentes/hogar/hogar.component';
 import { ProteccionCreditoComponent } from './componentes/proteccion-credito/proteccion-credito.component';
 import { PymeComponent } from './componentes/pyme/pyme.component';
+import { ResponsabilidadCivilComponent } from './componentes/responsabilidad-civil/responsabilidad-civil.component';
+import { SaludComponent } from './componentes/salud/salud.component';
+import { SoatComponent } from './componentes/soat/soat.component';
+import { VidaComponent } from './componentes/vida/vida.component';
 
 export const routes: Routes = [
 
@@ -36,6 +40,11 @@ export const routes: Routes = [
 { path: 'hogar', component: HogarComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'proteccion-credito', component: ProteccionCreditoComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'pyme', component: PymeComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'salud', component: SaludComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'responsabilidad-civil', component: ResponsabilidadCivilComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'soat', component: SoatComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'vida', component: VidaComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+
 
 //Administrador
 { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },

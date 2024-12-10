@@ -12,33 +12,58 @@
         font-weight: bold;
         margin-bottom: 20px;
       }
-
+    
       .descripcion {
         font-size: 1.2rem;
         margin-bottom: 30px;
       }
-
+    
       .img-seguro {
         width: 100%;
         height: auto;
         border-radius: 8px;
+        margin-top: 20px;  /* Agregar margen arriba */
+        margin-bottom: 20px; /* Agregar margen abajo */
       }
-
+    
       .seccion-seguro {
-        margin-top: 40px;
+        text-align: center;  /* Centra el título, la imagen y el texto dentro de la columna */
+      }
+    
+      .seccion-seguro h3 {
+        text-align: center;  /* Centra el título */
+        margin-bottom: 15px;  /* Añadir margen abajo al título */
+      }
+    
+      .seccion-seguro img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    
+      .seccion-seguro p {
+        text-align: center; /* Centra el texto debajo de la imagen */
       }
     </style>
+
   </head>
   <body>
     <!-- Imagen del logo al principio de la página -->
-  <div class="container my-3 text-center">
-    <figure class="figure">
-      <img src="/images/logo.png" 
-           class="rounded-circle mt-3" 
-           alt="Logo" 
-           height="170px" 
-           width="170px">
-    </figure>
+    <div class="container my-3 text-center">
+      <figure class="figure">
+        <img src="/images/logo.png" 
+             class="rounded-circle mt-3" 
+             alt="Logo" 
+             height="170px" 
+             width="170px">
+      </figure>
+    </div>
+
+     <!-- Nuevo texto añadido debajo de la imagen -->
+  <div class="container text-center">
+    <p class="lead mt-0 mb-4">
+      Protegiendo lo que más importa: tu vida, tu familia y tu patrimonio. Confianza y seguridad en cada paso.
+    </p>
   </div>
 
     <div class="container my-5">
@@ -62,7 +87,10 @@
       <div class="row">
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Autos y Motos</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Autos y Motos" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/carros.png" alt="Seguro Autos y Motos" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Autos y Motos</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             El seguro de autos y motos es esencial para proteger tanto tu vehículo como a los ocupantes de accidentes imprevistos. Ya sea que sufras un choque, un robo o un daño total, este seguro cubre los gastos de reparación o reposición, así como los daños a terceros. Además, algunas pólizas incluyen asistencia en carretera, lo que te garantiza apoyo inmediato en caso de emergencia. Protege tu inversión y asegura tu tranquilidad al conducir con un seguro de autos y motos adecuado a tus necesidades.
           </p>
@@ -70,7 +98,10 @@
         
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Hogar</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Hogar" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/hogar.png" alt="Seguro Hogar" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Hogar</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             Tu hogar es tu refugio, y merece ser protegido contra posibles daños que puedan poner en peligro su estructura y tu bienestar. El seguro de hogar cubre desde daños por incendios, robos hasta daños ocasionados por desastres naturales. Además, algunas pólizas incluyen responsabilidad civil, protegiendo tu patrimonio frente a posibles reclamaciones de terceros. Con un seguro de hogar, puedes tener la tranquilidad de que tu propiedad y tus seres queridos están cubiertos en cualquier situación inesperada.
           </p>
@@ -80,7 +111,10 @@
       <div class="row">
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Protección Crédito</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Protección Crédito" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/proteccion-credito.png" alt="Seguro Protección Crédito" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Protección Crédito</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             Un seguro de protección crédito te ayuda a mantener tu historial financiero y proteger tu capacidad de pago en caso de pérdida de ingresos. Es ideal para personas con préstamos o tarjetas de crédito, ya que cubre pagos en caso de incapacidad, enfermedad o desempleo. Con este seguro, puedes evitar la acumulación de deudas y asegurar tu estabilidad financiera sin preocupaciones.
           </p>
@@ -88,7 +122,10 @@
         
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro para Pyme</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Pyme" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/pyme.png" alt="Seguro Pyme" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Pyme</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             Un seguro para Pyme está diseñado para proteger a pequeñas y medianas empresas de imprevistos que puedan afectar su operación. Ya sea que enfrentes daños a tu propiedad, robos, accidentes laborales o responsabilidades civiles, este seguro cubre los riesgos más comunes, permitiéndote operar con tranquilidad y continuar con el crecimiento de tu negocio. Además, algunos seguros para Pymes también ofrecen cobertura para pérdidas de ingresos o interrupciones en el negocio.
           </p>
@@ -98,7 +135,10 @@
       <div class="row">
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Responsabilidad Civil</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Responsabilidad Civil" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/responsabilidad-civil.png" alt="Seguro Responsabilidad Civil" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Responsabilidad Civil</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             El seguro de responsabilidad civil te protege contra demandas legales por daños o lesiones causadas a otras personas o propiedades. Es esencial si eres propietario de un negocio, conductor de un vehículo o incluso si realizas actividades de riesgo. Este seguro cubre gastos legales, indemnizaciones y otros costos asociados a posibles accidentes o daños causados a terceros.
           </p>
@@ -106,7 +146,10 @@
         
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Salud</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Salud" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/salud.png" alt="Seguro Salud" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Salud</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             La salud es el activo más importante, y un seguro de salud te proporciona acceso a una atención médica de calidad cuando la necesites. Con un seguro de salud, puedes acceder a consultas médicas, tratamientos, hospitalización y hasta cirugías sin preocuparte por el alto costo de estos servicios. Además, algunos seguros de salud incluyen coberturas preventivas como chequeos anuales, vacunas y exámenes, lo que te permite cuidar tu salud de forma integral.
           </p>
@@ -116,7 +159,10 @@
       <div class="row">
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Vida</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Vida" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/vida.png" alt="Seguro Vida" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Vida</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             Un seguro de vida es una forma de proteger a tus seres queridos en caso de que algo inesperado ocurra. Este seguro proporciona un apoyo financiero a tu familia en el momento más difícil, garantizando que tengan los recursos para afrontar los gastos futuros, como la educación de tus hijos, deudas o el mantenimiento de su calidad de vida. Además, existen seguros de vida que permiten la acumulación de ahorro, ofreciendo una inversión a largo plazo que proporciona una mayor seguridad financiera.
           </p>
@@ -124,7 +170,10 @@
         
         <div class="col-md-6 seccion-seguro">
           <h3 class="text-center">Seguro de Soat</h3>
-          <img src="https://via.placeholder.com/600x300" alt="Seguro Soat" class="img-seguro">
+          <figure class="figure">
+            <img src="/images/soat.png" alt="Seguro Soat" class="img-seguro">
+            <figcaption class="figure-caption text-center">Seguro Soat</figcaption>
+          </figure>
           <p class="descripcion text-justify">
             El SOAT (Seguro Obligatorio de Accidentes de Tránsito) es esencial para protegerte en caso de accidentes vehiculares. Este seguro cubre los gastos médicos y hospitalarios para las personas afectadas en el accidente, independientemente de quién sea el culpable. Es obligatorio en muchos países y es la forma de asegurar que todos los conductores estén protegidos en caso de un accidente en la vía pública.
           </p>
