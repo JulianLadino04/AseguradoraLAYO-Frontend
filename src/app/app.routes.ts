@@ -20,6 +20,7 @@ import { ResponsabilidadCivilComponent } from './componentes/responsabilidad-civ
 import { SaludComponent } from './componentes/salud/salud.component';
 import { SoatComponent } from './componentes/soat/soat.component';
 import { VidaComponent } from './componentes/vida/vida.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 
 export const routes: Routes = [
 
@@ -44,6 +45,7 @@ export const routes: Routes = [
 { path: 'responsabilidad-civil', component: ResponsabilidadCivilComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'soat', component: SoatComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 { path: 'vida', component: VidaComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
+{ path: 'perfil', component: PerfilComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] }  },
 
 
 //Administrador

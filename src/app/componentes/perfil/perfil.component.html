@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      .dropdown-menu {
+          width: 350px;
+          height: auto;
+          max-height: 800px;
+          overflow-y: auto;
+          align-items: center;
+          border-radius: 4;
+      }
+      .form-control {
+          width: 100%;
+      }
+
+      /* Estilo para el título "Editar Perfil" */
+      .title {
+        font-size: 3rem; /* Tamaño del título */
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0; /* Márgenes reducidos superior e inferior */
+      }
+
+      /* Más espacio entre cada campo del formulario */
+      .form-row {
+        margin-bottom: 20px; /* Espacio entre las filas */
+      }
+
+      .form-control {
+        margin-bottom: 15px; /* Espacio debajo de cada input */
+      }
+
+      /* Reducir el margen superior de la imagen */
+      .figure {
+        margin-top: -20px; /* Ajusta este valor según lo necesites */
+      }
+    </style>
+  </head>
+  <body class="p-0 m-0 bd-example m-1 bg-white h-50 w-auto border-0 col-5">
+    <section class="py-0 text-center container">
+      <div class="row py-0">
+        <!-- Título Editar Perfil, aplicando la clase "title" -->
+        <h1 class="title">
+          <label>Editar Perfil</label>
+        </h1>
+
+        <!-- Imagen del logo ahora está más cerca del título -->
+        <div class="container my-3 text-center">
+          <figure class="figure">
+            <img src="/images/logo.png" 
+                 class="rounded-circle mt-1" 
+                 alt="Logo" 
+                 height="190px" 
+                 width="190px">
+          </figure>
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-3">
+        <form class="row g-4 needs-validation" [formGroup]="perfilForm" (ngSubmit)="editarPerfil()" novalidate>
+          <div class="row form-row">
+            <div class="col-md-6 text-start">
+              <label class="form-label">Cédula</label>
+              <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula" />
+            </div>
+            <div class="col-md-6 text-start">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" />
+            </div>
+          </div>
+          
+          <div class="row form-row">
+            <div class="col-md-6 text-start">
+              <label class="form-label">Teléfono</label>
+              <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono" />
+            </div>
+            <div class="col-md-6 text-start">
+              <label class="form-label">Dirección</label>
+              <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección" />
+            </div>
+          </div>
+
+          <div class="row form-row">
+            <div class="col-md-6 text-start">
+              <label class="form-label">Correo</label>
+              <input type="email" class="form-control" formControlName="email" placeholder="Correo" />
+            </div>
+          </div>
+          
+          <div class="col-12 mt-3 d-flex justify-content-center gap-3">
+            <button class="btn btn-success" type="submit">Editar Cuenta</button>
+            <button class="btn btn-danger" type="button" (click)="eliminarCuenta()">Eliminar Cuenta</button>
+          </div>
+        </form>
+        <div class="dropdown-divider"></div>
+      </div>
+    </section>
+  </body>
+</html>

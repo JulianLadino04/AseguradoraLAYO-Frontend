@@ -1,5 +1,5 @@
 export interface EditarCuentaDTO {
-    id : string ,
+    cedula : string ,
     nombre : string,
     telefono : string,
     direccion : string,
