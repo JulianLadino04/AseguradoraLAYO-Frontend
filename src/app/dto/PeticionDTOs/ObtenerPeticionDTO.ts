@@ -1,4 +1,5 @@
 export interface ObtenerPeticionDTO {
+    id: string;
     nombre: string;
     cedula: string;
     correo: string;

@@ -21,6 +21,15 @@ import { SaludComponent } from './componentes/salud/salud.component';
 import { SoatComponent } from './componentes/soat/soat.component';
 import { VidaComponent } from './componentes/vida/vida.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { AdminAutosComponent } from './componentes/admin-autos/admin-autos.component';
+import { AdminHogarComponent } from './componentes/admin-hogar/admin-hogar.component';
+import { AdminProteccionCreditoComponent } from './componentes/admin-proteccion-credito/admin-proteccion-credito.component';
+import { AdminPymeComponent } from './componentes/admin-pyme/admin-pyme.component';
+import { AdminResponsabilidadCivilComponent } from './componentes/admin-responsabilidad-civil/admin-responsabilidad-civil.component';
+import { AdminSaludComponent } from './componentes/admin-salud/admin-salud.component';
+import { AdminSoatComponent } from './componentes/admin-soat/admin-soat.component';
+import { AdminVidaComponent } from './componentes/admin-vida/admin-vida.component';
+import { AdminPeticionComponent } from './componentes/admin-peticion/admin-peticion.component';
 
 export const routes: Routes = [
 
@@ -50,5 +59,16 @@ export const routes: Routes = [
 
 //Administrador
 { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-autos', component: AdminAutosComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-hogar', component: AdminHogarComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-proteccion-credito', component: AdminProteccionCreditoComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-pyme', component: AdminPymeComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-responsabilidad-civil', component: AdminResponsabilidadCivilComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-vida', component: AdminVidaComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-salud', component: AdminSaludComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-soat', component: AdminSoatComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+{ path: 'admin-peticion', component: AdminPeticionComponent, canActivate: [RolesGuard], data: { expectedRole: ["ADMINISTRADOR"] }  },
+
+
 { path: "**", pathMatch: "full", redirectTo: "" }
 ];
