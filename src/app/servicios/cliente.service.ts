@@ -11,6 +11,7 @@ import { CrearCotizacionAutoDTO } from '../dto/AutoDTOs/CrearCotizacionAutoDTO';
 import { CrearCotizacionProteccionCreditoDTO } from '../dto/ProteccionCreditoDTOs/CrearCotizacionProteccionCreditoDTO';
 import { CrearCotizacionResponsabilidadCivilDTO } from '../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO';
 import { CrearPeticionDTO } from '../dto/PeticionDTOs/CrearPeticionDTO';
+import { CrearAfiliacionDTO } from '../dto/AfiliacionesDTOs/CrearAfiliacionDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,13 @@ export class ClienteService {
   public crearPeticion(peticionDTO: CrearPeticionDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.baseURL}/peticion/crear`, peticionDTO);
   }
+
+  // Crear Afiliación
+  public crearAfiliacion(afiliacionDTO: CrearAfiliacionDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.baseURL}/afiliaciones/crear`, afiliacionDTO);
+  }
+
+
   public obtenerEnumsAseguradora(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.baseURL}/aseguradoras`);
   }

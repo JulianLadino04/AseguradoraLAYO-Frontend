@@ -43,7 +43,7 @@ export class SoatComponent {
       tipo: ['', Validators.required],
       placa: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[A-Za-z0-9]*$')]],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$')]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
       correo: ['', [Validators.required, Validators.email]]

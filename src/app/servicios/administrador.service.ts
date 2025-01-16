@@ -50,6 +50,10 @@ export class AdministradorService {
     return this.http.get<MensajeDTO>(`${this.baseURL}/peticion/listar`);
   }
 
+  public listarAfiliaciones(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.baseURL}/afiliaciones/listar`);
+  }
+
   // Métodos para eliminar
 
   public eliminarAuto(placa: string): Observable<MensajeDTO> {
@@ -86,5 +90,9 @@ export class AdministradorService {
 
   public eliminarPeticion(cedula: string): Observable<MensajeDTO> {
     return this.http.delete<MensajeDTO>(`${this.baseURL}/peticion/eliminar/${cedula}`);
+  }
+
+  public eliminarAfiliacion(id: string): Observable<MensajeDTO> {
+    return this.http.delete<MensajeDTO>(`${this.baseURL}/afiliaciones/eliminar/${id}`);
   }
 }

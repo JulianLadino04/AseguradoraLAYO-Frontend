@@ -40,7 +40,7 @@ export class AutosComponent {
       aseguradora: ['', Validators.required],
       placa: ['', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required, Validators.maxLength(30)]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],

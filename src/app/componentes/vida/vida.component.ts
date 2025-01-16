@@ -36,7 +36,7 @@ export class VidaComponent {
     this.cotizacionVidaForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$')]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],

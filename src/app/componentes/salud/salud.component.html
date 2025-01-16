@@ -38,12 +38,6 @@
           <div class="col-md-6 text-start">
             <label class="form-label">Cédula</label>
             <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
-            @if (cotizacionSaludForm.get('cedula')?.touched && cotizacionSaludForm.get('cedula')?.hasError('maxlength')) {
-              <div class="alert alert-danger" role="alert">La cédula no puede tener más de 10 caracteres.</div>
-            }
-            @if (cotizacionSaludForm.get('cedula')?.touched && cotizacionSaludForm.get('cedula')?.hasError('minlength')) {
-              <div class="alert alert-danger" role="alert">La cédula debe tener 10 caracteres.</div>
-            }
           </div>
 
           <!-- Correo -->

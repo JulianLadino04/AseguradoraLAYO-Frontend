@@ -36,7 +36,7 @@ export class ProteccionCreditoComponent {
     this.proteccionCreditoForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
