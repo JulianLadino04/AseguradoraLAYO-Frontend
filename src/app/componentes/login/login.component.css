@@ -89,3 +89,14 @@
     color: green;
   }
   
+  .dropdown-menu {
+    width: 350px; /* Cambia el ancho como desees */
+    height: auto; /* Ajusta el alto, auto se ajusta al contenido */
+    max-height: 450px; /* Puedes establecer un alto máximo si lo deseas */
+    overflow-y: auto; /* Esto agrega un desplazamiento si el contenido excede el alto máximo */
+    align-items: center;
+    border-radius: 4;
+}
+.form-control {
+    width: 100%; /* Asegúrate de que los inputs llenen el ancho del contenedor */
+}

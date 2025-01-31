@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../servicios/token.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +10,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  title = 'Unieventos';
+  title = 'AseguradoraLayo';
   isLogged = false;
   email: string = "";
   rol: string = "";

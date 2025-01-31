@@ -12,6 +12,6 @@ import { FooterComponent } from "./componentes/footer/footer.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'UniEventos';
-  footer = 'Universidad del Quindío - 2024-2';
+  title = 'AseguradoraLayo';
+  footer = 'Aseguradora Layo - 2025';
 }

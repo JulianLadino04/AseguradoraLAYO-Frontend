@@ -39,6 +39,13 @@
     padding: 10px 15px;
   }
   
+  .navbar-custom {
+    position: sticky !important;
+    top: 0;
+    z-index: 1020;
+    background-color: #7ecb7e;
+  }
+  
   .nav-link:hover {
     text-decoration: underline;
     background-color: rgba(255, 255, 255, 0.2);
