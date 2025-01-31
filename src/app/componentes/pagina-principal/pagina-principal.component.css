@@ -1,0 +1,43 @@
+.titulo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.descripcion {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.img-seguro {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    /* Agregar margen arriba */
+    margin-bottom: 20px;
+    /* Agregar margen abajo */
+}
+
+.seccion-seguro {
+    text-align: center;
+    /* Centra el título, la imagen y el texto dentro de la columna */
+}
+
+.seccion-seguro h3 {
+    text-align: center;
+    /* Centra el título */
+    margin-bottom: 15px;
+    /* Añadir margen abajo al título */
+}
+
+.seccion-seguro img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seccion-seguro p {
+    text-align: center;
+    /* Centra el texto debajo de la imagen */
+}

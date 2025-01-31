@@ -8,13 +8,16 @@
   
   /* Estilos para el encabezado */
 .header-container {
-  background-color: #cce7ff; /* Color de fondo azul */
-  color: white;
-  padding: 20px;
+  display: flex;
+  align-content: center;
   text-align: center; /* Centrar el texto */
+  font-weight: bold;
 }
 
-  
+.centered, .nav-item {
+  align-content: center
+}
+
   /* Estilo para el título */
   .title {
     font-size: 2.5em;
@@ -40,10 +43,14 @@
   }
   
   .navbar-custom {
+    background-color: #7ecb7e;
+  }
+
+  .stick {
+    background-color: white;
     position: sticky !important;
     top: 0;
     z-index: 1020;
-    background-color: #7ecb7e;
   }
   
   .nav-link:hover {

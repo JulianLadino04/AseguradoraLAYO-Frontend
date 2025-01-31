@@ -28,8 +28,8 @@ export const routes: Routes = [
     //Cliente
     { path: 'seguros', component: SegurosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'nosotros', component: NosotrosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
-    { path: 'alianzas', component: AlianzasComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
-    { path: 'contactenos', component: ContactenosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
+    { path: 'alianzas', component: AlianzasComponent },
+    { path: 'contactenos', component: ContactenosComponent},
     { path: 'autos', component: AutosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'hogar', component: HogarComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'proteccion-credito', component: ProteccionCreditoComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
