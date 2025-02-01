@@ -22,8 +22,8 @@ export const routes: Routes = [
     { path: 'signup', component: RegistroComponent, canActivate: [LoginGuard] },
 
     //Cliente
-    { path: 'seguros', component: SegurosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
-    { path: 'nosotros', component: NosotrosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
+    { path: 'seguros', component: SegurosComponent},
+    { path: 'nosotros', component: NosotrosComponent },
     { path: 'alianzas', component: AlianzasComponent },
     { path: 'contactenos', component: ContactenosComponent},
     { path: 'autos', component: AutosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
@@ -35,7 +35,7 @@ export const routes: Routes = [
     { path: 'soat', component: SoatComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'vida', component: VidaComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'perfil', component: PerfilComponent },
-    { path: 'afiliaciones-traslados', component: AfiliacionesTrasladosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
+    { path: 'afiliaciones-traslados', component: AfiliacionesTrasladosComponent },
 
 
 

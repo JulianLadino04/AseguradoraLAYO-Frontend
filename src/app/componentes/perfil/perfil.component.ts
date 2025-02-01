@@ -39,8 +39,6 @@ export class PerfilComponent implements OnInit {
 
   private obtenerInformacionCuenta(): void {
     const token = this.tokenService.getToken();
-    console.log(token);
-
     if (token) {
       this.cuentaService.obtenerCuenta(token).subscribe({
         next: (data) => {
@@ -54,12 +52,16 @@ export class PerfilComponent implements OnInit {
               email: cuenta.email
             });
           } else {
-            Swal.fire({
-              title: 'Error',
-              text: 'Error al obtener la información de la cuenta',
-              icon: 'error',
-              confirmButtonText: 'Aceptar'
-            });
+            // logout
+            if (data.respuesta == "Sesión expirada") {
+              this.tokenService.logout();
+            } else
+              Swal.fire({
+                title: 'Error',
+                text: data.respuesta,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
           }
         }
       });
@@ -112,22 +114,6 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  // Método para extraer el mensaje de error del objeto error
-  private extraerMensajeDeError(error: any): string {
-    // Verificar si el error tiene un mensaje específico
-    if (error.error?.respuesta) {
-      return error.error.respuesta; // Retorna el mensaje de error específico
-    }
-    // Si no, verificar si hay un mensaje en error.message
-    else if (error.message) {
-      return error.message; // Retorna el mensaje genérico del error
-    }
-    // Si no se encuentra ningún mensaje, retornar un mensaje predeterminado
-    return 'Error desconocido al actualizar la información de la cuenta';
-  }
-
-
-
 
 
   public eliminarCuenta(): void {
@@ -153,14 +139,14 @@ export class PerfilComponent implements OnInit {
               }).then(() => {
                 this.tokenService.logout();
               });
-              else{
-                Swal.fire({
-                  title: 'Error',
-                  text: data.respuesta || 'Error al eliminar la cuenta',
-                  icon: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
+            else {
+              Swal.fire({
+                title: 'Error',
+                text: data.respuesta || 'Error al eliminar la cuenta',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
           },
         });
       }

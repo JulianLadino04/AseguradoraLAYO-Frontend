@@ -103,14 +103,14 @@ export class LoginComponent {
             title: 'Inicio de Sesión Correcto',
             text: 'Las credenciales son válidas',
             icon: 'success',
-            confirmButtonText: "Ingresar",
+            confirmButtonText: "Cerrar",
           });
 
-          this.tokenService.setToken(data.respuesta.token);
+          this.tokenService.setLogin(data.respuesta.token, data.respuesta.email);
           this.router.navigate(['/']);
         }
       },
     });
-    
+
   }
 }

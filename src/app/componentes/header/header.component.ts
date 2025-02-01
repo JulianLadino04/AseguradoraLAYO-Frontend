@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../servicios/token.service';
 
@@ -14,20 +14,19 @@ export class HeaderComponent implements OnInit {
   isLogged = false;
   email: string = "";
   rol: string = "";
-  
-  constructor(private tokenService: TokenService, private router: Router) {}
 
+  constructor(private tokenService: TokenService, private router: Router, private cdr: ChangeDetectorRef) { }
+
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
   ngOnInit() {
     // Suscribirse a los cambios de autenticación
     this.tokenService.getIsLoggedIn().subscribe(isLoggedIn => {
       this.isLogged = isLoggedIn; // Sincroniza solo isLogged, no es necesario usar isLoggedIn
-      if (isLoggedIn) {
-        this.email = this.tokenService.getCorreo(); // Asegúrate de tener este método en tu servicio
-        this.rol = this.tokenService.getRol(); // Asegúrate de tener este método en tu servicio
-      } else {
-        this.email = "";
-        this.rol = "";
-      }
+      this.email = isLoggedIn ? this.tokenService.getCorreo() : "";
+      this.cdr.detectChanges(); // Forzar actualización de la vista
     });
   }
 
@@ -35,7 +34,6 @@ export class HeaderComponent implements OnInit {
     this.tokenService.logout();
     this.isLogged = false; // Reiniciar el estado de autenticación
     this.email = "";
-    this.rol = "";
     this.router.navigate(['/login']); // Redirigir al inicio después de logout
   }
 }

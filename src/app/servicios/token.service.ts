@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Buffer } from "buffer";
+import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const TOKEN_KEY = "AuthToken";
+const EMAIL = "Email"
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +13,19 @@ const TOKEN_KEY = "AuthToken";
 export class TokenService {
   private isLoggedInSubject: BehaviorSubject<boolean>;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cookieService: CookieService) {
     // Inicializa el estado de autenticación al verificar si hay un token en el sessionStorage
     this.isLoggedInSubject = new BehaviorSubject<boolean>(this.isLogged());
   }
 
-  public setToken(token: string) {
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+  public setLogin(token: string, email: string) {
+    this.cookieService.set(TOKEN_KEY, token);
+    this.cookieService.set(EMAIL, email);
     this.isLoggedInSubject.next(true);  // Emitir que el usuario ha iniciado sesión
   }
 
   public getToken(): string | null {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return this.cookieService.get(TOKEN_KEY);
   }
 
   public isLogged(): boolean {
@@ -34,16 +37,12 @@ export class TokenService {
   }
 
   public logout() {
-    window.sessionStorage.clear();
+    this.cookieService.delete(TOKEN_KEY);
+    this.cookieService.delete(EMAIL);
     this.isLoggedInSubject.next(false);  // Emitir que el usuario ha cerrado sesión
     this.router.navigate(["/login"]).then(() => {
       window.location.reload();
     });
-  }
-
-  public login(token: string) {
-    this.setToken(token);
-    this.router.navigate(["/"]);
   }
 
   private decodePayload(token: string): any {
@@ -72,12 +71,7 @@ export class TokenService {
   }
 
   public getCorreo(): string {
-    const token = this.getToken();
-    if (token) {
-      const values = this.decodePayload(token);
-      return values.sub;
-    }
-    return "";
+    return this.cookieService.get(EMAIL);
   }
 
   public getNombre(): string {
@@ -104,7 +98,7 @@ export class TokenService {
     if (token) {
       const values = this.decodePayload(token);
       console.log(values.direccion);
-      return values.direccion; 
+      return values.direccion;
     }
     return "";
   }
