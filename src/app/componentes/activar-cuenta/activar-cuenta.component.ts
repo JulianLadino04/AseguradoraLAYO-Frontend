@@ -1,9 +1,8 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControlOptions } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { PublicoService } from '../../servicios/publico.service';
-import { ActivarCuentaDTO } from '../../dto/CuentaDTOs/ActivarCuentaDTO';
 
 @Component({
   selector: 'app-activar-cuenta',
@@ -16,7 +15,7 @@ export class ActivarCuentaComponent {
   
   registroForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService, private loc: Location) { 
     this.crearFormulario();
   }
 
@@ -28,31 +27,23 @@ export class ActivarCuentaComponent {
   }
 
   public activarCuenta() {
-    const activarCuentaDTO = this.registroForm.value as ActivarCuentaDTO; // Asegúrate de tener un DTO adecuado para esta operación
+    // const activarCuentaDTO = this.registroForm.value as ActivarCuentaDTO; // Asegúrate de tener un DTO adecuado para esta operación
     
-    this.publicoService.activarCuenta(activarCuentaDTO).subscribe({
-      next: (data) => {
-        Swal.fire({
-          title: 'Cuenta activada',
-          text: 'La cuenta se ha activado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        });
-        this.router.navigate(['/login']); // Redirige a la página de inicio de sesión
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+    // this.publicoService.activarCuenta(activarCuentaDTO).subscribe({
+    //   next: (data) => {
+    //     Swal.fire({
+    //       title: 'Cuenta activada',
+    //       text: 'La cuenta se ha activado correctamente',
+    //       icon: 'success',
+    //       confirmButtonText: 'Aceptar'
+    //     });
+    //     this.router.navigate(['/login']); // Redirige a la página de inicio de sesión
+    //   }
+    // });
   }
 
   public volver(){
-    this.router.navigate(['/registro']);
+    this.loc.back();
    }
 }
 

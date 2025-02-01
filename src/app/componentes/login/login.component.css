@@ -1,10 +1,5 @@
 /* Estilo general */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
+
   
   body {
     background-color: #f4f4f9;
@@ -20,6 +15,16 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+  }
+  
+  a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.1s linear;
+  }
+  
+  a:hover {
+    color: #333;
   }
   
   .card {
@@ -60,6 +65,22 @@
     outline: none;
   }
   
+  .button-secondary {
+    background-color: #505050;
+  }
+  
+  .button-secondary:hover {
+    background-color: #404040;
+  }
+
+  .button-cancel {
+    background-color: #ff4c4c;
+  }
+  
+  .button-cancel:hover {
+    background-color: #ff3333;
+  }
+
   button {
     background-color: #4CAF50;
     color: white;
@@ -70,15 +91,20 @@
     font-weight: bold;
     width: 100%;
     margin-top: 10px;
+    transition: background-color 0.1s linear;
   }
   
   button:hover {
     background-color: #45a049;
   }
+
+  button:hover:disabled {
+    background-color: #ccc;
+  }
   
   button:disabled {
     background-color: #ccc;
-    cursor: not-allowed;
+    cursor: auto;
   }
   
   .text-center {

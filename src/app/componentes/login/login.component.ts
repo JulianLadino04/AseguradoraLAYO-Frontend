@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { PublicoService } from '../../servicios/publico.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 import { LoginDTO } from '../../dto/CuentaDTOs/LoginDTO';
+import { PublicoService } from '../../servicios/publico.service';
+import { EnviarCodigoDTO } from '../../dto/CuentaDTOs/EnviarCodigoDTO';
 import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -21,64 +23,93 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private publicoService: PublicoService,
+    private loc: Location,
     private tokenService: TokenService
-  ) { 
+  ) {
     this.crearFormulario();
   }
 
   private crearFormulario() {
     this.loginForm = this.formBuilder.group({
-      correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(15)]]
+      email: ['', [Validators.required, Validators.email]],
+      userCode: ['', [Validators.required, Validators.pattern("\\d{6}")]]
+    });
+  }
+  gotoRegister() {
+    const loginDTO = this.loginForm.value as LoginDTO;
+    this.router.navigate(['/signup'], { queryParams: { email: loginDTO.email } });
+  }
+
+  volver() {
+    this.loc.back();
+  }
+
+  generarCodigo() {
+
+    const dto = this.loginForm.value as EnviarCodigoDTO;
+
+    this.publicoService.enviarCodigo(dto).subscribe({
+      next: (data) => {
+        if (data.error) {
+          console.error("Error al enviar código:", data.respuesta);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: data.respuesta || 'Error desconocido',
+            confirmButtonText: 'Registrarme',
+            showDenyButton: true,
+            showConfirmButton: data.respuesta === "Usuario no encontrado",
+            denyButtonText: "Cerrar"
+          }).then(onfulfilled => {
+            if (onfulfilled.isConfirmed) {
+              this.gotoRegister();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Código de seguridad enviado',
+            text: 'Revisa tu bandeja de entrada e inicia sesión',
+            icon: 'success',
+            confirmButtonText: "Cerrar",
+          });
+
+        }
+      },
     });
   }
 
   login() {
-    const loginDTO = this.loginForm.value as LoginDTO;
 
-    this.publicoService.iniciarSesion(loginDTO).subscribe({
+    const dto = this.loginForm.value as LoginDTO;
+    this.publicoService.iniciarSesion(dto).subscribe({
       next: (data) => {
-        Swal.fire({
-          title: 'Inicio de Sesión Correcto',
-          text: 'Las credenciales son válidas',
-          icon: 'success',
-          confirmButtonText: "Ingresar",
-        });
+        if (data.error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: data.respuesta || 'Error desconocido',
+            confirmButtonText: 'Registrarme',
+            showDenyButton: true,
+            showConfirmButton: data.respuesta === "Correo no encontrado",
+            denyButtonText: "Cerrar"
+          }).then(onfulfilled => {
+            if (onfulfilled.isConfirmed) {
+              this.gotoRegister();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: 'Inicio de Sesión Correcto',
+            text: 'Las credenciales son válidas',
+            icon: 'success',
+            confirmButtonText: "Ingresar",
+          });
 
-        this.tokenService.setToken(data.respuesta.token);
-        const userRole = this.tokenService.getRol();  
-
-        if (userRole === 'ADMINISTRADOR') {
-          this.router.navigate(['/cotizaciones-admin']);
-        } else if (userRole === 'CLIENTE') {
-          this.router.navigate(['/pagina-principal']);
+          this.tokenService.setToken(data.respuesta.token);
+          this.router.navigate(['/']);
         }
       },
-      error: (error) => {
-        // Mejor manejo de errores
-        console.error("Error en el inicio de sesión:", error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.error.respuesta || 'Error desconocido',
-          confirmButtonText: 'Reintentar',
-        });
-      },
     });
-}
-
-
-  public campoEsValido(campo: string): boolean {
-    return this.loginForm.controls[campo].valid && this.loginForm.controls[campo].touched;
-  }
-  
-  public abrirVentanaRecuperacion(){
-    this.router.navigate(['/enviar-codigo']);
-  }
-
-  public abrirVentanaRegistro(){
-    this.router.navigate(['/registro']);
+    
   }
 }
-
-

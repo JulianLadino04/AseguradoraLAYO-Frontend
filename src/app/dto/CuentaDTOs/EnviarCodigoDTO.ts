@@ -1,3 +1,3 @@
 export interface EnviarCodigoDTO {
-    correo:string,
+    email:string,
   }

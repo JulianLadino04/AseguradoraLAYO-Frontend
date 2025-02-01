@@ -19,9 +19,9 @@ export const routes: Routes = [
 
     //Publico
     { path: '', component: PaginaPrincipalComponent },
-    { path: 'login', component: LoginComponent, canActivate: [LoginGuard]  },
-    { path: 'registro', component: RegistroComponent, canActivate: [LoginGuard] },
-    { path: 'activar-cuenta', component: ActivarCuentaComponent },
+    { path: 'signin', component: LoginComponent, canActivate: [LoginGuard]  },
+    { path: 'signup', component: RegistroComponent, canActivate: [LoginGuard] },
+    { path: 'code', component: ActivarCuentaComponent },
     { path: 'enviar-codigo', component: EnviarCodigoComponent },
     { path: 'cambiar-password', component: CambiarPasswordComponent },
 

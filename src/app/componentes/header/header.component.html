@@ -1,20 +1,15 @@
-<div id="header" class="pt-2 px-2 stick">
-  <nav class="p-2 bd-example m-0 border-0 navbar navbar-expand-lg navbar-custom">
+<header id="header" class="pt-2 px-2 stick">
+  <nav class="p-2 bd-example m-0 border-0 navbar navbar-expand navbar-custom">
     <div class="container-fluid">
       <!-- Imagen del logo -->
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto centered h-100">
-          <!-- Opciones de menú para el rol CLIENTE -->
-          <li class="nav-item">
-            <div class="header-container">
+        <ul class="navbar-nav me-auto centered h-100 gap-1">
+          <li>
+            <a id="home-a" class="" routerLink="/">
               <img src="/images/logo.png" class="rounded-circle me-3" alt="Logo Aseguradora LAYO" height="40">
-              <!-- Nombre de la aseguradora -->
-
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="navbar-brand" style="font-weight: bold;" routerLink="/">Seguros LAYO</a>
+              Seguros LAYO
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="/seguros">Seguros</a>
@@ -41,8 +36,7 @@
         <div class="d-flex align-items-center">
           <div class="text-center me-3">
             @if (!isLogged) {
-            <button type="button" routerLink="/login" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" routerLink="/registro" class="btn btn-primary">Registro</button>
+            <button type="button" routerLink="/signin" class="btn-outline me-2">Ingresar</button>
             } @else if (isLogged) {
             <span class="me-3">Hola, {{ email }}</span>
             <button type="button" (click)="logout()" class="btn btn-primary">Logout</button>
@@ -52,4 +46,4 @@
       </div>
     </div>
   </nav>
-</div>
+</header>

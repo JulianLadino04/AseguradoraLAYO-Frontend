@@ -43,9 +43,8 @@
   }
   
   /* Estilo de las etiquetas */
-  label {
+    label, h1 {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
     color: #333; /* Color de etiqueta */
   }
@@ -77,6 +76,7 @@
     font-weight: bold;
     width: 100%; /* Botón ocupa todo el ancho */
     margin-top: 10px; /* Espacio encima del botón */
+    transition: background-color 0.1s linear;
   }
   
   button:hover {
@@ -122,4 +122,22 @@
   .text-center {
     text-align: center; /* Centrar texto */
   }
-  
+  .dropdown-menu {
+    width: 350px; /* Cambia el ancho como desees */
+    height: auto; /* Ajusta el alto, auto se ajusta al contenido */
+    max-height: 800px; /* Puedes establecer un alto máximo si lo deseas */
+    overflow-y: auto; /* Esto agrega un desplazamiento si el contenido excede el alto máximo */
+    align-items: center;
+    border-radius: 4;
+}
+.form-control {
+    width: 100%; /* Asegúrate de que los inputs llenen el ancho del contenedor */
+}
+.button-cancel {
+  background-color: #ff4c4c;
+}
+
+.button-cancel:hover {
+  background-color: #ff3333;
+}
+

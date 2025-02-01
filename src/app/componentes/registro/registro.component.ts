@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControlOptions } from '@angular/forms'; // Importa AbstractControlOptions
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PublicoService } from '../../servicios/publico.service';
 import { CrearCuentaDTO } from '../../dto/CuentaDTOs/CrearCuentaDTO';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -17,10 +18,18 @@ export class RegistroComponent {
 
   registroForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService, private route: ActivatedRoute, private location: Location) { 
     this.crearFormulario();
+    this.cargarEmailUrl();
   }
 
+  private cargarEmailUrl() {
+    this.route.queryParams.subscribe(params => {
+      if (params['email']) {
+        this.registroForm.patchValue({ correo: params['email'] });
+      }
+    });
+  }
   private crearFormulario() {
     this.registroForm = this.formBuilder.group({
       cedula: ['', [Validators.required]],
@@ -73,6 +82,6 @@ export class RegistroComponent {
   }
   
    public volver(){
-    this.router.navigate(['/login']);
+    this.location.back();
    }
 }
