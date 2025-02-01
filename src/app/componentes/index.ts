@@ -1,8 +1,5 @@
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
-import { ActivarCuentaComponent } from './activar-cuenta/activar-cuenta.component';
-import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
-import { EnviarCodigoComponent } from './enviar-codigo/enviar-codigo.component';
 import { CotizacionesAdminComponent } from './cotizaciones-admin/cotizaciones-admin.component';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { ContactenosComponent } from './contactenos/contactenos.component';
@@ -30,4 +27,4 @@ import { AdminPeticionComponent } from './admin-peticion/admin-peticion.componen
 import { AfiliacionesTrasladosComponent } from './afiliaciones-traslados/afiliaciones-traslados.component';
 import { AdminAfiliacionesComponent } from './admin-afiliaciones/admin-afiliaciones.component';
 
-export { LoginComponent, RegistroComponent, ActivarCuentaComponent, CambiarPasswordComponent, EnviarCodigoComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AfiliacionesTrasladosComponent, AdminAfiliacionesComponent };
+export { LoginComponent, RegistroComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AfiliacionesTrasladosComponent, AdminAfiliacionesComponent };

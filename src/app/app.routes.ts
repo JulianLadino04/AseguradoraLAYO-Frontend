@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginGuard } from './guards/permiso.service';
 import { RolesGuard } from './guards/roles.service';
 import {
-    LoginComponent, RegistroComponent, ActivarCuentaComponent,
-    CambiarPasswordComponent, EnviarCodigoComponent, CotizacionesAdminComponent,
+    LoginComponent, RegistroComponent, CotizacionesAdminComponent,
     PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent,
     AlianzasComponent, SegurosComponent, AutosComponent,
     HogarComponent, ProteccionCreditoComponent, PymeComponent,
@@ -21,9 +20,6 @@ export const routes: Routes = [
     { path: '', component: PaginaPrincipalComponent },
     { path: 'signin', component: LoginComponent, canActivate: [LoginGuard]  },
     { path: 'signup', component: RegistroComponent, canActivate: [LoginGuard] },
-    { path: 'code', component: ActivarCuentaComponent },
-    { path: 'enviar-codigo', component: EnviarCodigoComponent },
-    { path: 'cambiar-password', component: CambiarPasswordComponent },
 
     //Cliente
     { path: 'seguros', component: SegurosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },

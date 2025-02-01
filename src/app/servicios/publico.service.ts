@@ -7,7 +7,7 @@ import { CrearCuentaDTO } from '../dto/CuentaDTOs/CrearCuentaDTO';
 import { CambiarPasswordDTO } from '../dto/CuentaDTOs/CambiarPasswordDTO';
 import { EnviarCodigoDTO } from '../dto/CuentaDTOs/EnviarCodigoDTO';
 import { TokenDTO } from '../dto/TokenDTOs/TokenDTO';
-import { environment } from '../../environments/environment';
+import { Environment } from '../../environments/environment';
 
 
 
@@ -17,7 +17,7 @@ import { environment } from '../../environments/environment';
 export class PublicoService {
 
 
- private publicoURL = environment.BACKEND_URL;
+ private publicoURL = Environment.BACKEND_URL;
 
 
  constructor(private http: HttpClient) { }
