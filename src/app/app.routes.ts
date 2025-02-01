@@ -34,7 +34,7 @@ export const routes: Routes = [
     { path: 'responsabilidad-civil', component: ResponsabilidadCivilComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'soat', component: SoatComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
     { path: 'vida', component: VidaComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
-    { path: 'perfil', component: PerfilComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
+    { path: 'perfil', component: PerfilComponent },
     { path: 'afiliaciones-traslados', component: AfiliacionesTrasladosComponent, canActivate: [RolesGuard], data: { expectedRole: ["CLIENTE"] } },
 
 

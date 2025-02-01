@@ -19,23 +19,23 @@
             <form [formGroup]="footerForm" (ngSubmit)="crearPeticion()" class="form-container">
               
               <div class="form-group">
-                <label for="cedula">Cédula:</label>
-                <input id="cedula" formControlName="cedula" type="text" class="form-control" required />
+                <label for="id">Cédula:</label>
+                <input id="cedula" formControlName="id" type="text" class="form-control" required />
               </div>
         
               <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input id="nombre" formControlName="nombre" type="text" class="form-control" required />
+                <input id="nombre" formControlName="name" type="text" class="form-control" required />
               </div>
         
               <div class="form-group">
                 <label for="correo">Correo:</label>
-                <input id="correo" formControlName="correo" type="email" class="form-control" required />
+                <input id="correo" formControlName="email" type="email" class="form-control" required />
               </div>
         
               <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input id="telefono" formControlName="telefono" type="tel" class="form-control" pattern="[0-9]{10}" required />
+                <input id="telefono" formControlName="phone" type="tel" class="form-control" pattern="[0-9]{10}" required />
               </div>
         
               <div class="form-group">
@@ -45,7 +45,7 @@
         
               <div class="form-group">
                 <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" formControlName="mensaje" class="form-control" rows="4" required></textarea>
+                <textarea id="mensaje" formControlName="message" class="form-control" rows="4" required></textarea>
               </div>
         
               <button type="submit" class="btn btn-primary">Crear Petición</button>

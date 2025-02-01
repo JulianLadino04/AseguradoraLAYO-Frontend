@@ -12,13 +12,14 @@ import { CrearCotizacionProteccionCreditoDTO } from '../dto/ProteccionCreditoDTO
 import { CrearCotizacionResponsabilidadCivilDTO } from '../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO';
 import { CrearPeticionDTO } from '../dto/PeticionDTOs/CrearPeticionDTO';
 import { CrearAfiliacionDTO } from '../dto/AfiliacionesDTOs/CrearAfiliacionDTO';
+import { Environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  private baseURL = 'http://localhost:8080/api/cliente';
+  private baseURL = Environment.BACKEND_URL;
 
   constructor(private http: HttpClient) { }
 
