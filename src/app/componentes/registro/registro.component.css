@@ -22,6 +22,10 @@
     margin: 0 auto; /* Centramos el contenedor */
     padding: 20px;
   }
+
+  section {
+    border-radius: 1rem;
+  }
   
   /* Estilo de la tarjeta del formulario */
   .card {
@@ -32,6 +36,22 @@
     display: flex; /* Usar flexbox */
     flex-direction: column; /* Para alinear elementos en columna */
     align-items: stretch; /* Centrar elementos horizontalmente */
+  }
+  
+  a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.1s linear;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+  .ablack {
+    color: #404040;
+  }
+  .ablack:hover {
+    color: #000;
   }
   
   /* Estilo del encabezado del formulario */

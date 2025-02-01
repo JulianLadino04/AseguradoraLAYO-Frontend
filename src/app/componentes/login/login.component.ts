@@ -84,6 +84,7 @@ export class LoginComponent {
     this.publicoService.iniciarSesion(dto).subscribe({
       next: (data) => {
         if (data.error) {
+          this.loginForm.get('userCode')?.setValue('');
           Swal.fire({
             icon: 'error',
             title: 'Error',

@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControlOptions } from '@angular/forms'; // Importa AbstractControlOptions
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PublicoService } from '../../servicios/publico.service';
 import { CrearCuentaDTO } from '../../dto/CuentaDTOs/CrearCuentaDTO';
 import Swal from 'sweetalert2';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'] // Cambiado styleUrl a styleUrls
 })
 export class RegistroComponent {
-
+  @Input() mostrarElementos: boolean = true;
   registroForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService, private route: ActivatedRoute, private location: Location) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private publicoService: PublicoService, private route: ActivatedRoute, private location: Location) {
     this.crearFormulario();
     this.cargarEmailUrl();
   }
@@ -30,6 +30,7 @@ export class RegistroComponent {
       }
     });
   }
+
   private crearFormulario() {
     this.registroForm = this.formBuilder.group({
       cedula: ['', [Validators.required]],
@@ -51,7 +52,7 @@ export class RegistroComponent {
 
   public registrar() {
     const crearCuenta = this.registroForm.value as CrearCuentaDTO;
-    
+
     this.publicoService.crearCuenta(crearCuenta).subscribe({
       next: (data) => {
         Swal.fire({
@@ -60,7 +61,7 @@ export class RegistroComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        
+
         // Verifica si el correo es admin@gmail.com
         if (crearCuenta.correo === 'admin@gmail.com') {
           // Si es admin, redirige al login
@@ -80,8 +81,15 @@ export class RegistroComponent {
       }
     });
   }
-  
-   public volver(){
+
+  public volver() {
     this.location.back();
-   }
+  }
+
+  get labels() {
+    return this.mostrarElementos ? {} : { 'color': '#fff' }; // Ejemplo
+  }
+  get rootComp() {
+    return this.mostrarElementos ? {} : { 'background-color': '#000', 'padding': '20px' }; // Ejemplo
+  }
 }
