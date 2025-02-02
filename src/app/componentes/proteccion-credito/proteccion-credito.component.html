@@ -1,7 +1,13 @@
 <section class="py-5 container">
-  <h1 class="text-center mb-4">Protección de Crédito</h1>
-  <div class="col-md-12 mt-3" [formGroup]="proteccionCreditoForm" (ngSubmit)="crearProteccionCredito()">
-    <form class="row g-4 needs-validation" novalidate>
+  <h1 class="text-center mb-4">Cotización Protección de Crédito</h1>
+
+  <div class="col-md-12 mt-3">
+    <div class="w-100 d-flex justify-content-center pb-4">
+      <button [ngClass]="viewForm?'btn btn-danger':'btn btn-success'" class="mt-4"
+        (click)="toggleVerForm()">{{viewFormBtn}}</button>
+    </div>
+    <form *ngIf="viewForm" class="row g-4 needs-validation" novalidate [formGroup]="proteccionCreditoForm"
+      (ngSubmit)="crearProteccionCredito()">
       <div class="row g-3">
         <!-- Aseguradora -->
         <div class="col-md-6 text-start">
@@ -16,65 +22,6 @@
           </select>
         </div>
 
-        <!-- Nombre -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-          @if (proteccionCreditoForm.get('nombre')?.touched &&
-          proteccionCreditoForm.get('nombre')?.hasError('maxlength')) {
-          <div class="alert alert-danger" role="alert">El nombre no puede tener más de 30 caracteres.</div>
-          }
-        </div>
-
-        <!-- Cédula -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Cédula</label>
-          <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
-        </div>
-
-        <!-- Correo -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Correo</label>
-          <input type="email" class="form-control" formControlName="correo" placeholder="Correo Electrónico">
-          @if (proteccionCreditoForm.get('correo')?.touched && proteccionCreditoForm.get('correo')?.hasError('email')) {
-          <div class="alert alert-danger" role="alert">El correo no es válido.</div>
-          }
-        </div>
-
-        <!-- Teléfono -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Teléfono</label>
-          <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
-          @if (proteccionCreditoForm.get('telefono')?.touched &&
-          proteccionCreditoForm.get('telefono')?.hasError('maxlength')) {
-          <div class="alert alert-danger" role="alert">El teléfono no puede tener más de 10 caracteres.</div>
-          }
-          @if (proteccionCreditoForm.get('telefono')?.touched &&
-          proteccionCreditoForm.get('telefono')?.hasError('minlength')) {
-          <div class="alert alert-danger" role="alert">El teléfono debe tener 10 caracteres.</div>
-          }
-        </div>
-
-        <!-- Dirección -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Dirección</label>
-          <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
-          @if (proteccionCreditoForm.get('direccion')?.touched &&
-          proteccionCreditoForm.get('direccion')?.hasError('maxlength')) {
-          <div class="alert alert-danger" role="alert">La dirección no puede tener más de 50 caracteres.</div>
-          }
-        </div>
-
-        <!-- Fecha de Nacimiento -->
-        <div class="col-md-6 text-start">
-          <label class="form-label">Fecha de Nacimiento</label>
-          <input type="datetime-local" class="form-control" formControlName="fechaNacimiento">
-          @if (proteccionCreditoForm.get('fechaNacimiento')?.touched &&
-          proteccionCreditoForm.get('fechaNacimiento')?.hasError('required')) {
-          <div class="alert alert-danger" role="alert">La fecha de nacimiento es requerida.</div>
-          }
-        </div>
-
         <!-- Valor de Deuda -->
         <div class="col-md-6 text-start">
           <label class="form-label">Valor de Deuda</label>
@@ -84,14 +31,16 @@
           <div class="alert alert-danger" role="alert">El valor de la deuda debe ser mayor que 0.</div>
           }
         </div>
-
         <!-- Botones -->
         <div class="col-12 text-center">
           <button class="btn btn-success mt-4 me-2" type="submit">Solicitar Cotización</button>
-          <button class="btn btn-danger mt-4" (click)="volver()">Volver</button>
         </div>
       </div>
     </form> <!-- El cierre correcto aquí -->
-    <div class="dropdown-dividers"></div>
+    <br />
+    <app-admin-proteccion-credito></app-admin-proteccion-credito>
+    <div class="w-100 d-flex justify-content-center pb-4">
+      <button class="btn btn-danger mt-4" (click)="volver()">Volver</button>
+    </div>
   </div>
 </section>

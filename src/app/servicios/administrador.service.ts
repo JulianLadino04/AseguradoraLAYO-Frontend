@@ -28,12 +28,12 @@ export class AdministradorService {
     return this.http.post<MensajeDTO>(`${this.baseURL}`, { token: token, action: "getSegurosByTipo", tipo: tipo }, { headers: headers });
   }
 
-  public listarProteccionCredito(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/proteccion-credito/listar`);
+  public listarProteccionCredito(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 2);
   }
-
-  public listarPyme(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/pyme/listar`);
+  
+  public listarPyme(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 3);
   }
 
   public listarResponsabilidadCivil(): Observable<MensajeDTO> {

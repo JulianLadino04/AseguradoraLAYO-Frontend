@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-proteccion-credito',
@@ -16,8 +17,9 @@ export class AdminProteccionCreditoComponent implements OnInit {
   selectedProteccionCreditoId: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
-    private router: Router
+    private administradorService: AdministradorService,
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,19 @@ export class AdminProteccionCreditoComponent implements OnInit {
 
   // Método para listar las protecciones de crédito
   public obtenerProteccionesCredito(): void {
-    this.administradorService.listarProteccionCredito().subscribe({
-      next: (data) => {
-        this.proteccionesCredito = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar las protecciones de crédito:', err);
-      }
-    });
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarProteccionCredito(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.proteccionesCredito = data.respuesta;
+          } else {
+            console.error('Error al cargar las protecciones de crédito:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"]);
+    }
   }
 
   // Método para seleccionar una fila de la tabla

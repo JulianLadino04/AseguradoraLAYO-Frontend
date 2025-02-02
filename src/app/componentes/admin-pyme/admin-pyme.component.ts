@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-pyme',
@@ -16,8 +17,9 @@ export class AdminPymeComponent implements OnInit {
   selectedPymeId: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
-    private router: Router
+    private administradorService: AdministradorService,
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,20 @@ export class AdminPymeComponent implements OnInit {
 
   // Método para listar las pymes
   public obtenerPymes(): void {
-    this.administradorService.listarPyme().subscribe({
-      next: (data) => {
-        this.pymes = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar las pymes:', err);
-      }
-    });
+
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarPyme(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.pymes = data.respuesta;
+          } else {
+            console.error('Error al cargar las pymes:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"]);
+    }
   }
 
   // Método para seleccionar una fila de la tabla

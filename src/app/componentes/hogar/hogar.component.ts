@@ -5,7 +5,7 @@ import { CrearCotizacionHogarDTO } from '../../dto/HogarDTOs/CrearCotizacionHoga
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AdminHogarComponent } from "../admin-hogar/admin-hogar.component";
 
 @Component({
@@ -25,7 +25,8 @@ export class HogarComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
@@ -94,6 +95,6 @@ export class HogarComponent {
 
 
   volver(): void {
-    this.router.navigate(['/seguros']);  // Ruta para volver a la página principal de seguros
+    this.location.back();
   }
 }

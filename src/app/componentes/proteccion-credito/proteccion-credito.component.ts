@@ -1,26 +1,32 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearCotizacionProteccionCreditoDTO } from '../../dto/ProteccionCreditoDTOs/CrearCotizacionProteccionCreditoDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
+import { AdminProteccionCreditoComponent } from "../admin-proteccion-credito/admin-proteccion-credito.component";
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-proteccion-credito',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, AdminProteccionCreditoComponent],
   templateUrl: './proteccion-credito.component.html',
   styleUrls: ['./proteccion-credito.component.css']
 })
 export class ProteccionCreditoComponent {
+  viewFormBtn: string = "Solicitar Cotización";
+
   proteccionCreditoForm!: FormGroup;
   aseguradoras: string[] = Object.keys(Aseguradora);
+  viewForm: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location,
   ) {
     this.crearFormulario();
   }
@@ -29,7 +35,7 @@ export class ProteccionCreditoComponent {
     this.proteccionCreditoForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
@@ -62,7 +68,7 @@ export class ProteccionCreditoComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {
@@ -81,6 +87,11 @@ export class ProteccionCreditoComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);  // Ruta para volver a la página principal de seguros
+    this.location.back();
+  }
+
+  toggleVerForm() {
+    this.viewForm = !this.viewForm;
+    this.viewFormBtn = this.viewForm ? "Ocultar" : "Solicitar Cotización";
   }
 }

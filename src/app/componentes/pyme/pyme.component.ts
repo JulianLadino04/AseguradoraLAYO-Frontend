@@ -1,20 +1,25 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearCotizacionPymeDTO } from '../../dto/PymeDTOs/CrearCotizacionPymeDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoInmueble } from '../../dto/Enums/TipoInmueble';
+import { CommonModule, Location } from '@angular/common';
+import { AdminPymeComponent } from "../admin-pyme/admin-pyme.component";
 
 @Component({
   selector: 'app-cotizacion-pyme',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, AdminPymeComponent],
   templateUrl: './pyme.component.html',
   styleUrls: ['./pyme.component.css']
 })
 export class PymeComponent {
+  viewForm: boolean = false;
+  viewFormBtn: string = "Solicitar Cotización";
+
   cotizacionPymeForm!: FormGroup;
   aseguradoras: string[] = Object.keys(Aseguradora);
   tiposInmuebles: string[] = Object.keys(TipoInmueble);
@@ -22,7 +27,8 @@ export class PymeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
@@ -31,7 +37,7 @@ export class PymeComponent {
     this.cotizacionPymeForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
@@ -69,7 +75,7 @@ export class PymeComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {
@@ -88,6 +94,11 @@ export class PymeComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);  // Ruta para volver a la página principal de seguros
+    this.location.back();
+  }
+  
+  toggleVerForm() {
+    this.viewForm = !this.viewForm;
+    this.viewFormBtn = this.viewForm ? "Ocultar" : "Solicitar Cotización";
   }
 }
