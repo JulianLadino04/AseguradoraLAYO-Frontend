@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../servicios/token.service';
 
@@ -13,20 +13,14 @@ export class HeaderComponent implements OnInit {
   title = 'AseguradoraLayo';
   isLogged = false;
   email: string = "";
-  rol: string = "";
 
-  constructor(private tokenService: TokenService, private router: Router, private cdr: ChangeDetectorRef) { }
+  constructor(private tokenService: TokenService, private router: Router) { }
 
-
-  ngAfterViewInit() {
-    this.cdr.detectChanges();
-  }
   ngOnInit() {
     // Suscribirse a los cambios de autenticación
     this.tokenService.getIsLoggedIn().subscribe(isLoggedIn => {
       this.isLogged = isLoggedIn; // Sincroniza solo isLogged, no es necesario usar isLoggedIn
       this.email = isLoggedIn ? this.tokenService.getCorreo() : "";
-      this.cdr.detectChanges(); // Forzar actualización de la vista
     });
   }
 

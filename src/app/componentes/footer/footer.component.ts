@@ -16,8 +16,7 @@ export class FooterComponent {
   footerForm!: FormGroup;
   isLogged = false;
   email: string = "";
-  rol: string = "";
-  
+
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -29,40 +28,23 @@ export class FooterComponent {
 
   private crearFormulario() {
     this.footerForm = this.formBuilder.group({
-      cedula: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.maxLength(10)]],
+      email: [{ value: '', disabled: true }],
       asegurar: ['', [Validators.required, Validators.maxLength(15)]],
-      mensaje: ['', [Validators.required]] 
+      mensaje: ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
     this.tokenService.getIsLoggedIn().subscribe(isLoggedIn => {
       this.isLogged = isLoggedIn;
-      if (isLoggedIn) {
-        this.email = this.tokenService.getCorreo();
-        this.rol = this.tokenService.getRol();
-      } else {
-        this.email = "";
-        this.rol = "";
-      }
+      this.email = isLoggedIn ? this.tokenService.getCorreo() : "";
     });
-  }
-
-  public logout() {
-    this.tokenService.logout();
-    this.isLogged = false;
-    this.email = "";
-    this.rol = "";
-    this.router.navigate(['/login']);
   }
 
   public crearPeticion() {
     if (this.footerForm.valid) {
       const peticion = this.footerForm.value; // Captura los valores del formulario como un objeto DTO
-  
+
       this.clienteService.crearPeticion(peticion).subscribe({
         next: (response) => {
           Swal.fire({

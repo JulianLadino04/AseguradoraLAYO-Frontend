@@ -33,21 +33,13 @@ export class RegistroComponent {
 
   private crearFormulario() {
     this.registroForm = this.formBuilder.group({
-      cedula: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(7)]],
-      confirmaPassword: ['', [Validators.required]] // Agrega el campo para confirmar contraseña
-    }, { validators: this.passwordsMatchValidator } as AbstractControlOptions);
-  }
-
-  passwordsMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const confirmaPassword = formGroup.get('confirmaPassword')?.value;
-
-    // Si las contraseñas no coinciden, devuelve un error, de lo contrario, null
-    return password === confirmaPassword ? null : { passwordsMismatch: true };
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.maxLength(10)]],
+      address: ['', [Validators.required, Validators.maxLength(35)]],
+      birthDate: ['', [Validators.required]] // Agrega el campo para confirmar contraseña
+    });
   }
 
   public registrar() {

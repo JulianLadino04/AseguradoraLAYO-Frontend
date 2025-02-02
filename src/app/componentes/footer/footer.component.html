@@ -1,57 +1,39 @@
-    @if (!isLogged) {
-        <footer id="footer" class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-          <div class="col-md-4 d-flex align-items-center">
-            <span class="mb-3 mb-md-0 text-body-secondary">Seguros LAYO</span>
-          </div>
-          <div class="col-md-4 d-flex align-items-center justify-content-center">
-            <img src="/images/telefono.png" alt="Teléfono" class="me-2" style="width: 20px; height: 20px;">
-            <span class="text-body-secondary">3148219899</span>
-            <span class="mx-3">|</span>
-            <span class="text-body-secondary">3122866247</span>
-          </div>
-        </footer>
-      
-    } @else if (isLogged) {
-       @if (rol === 'CLIENTE') {
-        <div class="background-container">
-          <div class="container logged-container">
-            <h2 class="title">Cotizar</h2>
-            <form [formGroup]="footerForm" (ngSubmit)="crearPeticion()" class="form-container">
-              
-              <div class="form-group">
-                <label for="id">Cédula:</label>
-                <input id="cedula" formControlName="id" type="text" class="form-control" required />
-              </div>
-        
-              <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input id="nombre" formControlName="name" type="text" class="form-control" required />
-              </div>
-        
-              <div class="form-group">
-                <label for="correo">Correo:</label>
-                <input id="correo" formControlName="email" type="email" class="form-control" required />
-              </div>
-        
-              <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input id="telefono" formControlName="phone" type="tel" class="form-control" pattern="[0-9]{10}" required />
-              </div>
-        
-              <div class="form-group">
-                <label for="asegurar">Aseguradora:</label>
-                <input id="asegurar" formControlName="asegurar" type="text" class="form-control" required />
-              </div>
-        
-              <div class="form-group">
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" formControlName="message" class="form-control" rows="4" required></textarea>
-              </div>
-        
-              <button type="submit" class="btn btn-primary">Crear Petición</button>
-            </form>
-          </div>
+<div>
+  @if (isLogged) {
+  <div class="background-container">
+    <div class="container logged-container">
+      <h2 class="title">Cotizar</h2>
+      <form [formGroup]="footerForm" (ngSubmit)="crearPeticion()" class="form-container">
+
+        <div class="form-group">
+          <label for="email">Correo:</label>
+          <input id="correo" formControlName="email" type="email" [(ngModel)]="email" class="form-control" />
         </div>
-        
-        
-    }}
+        <div class="form-group">
+          <label for="asegurar">Aseguradora:</label>
+          <input id="asegurar" formControlName="asegurar" type="text" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" formControlName="mensaje" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Petición</button>
+      </form>
+    </div>
+  </div>
+  }
+
+  <footer id="footer"
+    class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <span class="mb-3 mb-md-0 text-body-secondary">Seguros LAYO</span>
+    </div>
+    <div class="col-md-4 d-flex align-items-center justify-content-center">
+      <img src="/images/telefono.png" alt="Teléfono" class="me-2" style="width: 20px; height: 20px;">
+      <span class="text-body-secondary">3148219899</span>
+      <span class="mx-3">|</span>
+      <span class="text-body-secondary">3122866247</span>
+    </div>
+  </footer>
+</div>

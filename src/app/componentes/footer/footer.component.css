@@ -2,11 +2,10 @@
 .background-container {
   background-color: #7ecb7e; /* Azul claro */
   margin: 0;
-  padding: 20px 0; /* Espaciado vertical para separar el formulario */
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
 }
 
 /* Estilos para el contenedor del formulario */

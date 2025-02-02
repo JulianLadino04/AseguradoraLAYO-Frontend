@@ -12,30 +12,30 @@
         </div>
         <div class="col-md-6 text-start">
           <label [ngStyle]="labels" class="form-label">Nombre</label>
-          <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" />
+          <input type="text" class="form-control" formControlName="name" placeholder="Nombre" />
         </div>
       </div>
 
       <div class="d-flex gap-4">
         <div class="col-md-6 text-start">
           <label [ngStyle]="labels" class="form-label">Email</label>
-          <input type="email" class="form-control" formControlName="correo" placeholder="Email" />
+          <input type="email" class="form-control" formControlName="email" placeholder="Email" />
         </div>
         <div class="col-md-6 text-start">
           <label [ngStyle]="labels" class="form-label">Teléfono</label>
-          <input type="number" class="form-control" formControlName="telefono" placeholder="Télefono" />
+          <input type="number" class="form-control" formControlName="phone" placeholder="Télefono" />
         </div>
       </div>
 
       <div class="d-flex gap-4">
         <div class="col-md-6 text-start">
-          <label [ngStyle]="labels" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password" placeholder="Contraseña" />
+          <label [ngStyle]="labels" class="form-label">Dirección</label>
+          <input type="text" class="form-control" formControlName="address" placeholder="Dirección" />
         </div>
         <div class="col-md-6 text-start">
-          <label [ngStyle]="labels" class="form-label">Repetir contraseña</label>
-          <input type="password" class="form-control" formControlName="confirmaPassword"
-            placeholder="Repite Contraseña" />
+          <label [ngStyle]="labels" class="form-label">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" formControlName="birthDate"
+            placeholder="Fecha de Nacimiento" />
         </div>
       </div>
       <a *ngIf="!mostrarElementos" routerLink="/signin" style="align-self: center;">¿Ya tienes cuenta? <strong>Inicia Sesión</strong> </a>
@@ -44,9 +44,6 @@
         <button class="btn btn-primary" type="submit">Registrarse</button>
         <button *ngIf="mostrarElementos" class="button-cancel" type="button" (click)="volver()">Volver</button>
       </div>
-      @if (registroForm.hasError('passwordsMismatch')) {
-      <div class="alert alert-danger" role="alert">Las contraseñas no coinciden</div>
-      }
 
     </form>
     <div class="dropdown-dividers"></div>
