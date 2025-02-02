@@ -15,7 +15,7 @@ import { Aseguradora } from '../../dto/Enums/Aseguradora';
 })
 export class SaludComponent {
   cotizacionSaludForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,13 +23,6 @@ export class SaludComponent {
     private router: Router
   ) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;
-    });
   }
 
   private crearFormulario(): void {

@@ -15,7 +15,7 @@ import { Aseguradora } from '../../dto/Enums/Aseguradora';
 })
 export class ProteccionCreditoComponent {
   proteccionCreditoForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,13 +23,6 @@ export class ProteccionCreditoComponent {
     private router: Router
   ) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;  // Asegúrate de que `respuesta` coincide con tu estructura de datos
-    });
   }
 
   private crearFormulario(): void {

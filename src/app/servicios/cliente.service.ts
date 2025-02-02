@@ -73,18 +73,4 @@ export class ClienteService {
     return this.http.post<MensajeDTO>(`${this.baseURL}/afiliaciones/crear`, afiliacionDTO);
   }
 
-
-  public obtenerEnumsAseguradora(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/aseguradoras`);
-  }
-  
-  public obtenerEnumsTipoVehiculo(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/tipos-vehiculo`);
-  }
-  
-  public obtenerEnumsTipoInmueble(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/tipos-inmueble`);
-  }
-  
-
 }

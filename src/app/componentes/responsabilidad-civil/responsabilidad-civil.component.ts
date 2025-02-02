@@ -15,7 +15,7 @@ import { Aseguradora } from '../../dto/Enums/Aseguradora';
 })
 export class ResponsabilidadCivilComponent {
   cotizacionResponsabilidadCivilForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,14 +23,6 @@ export class ResponsabilidadCivilComponent {
     private router: Router
   ) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    // Cargar aseguradoras
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;
-    });
   }
 
   private crearFormulario(): void {

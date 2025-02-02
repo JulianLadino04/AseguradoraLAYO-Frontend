@@ -4,36 +4,31 @@ import { TokenService } from '../servicios/token.service';
 
 
 @Injectable({
- providedIn: 'root'
+  providedIn: 'root'
 })
 export class RolesService {
 
 
- realRole: string = "";
+  status: string = "";
 
 
- constructor(private tokenService: TokenService, private router: Router) { }
+  constructor(private tokenService: TokenService, private router: Router) { }
 
 
- canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
+    if (!this.tokenService.isLogged()) {
+      this.router.navigate(["/login"]);
+      return false;
+    }
 
 
-   const expectedRole: string[] = next.data["expectedRole"];
-   this.realRole = this.tokenService.getRol();
-
-
-   if (!this.tokenService.isLogged() || !expectedRole.some(r => this.realRole.includes(r))) {
-     this.router.navigate([""]);
-     return false;
-   }
-
-
-   return true;
- }
+    return true;
+  }
 
 
 }
 
 export const RolesGuard: CanActivateFn = (next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
- return inject(RolesService).canActivate(next, state);
+  return inject(RolesService).canActivate(next, state);
 }

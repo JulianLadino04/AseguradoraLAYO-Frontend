@@ -15,9 +15,6 @@
             <a class="nav-link active" routerLink="/seguros">Seguros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/afiliaciones-traslados">Afiliaciones o Traslados</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" routerLink="/nosotros">Nosotros</a>
           </li>
           <li class="nav-item">
@@ -26,9 +23,11 @@
           <li class="nav-item">
             <a class="nav-link active" routerLink="/contactenos">Contáctenos</a>
           </li>
+          @if (isLogged) {
           <li class="nav-item">
             <a class="nav-link active" routerLink="/perfil">Perfil</a>
           </li>
+          }
         </ul>
 
 

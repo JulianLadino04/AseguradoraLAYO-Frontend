@@ -1,0 +1,31 @@
+.dropdown-menu {
+    width: 350px;
+    height: auto;
+    max-height: 800px;
+    overflow-y: auto;
+    align-items: center;
+    border-radius: 4;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.figure {
+    margin-top: -20px;
+}

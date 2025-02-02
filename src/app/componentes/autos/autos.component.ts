@@ -1,38 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClienteService } from '../../servicios/cliente.service';
-import { CrearCotizacionAutoDTO } from '../../dto/AutoDTOs/CrearCotizacionAutoDTO';
-import Swal from 'sweetalert2';
+import { CommonModule, Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // Importa el Router
+import Swal from 'sweetalert2';
+import { CrearCotizacionAutoDTO } from '../../dto/AutoDTOs/CrearCotizacionAutoDTO';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoVehiculo } from '../../dto/Enums/TipoVehiculo';
+import { ClienteService } from '../../servicios/cliente.service';
+import { AdminAutosComponent } from "../admin-autos/admin-autos.component";
 
 @Component({
   selector: 'app-autos',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, AdminAutosComponent, CommonModule],
   templateUrl: './autos.component.html',
   styleUrl: './autos.component.css'
 })
 export class AutosComponent {
 
   cotizacionAutoForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
   tiposVehiculo: TipoVehiculo[] = [];
+  isChecked: boolean = false;
+  btnText: string = "Solicitar Cotización";
 
-  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService, private router: Router, private location: Location) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;  // Accede a la propiedad `data`
-    });
-  
-    this.clienteService.obtenerEnumsTipoVehiculo().subscribe((response) => {
-      this.tiposVehiculo = response.respuesta;  // Accede a la propiedad `data`
-    });
   }
 
   private crearFormulario() {
@@ -40,16 +33,21 @@ export class AutosComponent {
       aseguradora: ['', Validators.required],
       placa: ['', [Validators.required, Validators.maxLength(6), Validators.minLength(6)]],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required, Validators.maxLength(30)]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       ciudadCirculacion: ['', Validators.required],
       tipo: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required]
+      fechaNacimiento: ['', Validators.required],
     });
   }
-  
+
+  toggleShowing() {
+    this.isChecked = !this.isChecked;
+    this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
+  }
+
 
   public crearCotizacionAuto() {
     const cotizacionData = this.cotizacionAutoForm.value as CrearCotizacionAutoDTO;
@@ -66,7 +64,7 @@ export class AutosComponent {
         return; // Detener la ejecución si algún campo está vacío
       }
     }
-  
+
     this.clienteService.crearCotizacionAuto(cotizacionData).subscribe({
       next: (data) => {
         Swal.fire({
@@ -94,7 +92,6 @@ export class AutosComponent {
   }
 
   volver() {
-    // Redirige a la página de seguros
-    this.router.navigate(['/seguros']);
+    this.location.back();
   }
 }

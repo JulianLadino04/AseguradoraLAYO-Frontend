@@ -16,8 +16,8 @@ import { TipoVehiculo } from '../../dto/Enums/TipoVehiculo';
 })
 export class SoatComponent {
   cotizacionSoatForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
-  tiposVehiculo: TipoVehiculo[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
+  tiposVehiculo: string[] = Object.keys(TipoVehiculo);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,16 +25,6 @@ export class SoatComponent {
     private router: Router
   ) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;
-    });
-    this.clienteService.obtenerEnumsTipoVehiculo().subscribe((response) => {
-      this.tiposVehiculo = response.respuesta;
-    });
   }
 
   private crearFormulario(): void {

@@ -85,7 +85,7 @@
 
 .btn-outline {
   color: white;
-  background-color: #405040;
+  background-color: #000;
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
@@ -95,8 +95,8 @@
 }
 
 .btn-outline:hover {
-  color: #7ecb7e;
-  background-color: black;
+  scale: 1.1;
+  background-color: #333333;
 }
 
 /* Estilo específico para botones de Login y Registro */

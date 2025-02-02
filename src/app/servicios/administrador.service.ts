@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MensajeDTO } from '../dto/TokenDTOs/MensajeDTO';
+import { Environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdministradorService {
 
-  private baseURL = 'http://localhost:8080/api/admin';
+  private baseURL = Environment.BACKEND_URL;
 
   constructor(private http: HttpClient) { }
 
   // Métodos para listar
 
-  public listarAutos(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/autos/listar`);
+  public listarAutos(token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { token: token, action: "getSegurosByTipo", tipo: 0 }, { headers: headers });
   }
 
   public listarHogar(): Observable<MensajeDTO> {

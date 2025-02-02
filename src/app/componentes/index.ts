@@ -24,7 +24,6 @@ import { AdminSaludComponent } from './admin-salud/admin-salud.component';
 import { AdminSoatComponent } from './admin-soat/admin-soat.component';
 import { AdminVidaComponent } from './admin-vida/admin-vida.component';
 import { AdminPeticionComponent } from './admin-peticion/admin-peticion.component';
-import { AfiliacionesTrasladosComponent } from './afiliaciones-traslados/afiliaciones-traslados.component';
 import { AdminAfiliacionesComponent } from './admin-afiliaciones/admin-afiliaciones.component';
 
-export { LoginComponent, RegistroComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AfiliacionesTrasladosComponent, AdminAfiliacionesComponent };
+export { LoginComponent, RegistroComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent };

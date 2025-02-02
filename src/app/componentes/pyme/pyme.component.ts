@@ -16,8 +16,8 @@ import { TipoInmueble } from '../../dto/Enums/TipoInmueble';
 })
 export class PymeComponent {
   cotizacionPymeForm!: FormGroup;
-  aseguradoras: Aseguradora[] = [];
-  tiposInmuebles: TipoInmueble[] = [];
+  aseguradoras: string[] = Object.keys(Aseguradora);
+  tiposInmuebles: string[] = Object.keys(TipoInmueble);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,19 +25,6 @@ export class PymeComponent {
     private router: Router
   ) {
     this.crearFormulario();
-    this.cargarEnums();
-  }
-
-  private cargarEnums(): void {
-    // Cargar aseguradoras
-    this.clienteService.obtenerEnumsAseguradora().subscribe((response) => {
-      this.aseguradoras = response.respuesta;
-    });
-
-    // Cargar tipos de inmuebles
-    this.clienteService.obtenerEnumsTipoInmueble().subscribe((response) => {
-      this.tiposInmuebles = response.respuesta;
-    });
   }
 
   private crearFormulario(): void {
