@@ -39,10 +39,8 @@ export class AdminAutosComponent implements OnInit {
         }
       });
     } else {
-      // this.router.navigate(["/signin"]);
-      console.log("notloggedin")
+      this.router.navigate(["/signin"]);
     }
-    this.tokenService.getToken();
   }
 
   // Método para seleccionar una fila de la tabla

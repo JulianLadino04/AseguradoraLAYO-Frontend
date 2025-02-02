@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
-import { MensajeDTO } from '../../dto/TokenDTOs/MensajeDTO';
-import { CommonModule } from '@angular/common';
+import { AdministradorService } from '../../servicios/administrador.service';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-hogar',
@@ -18,7 +18,8 @@ export class AdminHogarComponent implements OnInit {
 
   constructor(
     private administradorService: AdministradorService, 
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -27,14 +28,19 @@ export class AdminHogarComponent implements OnInit {
 
   // Método para listar los hogares
   public obtenerHogares(): void {
-    this.administradorService.listarHogar().subscribe({
-      next: (data) => {
-        this.hogares = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar los hogares:', err);
-      }
-    });
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarHogar(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.hogares = data.respuesta;
+          } else {
+            console.error('Error al cargar los autos:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"]);
+    }
   }
 
   // Método para seleccionar una fila de la tabla

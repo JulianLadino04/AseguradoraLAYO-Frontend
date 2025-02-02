@@ -1,21 +1,26 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearCotizacionHogarDTO } from '../../dto/HogarDTOs/CrearCotizacionHogarDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
+import { CommonModule } from '@angular/common';
+import { AdminHogarComponent } from "../admin-hogar/admin-hogar.component";
 
 @Component({
   selector: 'app-hogar',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, AdminHogarComponent],
   templateUrl: './hogar.component.html',
   styleUrl: './hogar.component.css'
 })
 export class HogarComponent {
+
   cotizacionHogarForm!: FormGroup;
   aseguradoras: string[] = Object.keys(Aseguradora);
+  viewForm: boolean = false;
+  viewFormBtn: string = "Solicitar Cotización";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +69,7 @@ export class HogarComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {
@@ -78,10 +83,15 @@ export class HogarComponent {
     });
   }
 
+  toggleVerForm() {
+    this.viewForm = !this.viewForm;
+    this.viewFormBtn = this.viewForm ? "Ocultar" : "Solicitar Cotización";
+  }
+
   public campoEsValido(campo: string): boolean {
     return this.cotizacionHogarForm.controls[campo].valid && this.cotizacionHogarForm.controls[campo].touched;
   }
-  
+
 
   volver(): void {
     this.router.navigate(['/seguros']);  // Ruta para volver a la página principal de seguros

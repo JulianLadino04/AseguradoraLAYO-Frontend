@@ -16,12 +16,16 @@ export class AdministradorService {
   // Métodos para listar
 
   public listarAutos(token: string): Observable<MensajeDTO> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return this.http.post<MensajeDTO>(`${this.baseURL}`, { token: token, action: "getSegurosByTipo", tipo: 0 }, { headers: headers });
+    return this.listarPorTipo(token, 0);
   }
 
-  public listarHogar(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/hogar/listar`);
+  public listarHogar(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 1);
+  }
+
+  private listarPorTipo(token: string, tipo: number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { token: token, action: "getSegurosByTipo", tipo: tipo }, { headers: headers });
   }
 
   public listarProteccionCredito(): Observable<MensajeDTO> {
