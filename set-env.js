@@ -8,3 +8,4 @@ export const Environment: IEnvironment = {
 
 fs.writeFileSync('./src/environments/environment.prod.ts', envConfig);
 console.log('✅ environment.prod.ts generado con variables de entorno.');
+console.log(`BACKEND_URL: ${process.env.API_URL || ''}`);
