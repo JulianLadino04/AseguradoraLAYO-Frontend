@@ -10,7 +10,8 @@ import {
     VidaComponent, PerfilComponent, AdminAutosComponent,
     AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent,
     AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent,
-    AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent
+    AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent,
+    AfiliacionesTrasladosComponent
 } from './componentes'
 
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
     { path: 'soat', component: SoatComponent, canActivate: [RolesGuard] },
     { path: 'vida', component: VidaComponent, canActivate: [RolesGuard] },
     { path: 'perfil', component: PerfilComponent, canActivate: [RolesGuard] },
+    { path: 'afiliaciones-traslados', component: AfiliacionesTrasladosComponent, canActivate: [RolesGuard] },
 
     //Administrador
     { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard] },

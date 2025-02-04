@@ -12,6 +12,7 @@ import { ProteccionCreditoComponent } from './proteccion-credito/proteccion-cred
 import { PymeComponent } from './pyme/pyme.component';
 import { ResponsabilidadCivilComponent } from './responsabilidad-civil/responsabilidad-civil.component';
 import { SaludComponent } from './salud/salud.component';
+import { AfiliacionesTrasladosComponent } from './afiliaciones-traslados/afiliaciones-traslados.component'
 import { SoatComponent } from './soat/soat.component';
 import { VidaComponent } from './vida/vida.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -26,4 +27,4 @@ import { AdminVidaComponent } from './admin-vida/admin-vida.component';
 import { AdminPeticionComponent } from './admin-peticion/admin-peticion.component';
 import { AdminAfiliacionesComponent } from './admin-afiliaciones/admin-afiliaciones.component';
 
-export { LoginComponent, RegistroComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent };
+export { LoginComponent, AfiliacionesTrasladosComponent, RegistroComponent, CotizacionesAdminComponent, PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent, AlianzasComponent, SegurosComponent, AutosComponent, HogarComponent, ProteccionCreditoComponent, PymeComponent, ResponsabilidadCivilComponent, SaludComponent, SoatComponent, VidaComponent, PerfilComponent, AdminAutosComponent, AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent, AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent, AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent };
