@@ -23,7 +23,8 @@ export class PublicoService {
  constructor(private http: HttpClient) { }
 
  public crearCuenta(cuentaDTO: CrearCuentaDTO): Observable<MensajeDTO> {
-  return this.http.post<MensajeDTO>(`${this.publicoURL}/crear-cuenta`, cuentaDTO);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.publicoURL}`, { ...cuentaDTO, action: "signUp" }, { headers });
  }
  
  public iniciarSesion(loginDTO: LoginDTO): Observable<MensajeDTO> {

@@ -1,9 +1,8 @@
 export interface CrearCuentaDTO {
-   cedula:string,
-   nombre:string,
-   telefono:string,
-   direccion:string,
-   correo:string,
-   password:string,
-   confirmaPassword:string
+   id:string,
+   name:string,
+   phone:string,
+   address:string,
+   email:string,
+   birthDate:string
  }

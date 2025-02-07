@@ -26,7 +26,7 @@ export class RegistroComponent {
   private cargarEmailUrl() {
     this.route.queryParams.subscribe(params => {
       if (params['email']) {
-        this.registroForm.patchValue({ correo: params['email'] });
+        this.registroForm.patchValue({ email: params['email'] });
       }
     });
   }
@@ -47,29 +47,22 @@ export class RegistroComponent {
 
     this.publicoService.crearCuenta(crearCuenta).subscribe({
       next: (data) => {
-        Swal.fire({
-          title: 'Cuenta creada',
-          text: 'La cuenta se ha creado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        });
-
-        // Verifica si el correo es admin@gmail.com
-        if (crearCuenta.correo === 'admin@gmail.com') {
-          // Si es admin, redirige al login
-          this.router.navigate(['/login']);
+        if (!data.error) {
+          Swal.fire({
+            title: 'Cuenta creada',
+            text: 'La cuenta se ha creado correctamente',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          this.router.navigate(['/signin']);
         } else {
-          // Si no es admin, redirige a la página de Activar Cuenta
-          this.router.navigate(['/activar-cuenta']);
+          Swal.fire({
+            title: 'Error',
+            text: data.respuesta,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
       }
     });
   }
