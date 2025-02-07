@@ -40,7 +40,7 @@ export class AdminPymeComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(["/signin"]);
+      this.router.navigate(["/signin"], { replaceUrl: true });
     }
   }
 

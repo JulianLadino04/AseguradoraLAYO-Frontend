@@ -39,7 +39,7 @@ export class AdminAutosComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(["/signin"]);
+      this.router.navigate(["/signin"], { replaceUrl: true });
     }
   }
 
