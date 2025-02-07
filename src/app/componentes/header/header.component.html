@@ -3,47 +3,71 @@
     <div class="container-fluid">
       <!-- Imagen del logo -->
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto centered h-100 gap-1">
-          <li>
-            <a id="home-a" class="" routerLink="/">
-              <img src="/images/logo.png" class="rounded-circle me-3" alt="Logo Aseguradora LAYO" height="40">
-              Seguros LAYO
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/seguros">Seguros</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/nosotros">Nosotros</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/alianzas">Alianzas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/contactenos">Contáctenos</a>
-          </li>
-          @if (isLogged) {
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/afiliaciones-traslados">Afiliaciones/Traslados</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/perfil">Perfil</a>
-          </li>
-          }
-        </ul>
+      <div class="collapse navbar-collapse header-between" id="navbarNav">
+        <div class="header-seguros centered h-100 gap-1 header-title">
+          <a id="home-a" class="" routerLink="/">
+            <img src="/images/logo.png" class="rounded-circle me-3" alt="Logo Aseguradora LAYO" height="40">
+            Seguros LAYO
+          </a>
+          <ul class="navbar-nav me-auto nav-pc centered gap-1">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/seguros">Seguros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/alianzas">Alianzas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/contactenos">Contáctenos</a>
+            </li>
+            @if (isLogged) {
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/afiliaciones-traslados">Afiliaciones/Traslados</a>
+            </li>
+            }
+          </ul>
+        </div>
 
 
         <!-- Mostrar Login y Registro si el usuario no está autenticado -->
         <div class="d-flex align-items-center">
           <div class="text-center me-3">
+            <button type="button" (click)="toggleMenu()" class="btn-menu me-2">
+              <svg style="width: 1.5rem;height: 1.5rem;" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="M4 6H20M4 12H20M4 18H20" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+          @if(showMenu){
+          <div class="menu-cel">
             @if (!isLogged) {
             <button type="button" routerLink="/signin" class="btn-outline me-2">Ingresar</button>
-            } @else if (isLogged) {
-            <span class="me-3">Hola, {{ email }}</span>
-            <button type="button" (click)="logout()" class="btn btn-primary">Logout</button>
+            } @else {
+            <span class="me-3">{{ email }}</span>
+            <div class="menubar2-cel">
+              <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/seguros">Seguros</a>
+              <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/nosotros">Nosotros</a>
+              <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/alianzas">Alianzas</a>
+              <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/contactenos">Contáctenos</a>
+              @if (isLogged) {
+              <a class="nav-link-dark black active" (click)="toggleMenu()"
+                routerLink="/afiliaciones-traslados">Afiliaciones/Traslados</a>
+              }
+            </div>
+            <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/perfil">Perfil</a>
+            <button type="button" (click)="logout()" class="btn-menu">Logout</button>
             }
           </div>
+
+          }
         </div>
       </div>
     </div>

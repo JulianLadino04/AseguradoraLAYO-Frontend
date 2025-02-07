@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   title = 'AseguradoraLayo';
   isLogged = false;
   email: string = "";
+  showMenu: boolean = false;
 
   constructor(private tokenService: TokenService, private router: Router) { }
 
@@ -22,6 +23,10 @@ export class HeaderComponent implements OnInit {
       this.isLogged = isLoggedIn; // Sincroniza solo isLogged, no es necesario usar isLoggedIn
       this.email = isLoggedIn ? this.tokenService.getCorreo() : "";
     });
+  }
+
+  public toggleMenu() {
+    this.showMenu = !this.showMenu;
   }
 
   public logout() {
