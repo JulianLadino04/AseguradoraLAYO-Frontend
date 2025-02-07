@@ -48,10 +48,6 @@
           </div>
           @if(showMenu){
           <div class="menu-cel">
-            @if (!isLogged) {
-            <button type="button" routerLink="/signin" class="btn-outline me-2">Ingresar</button>
-            } @else {
-            <span class="me-3">{{ email }}</span>
             <div class="menubar2-cel">
               <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/seguros">Seguros</a>
               <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/nosotros">Nosotros</a>
@@ -62,6 +58,10 @@
                 routerLink="/afiliaciones-traslados">Afiliaciones/Traslados</a>
               }
             </div>
+            @if (!isLogged) {
+            <button type="button" routerLink="/signin" class="btn-outline me-2">Ingresar</button>
+            } @else {
+            <span class="me-3">{{ email }}</span>
             <a class="nav-link-dark black active" (click)="toggleMenu()" routerLink="/perfil">Perfil</a>
             <button type="button" (click)="logout()" class="btn-menu">Logout</button>
             }
