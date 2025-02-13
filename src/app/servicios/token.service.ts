@@ -5,7 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const TOKEN_KEY = "AuthToken";
-const EMAIL = "Email"
+const EMAIL = "Email";
+const EXP = "Expiration";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,10 @@ export class TokenService {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(this.isLogged());
   }
 
-  public setLogin(token: string, email: string) {
+  public setLogin(token: string, exp: string, email: string) {
     this.cookieService.set(TOKEN_KEY, token);
     this.cookieService.set(EMAIL, email);
+    this.cookieService.set(EXP, exp);
     this.isLoggedInSubject.next(true);  // Emitir que el usuario ha iniciado sesión
   }
 
@@ -36,9 +38,17 @@ export class TokenService {
     return this.isLoggedInSubject.asObservable();
   }
 
+  public hasExpiredLogin(): boolean {
+    const exp = this.cookieService.get(EXP);
+    if (!exp) return true;
+    const expDate = new Date(exp);
+    return expDate < new Date();
+  }
+
   public logout() {
     this.cookieService.delete(TOKEN_KEY);
     this.cookieService.delete(EMAIL);
+    this.cookieService.delete(EXP);
     this.isLoggedInSubject.next(false);  // Emitir que el usuario ha cerrado sesión
     this.router.navigate(["/login"]).then(() => {
       window.location.reload();

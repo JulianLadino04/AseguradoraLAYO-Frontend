@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MensajeDTO } from '../dto/TokenDTOs/MensajeDTO';
 import { CrearCotizacionHogarDTO } from '../dto/HogarDTOs/CrearCotizacionHogarDTO';
@@ -64,8 +64,9 @@ export class ClienteService {
   }
 
   // Crear Peticion
-  public crearPeticion(peticionDTO: CrearPeticionDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/peticion/crear`, peticionDTO);
+  public crearPeticion(peticionDTO: CrearPeticionDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, {...peticionDTO, token: token, action: "crearPeticion" }, { headers: headers });
   }
 
   // Crear Afiliación

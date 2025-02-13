@@ -45,29 +45,33 @@ export class FooterComponent {
     if (this.footerForm.valid) {
       const peticion = this.footerForm.value; // Captura los valores del formulario como un objeto DTO
 
-      this.clienteService.crearPeticion(peticion).subscribe({
-        next: (response) => {
-          Swal.fire({
-            title: 'Petición creada',
-            text: 'La petición se ha creado correctamente',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-          this.footerForm.reset(); // Limpia el formulario
-        },
-        error: (error) => {
-          Swal.fire({
-            title: 'Error',
-            text: error.error?.respuesta || 'Ocurrió un error al enviar la petición',
-            icon: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-      });
+      const token = this.tokenService.getToken();
+      if (token) {
+        this.clienteService.crearPeticion(peticion, token).subscribe({
+          next: (response) => {
+            if (!response.error) {
+              Swal.fire({
+                title: 'Petición creada',
+                text: 'La petición se ha creado correctamente',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              this.footerForm.reset(); // Limpia el formulario
+            } else {
+              Swal.fire({
+                title: 'Error',
+                text: response.respuesta || 'Ocurrió un error al enviar la petición',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          }
+        });
+      }
     } else {
       Swal.fire({
-        title: 'Formulario incompleto',
-        text: 'Por favor, completa todos los campos correctamente',
+        title: 'Error de autenticación',
+        text: 'Por favor, inicia sesión y vuelve a intentarlo',
         icon: 'warning',
         confirmButtonText: 'Aceptar'
       });

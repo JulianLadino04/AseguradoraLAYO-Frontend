@@ -106,7 +106,7 @@ export class LoginComponent {
             confirmButtonText: "Cerrar",
           });
 
-          this.tokenService.setLogin(data.respuesta.token, data.respuesta.email);
+          this.tokenService.setLogin(data.respuesta.token, data.respuesta.date, data.respuesta.email);
           this.router.navigate(['/']);
         }
       },

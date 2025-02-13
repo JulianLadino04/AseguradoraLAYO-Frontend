@@ -1,30 +1,23 @@
 <section class="py-5 container">
   <h1 class="text-center mb-4">Afiliaciones o Traslados</h1>
-  <div class="col-md-12 mt-3" [formGroup]="afiliacionForm" (ngSubmit)="crearAfiliacion()">
+  <div class="mt-3" [formGroup]="afiliacionForm" (ngSubmit)="crearAfiliacion()">
     <form class="row g-4 needs-validation" novalidate>
-      <div class="row g-3">
-        <div class="w-100 row">
-          <!-- Nombre -->
-          <div class="col-md-6 text-start">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" formControlName="email" [(ngModel)]="email" placeholder="Correo">
-            <div
-              [ngClass]="(afiliacionForm.get('email')?.touched && afiliacionForm.get('email')?.hasError('required'))?'showing':''"
-              class="alert alert-danger" style="opacity: 0;" role="alert">El correo es requerido.</div>
-          </div>
+      <div class="row g-3 w-100">
+        <!-- Nombre -->
+        <div class="col-md-6 text-start w-100">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control w-full" formControlName="email" [(ngModel)]="email"
+            placeholder="Correo">
 
-          <!-- Teléfono -->
-          <div class="col-md-6 row text-start">
-            <label class="form-label">Tipo de gestión</label>
-            <select formControlName="type">
-              <option value="" disabled selected>Selecciona un tipo</option>
-              <option value="Afiliación">Afiliación</option>
-              <option value="Traslado">Traslado</option>
-            </select>
-            <div
-              [ngClass]="(afiliacionForm.get('type')?.touched && afiliacionForm.get('type')?.hasError('required'))?'showing':''"
-              class="alert alert-danger" style="opacity: 0;" role="alert">El tipo es requerido.</div>
-          </div>
+        </div>
+        <!-- Teléfono -->
+        <div class="col-md-6 w-100 text-start">
+          <label class="form-label">Tipo de gestión</label>
+          <select class="form-control w-100" formControlName="type">
+            <option value="" disabled selected>Selecciona un tipo</option>
+            <option value="Afiliación">Afiliación</option>
+            <option value="Traslado">Traslado</option>
+          </select>
         </div>
 
         <!-- Mensaje -->
@@ -42,8 +35,8 @@
 
         <!-- Botones -->
         <div class="col-12 text-center">
-          <button class="btn btn-success mt-4 me-2" type="submit">Solicitar Afiliación o Traslado</button>
-          <button class="btn btn-danger mt-4" (click)="volver()">Volver</button>
+          <button class="btn btn-success mt-1 me-2" type="submit">Solicitar Afiliación o Traslado</button>
+          <button class="btn btn-danger mt-1" (click)="volver()">Volver</button>
         </div>
       </div>
     </form>

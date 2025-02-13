@@ -21,6 +21,8 @@ export class RolesService {
       this.router.navigate(["/login"]);
       return false;
     }
+    if (this.tokenService.hasExpiredLogin())
+      return false;
 
 
     return true;
