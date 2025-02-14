@@ -6,7 +6,7 @@
     </figure>
   </div>
 
-  <body class="p-0 m-0 bd-example m-1 bg-white h-25 w-auto border-0 col-6 ">
+  <body class="p-0 m-0 bd-example m-1 bg-white h-fit w-auto border-0 col-6 ">
 
     <div class="dropdown-menu" [formGroup]="loginForm" (ngSubmit)="login()">
       <form class="px-4 py-3 d-flex flex-column">
@@ -14,17 +14,21 @@
           <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
           <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="correo@example.com"
             formControlName="email">
+          @if (source!=="") {
+          <div class="alert alert-danger" role="alert">{{source}}</div>
+          }
         </div>
         <div class="mb-auto">
           <label for="inputFormCodigo" class="form-label">Código</label>
-          <input type="text" class="form-control" id="inputFormCodigo" placeholder="123456"
-            formControlName="userCode">
+          <input type="text" class="form-control" id="inputFormCodigo" placeholder="123456" formControlName="userCode">
         </div>
-        <a routerLink="/signup" style="align-self: center;">¿No tienes cuenta? <strong>Regístrate</strong> </a>
-        <button disabled [disabled]="loginForm.get('email')?.invalid||loginForm.get('userCode')?.valid" class="button-secondary" type="button" (click)="generarCodigo()" >Enviar Código</button>
-        <button disabled [disabled]="loginForm.invalid" type="submit" class="btn btn-primary" >Ingresar</button>
+        <a id="goRegister" (click)="gotoRegister()" style="align-self: center;">¿No tienes cuenta?
+          <strong>Regístrate</strong> </a>
+        <button disabled [disabled]="loginForm.get('email')?.invalid||loginForm.get('userCode')?.valid"
+          class="button-secondary" type="button" (click)="generarCodigo()">Enviar Código</button>
+        <button disabled [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Ingresar</button>
         <button class="button-cancel" type="button" (click)="volver()">Volver</button>
-        
+
       </form>
       <div class="dropdown-divider"></div>
     </div>

@@ -6,8 +6,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
+  }
+
+  #goRegister {
+    color: #303030;
+    transition: color .1s linear;
+    cursor: pointer;
+  }
+  #goRegister:hover{
+    color: #000;
   }
   
   .container {
@@ -118,7 +126,6 @@
   .dropdown-menu {
     width: 350px; /* Cambia el ancho como desees */
     height: auto; /* Ajusta el alto, auto se ajusta al contenido */
-    max-height: 450px; /* Puedes establecer un alto máximo si lo deseas */
     overflow-y: auto; /* Esto agrega un desplazamiento si el contenido excede el alto máximo */
     align-items: center;
     border-radius: 4;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { LoginDTO } from '../../dto/CuentaDTOs/LoginDTO';
@@ -18,16 +18,31 @@ import { TokenService } from '../../servicios/token.service';
 export class LoginComponent {
 
   loginForm!: FormGroup;
+  source: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private publicoService: PublicoService,
     private loc: Location,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private route: ActivatedRoute,
   ) {
     this.crearFormulario();
+    this.cargarEmailUrl();
   }
+
+  private cargarEmailUrl() {
+    this.route.queryParams.subscribe(params => {
+      if (params['email']) {
+        this.loginForm.patchValue({ email: params['email'] });
+      }
+      if (params['source']) {
+        this.source = params['source'];
+      }
+    });
+  }
+
 
   private crearFormulario() {
     this.loginForm = this.formBuilder.group({

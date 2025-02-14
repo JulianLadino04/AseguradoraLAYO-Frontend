@@ -31,8 +31,5 @@ export class HeaderComponent implements OnInit {
 
   public logout() {
     this.tokenService.logout();
-    this.isLogged = false; // Reiniciar el estado de autenticación
-    this.email = "";
-    this.router.navigate(['/login']); // Redirigir al inicio después de logout
   }
 }

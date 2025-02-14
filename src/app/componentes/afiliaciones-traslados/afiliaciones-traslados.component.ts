@@ -30,8 +30,8 @@ export class AfiliacionesTrasladosComponent {
   private crearFormulario(): void {
     this.afiliacionForm = this.formBuilder.group({
       email: [{ value: '', disabled: true }],
-      type: ['', [Validators.required]],
-      message: ['', [Validators.required, Validators.maxLength(300)]],
+      tipo: ['', [Validators.required]],
+      mensaje: ['', [Validators.required, Validators.maxLength(300)]],
     });
 
   }
@@ -55,27 +55,42 @@ export class AfiliacionesTrasladosComponent {
     }
 
     const afiliacionData: CrearAfiliacionDTO = this.afiliacionForm.value;
+    const token = this.tokenService.getToken();
 
-    this.clienteService.crearAfiliacion(afiliacionData).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Afiliación creada correctamente.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          this.router.navigate(['/home']); // Redirigir a una página después de crear la afiliación
-        });
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta || 'Ocurrió un error inesperado',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+    if (token) {
+      this.clienteService.crearAfiliacion(afiliacionData, token).subscribe({
+        next: (respuesta) => {
+          console.log({ respuesta });
+          if (!respuesta.error) {
+            Swal.fire({
+              title: 'Éxito',
+              text: respuesta.respuesta,
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              this.router.navigate(['/home']); // Redirigir a una página después de crear la afiliación
+            });
+          } else {
+            if (respuesta.respuesta === "Token inválido" || respuesta.respuesta === "Sesión expirada")
+              this.tokenService.logout("Tu sesión ha expirado");
+            else
+              Swal.fire({
+                title: 'Error',
+                text: respuesta.respuesta || 'Ocurrió un error inesperado',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+          }
+        }
+      });
+    } else {
+      Swal.fire({
+        title: 'Error de autenticación',
+        text: 'Por favor, inicia sesión y vuelve a intentarlo',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
 
   // Método para verificar si un campo es válido

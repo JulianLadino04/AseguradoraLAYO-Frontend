@@ -8,28 +8,30 @@
           <label class="form-label">Email</label>
           <input type="email" class="form-control w-full" formControlName="email" [(ngModel)]="email"
             placeholder="Correo">
-
         </div>
         <!-- Teléfono -->
         <div class="col-md-6 w-100 text-start">
           <label class="form-label">Tipo de gestión</label>
-          <select class="form-control w-100" formControlName="type">
+          <select class="form-control w-100" formControlName="tipo">
             <option value="" disabled selected>Selecciona un tipo</option>
             <option value="Afiliación">Afiliación</option>
             <option value="Traslado">Traslado</option>
           </select>
+          @if (afiliacionForm.get('tipo')?.touched && afiliacionForm.get('tipo')?.hasError('required')) {
+          <div class="alert alert-danger" role="alert">El tipo es requerido.</div>
+          }
         </div>
 
         <!-- Mensaje -->
         <div class="col-md-6 text-start w-100">
           <label class="form-label">Mensaje</label>
-          <textarea class="form-control" formControlName="message"
+          <textarea class="form-control" formControlName="mensaje"
             placeholder="Escribe el detalle de lo que quieres hacer"></textarea>
-          @if (afiliacionForm.get('message')?.touched && afiliacionForm.get('message')?.hasError('required')) {
+          @if (afiliacionForm.get('mensaje')?.touched && afiliacionForm.get('mensaje')?.hasError('required')) {
           <div class="alert alert-danger" role="alert">El mensaje es requerido.</div>
           }
-          @if (afiliacionForm.get('message')?.touched && afiliacionForm.get('message')?.hasError('maxlength')) {
-          <div class="alert alert-danger" role="alert">El mensaje no puede tener más de 250 caracteres.</div>
+          @if (afiliacionForm.get('mensaje')?.touched && afiliacionForm.get('mensaje')?.hasError('maxlength')) {
+          <div class="alert alert-danger" role="alert">El mensaje no puede tener más de 300 caracteres.</div>
           }
         </div>
 

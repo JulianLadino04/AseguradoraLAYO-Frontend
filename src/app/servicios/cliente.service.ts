@@ -66,12 +66,13 @@ export class ClienteService {
   // Crear Peticion
   public crearPeticion(peticionDTO: CrearPeticionDTO, token: string): Observable<MensajeDTO> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return this.http.post<MensajeDTO>(`${this.baseURL}`, {...peticionDTO, token: token, action: "crearPeticion" }, { headers: headers });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...peticionDTO, token: token, action: "crearPeticion" }, { headers: headers });
   }
 
   // Crear Afiliación
-  public crearAfiliacion(afiliacionDTO: CrearAfiliacionDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/afiliaciones/crear`, afiliacionDTO);
+  public crearAfiliacion(afiliacionDTO: CrearAfiliacionDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...afiliacionDTO, token: token, action: "crearAfiliacionTraslado" }, { headers: headers });
   }
 
 }
