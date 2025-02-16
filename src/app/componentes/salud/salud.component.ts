@@ -5,7 +5,7 @@ import { CrearCotizacionSaludDTO } from '../../dto/SaludDTOs/CrearCotizacionSalu
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AdminSaludComponent } from "../admin-salud/admin-salud.component";
 
 @Component({
@@ -24,7 +24,8 @@ export class SaludComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
@@ -88,6 +89,6 @@ export class SaludComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);
+    this.location.back();
   }
 }

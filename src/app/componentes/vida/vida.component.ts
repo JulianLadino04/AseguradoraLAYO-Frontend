@@ -5,7 +5,7 @@ import { CrearCotizacionVidaDTO } from '../../dto/VidaDTOs/CrearCotizacionVidaDT
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AdminVidaComponent } from "../admin-vida/admin-vida.component";
 
 @Component({
@@ -24,7 +24,8 @@ export class VidaComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
@@ -89,6 +90,6 @@ export class VidaComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);
+    this.location.back();
   }
 }

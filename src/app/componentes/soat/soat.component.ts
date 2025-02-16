@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoVehiculo } from '../../dto/Enums/TipoVehiculo';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AdminSoatComponent } from "../admin-soat/admin-soat.component";
 
 @Component({
@@ -26,11 +26,12 @@ export class SoatComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
-  
+
   toggleShowing() {
     this.isChecked = !this.isChecked;
     this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
@@ -91,6 +92,6 @@ export class SoatComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);
+    this.location.back();
   }
 }

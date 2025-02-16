@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { AdminResponsabilidadCivilComponent } from "../admin-responsabilidad-civil/admin-responsabilidad-civil.component";
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-cotizacion-responsabilidad-civil',
@@ -24,7 +24,8 @@ export class ResponsabilidadCivilComponent {
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.crearFormulario();
   }
@@ -91,6 +92,6 @@ export class ResponsabilidadCivilComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/seguros']);  // Ruta para volver a la página principal de seguros
+    this.location.back();
   }
 } 
