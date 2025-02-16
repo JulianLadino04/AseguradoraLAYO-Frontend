@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearSoatDTO } from '../../dto/SoatDTOs/CrearSoatDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoVehiculo } from '../../dto/Enums/TipoVehiculo';
+import { CommonModule } from '@angular/common';
+import { AdminSoatComponent } from "../admin-soat/admin-soat.component";
 
 @Component({
   selector: 'app-cotizacion-soat',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, AdminSoatComponent],
   templateUrl: './soat.component.html',
   styleUrls: ['./soat.component.css']
 })
@@ -18,6 +20,8 @@ export class SoatComponent {
   cotizacionSoatForm!: FormGroup;
   aseguradoras: string[] = Object.keys(Aseguradora);
   tiposVehiculo: string[] = Object.keys(TipoVehiculo);
+  isChecked: boolean = false;
+  btnText: string = "Solicitar Cotización";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,6 +29,11 @@ export class SoatComponent {
     private router: Router
   ) {
     this.crearFormulario();
+  }
+  
+  toggleShowing() {
+    this.isChecked = !this.isChecked;
+    this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
   }
 
   private crearFormulario(): void {
@@ -63,7 +72,7 @@ export class SoatComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {

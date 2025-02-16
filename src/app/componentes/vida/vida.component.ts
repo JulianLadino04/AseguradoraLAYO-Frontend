@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearCotizacionVidaDTO } from '../../dto/VidaDTOs/CrearCotizacionVidaDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
+import { CommonModule } from '@angular/common';
+import { AdminVidaComponent } from "../admin-vida/admin-vida.component";
 
 @Component({
   selector: 'app-cotizacion-vida',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, AdminVidaComponent],
   templateUrl: './vida.component.html',
   styleUrls: ['./vida.component.css']
 })
 export class VidaComponent {
   cotizacionVidaForm!: FormGroup;
   aseguradoras: string[] = Object.keys(Aseguradora);
+  isChecked: boolean = false;
+  btnText: string = "Solicitar Cotización";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +27,11 @@ export class VidaComponent {
     private router: Router
   ) {
     this.crearFormulario();
+  }
+
+  toggleShowing() {
+    this.isChecked = !this.isChecked;
+    this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
   }
 
   private crearFormulario(): void {
@@ -61,7 +70,7 @@ export class VidaComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {

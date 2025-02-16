@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
-import { CrearCotizacionResponsabilidadCivilDTO } from '../../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO'; 
+import { CrearCotizacionResponsabilidadCivilDTO } from '../../dto/ResponsabillidadCivilDTOs/CrearCotizacionResponsabilidadCivilDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
+import { AdminResponsabilidadCivilComponent } from "../admin-responsabilidad-civil/admin-responsabilidad-civil.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cotizacion-responsabilidad-civil',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, AdminResponsabilidadCivilComponent, FormsModule, CommonModule],
   templateUrl: './responsabilidad-civil.component.html',
   styleUrls: ['./responsabilidad-civil.component.css']
 })
 export class ResponsabilidadCivilComponent {
   cotizacionResponsabilidadCivilForm!: FormGroup;
+  isChecked: boolean = false;
+  btnText: string = "Solicitar Cotización";
   aseguradoras: string[] = Object.keys(Aseguradora);
 
   constructor(
@@ -25,11 +29,16 @@ export class ResponsabilidadCivilComponent {
     this.crearFormulario();
   }
 
+  toggleShowing() {
+    this.isChecked = !this.isChecked;
+    this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
+  }
+
   private crearFormulario(): void {
     this.cotizacionResponsabilidadCivilForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
@@ -63,7 +72,7 @@ export class ResponsabilidadCivilComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {

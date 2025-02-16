@@ -1,0 +1,10 @@
+.button-container button {
+    margin-right: 15px;
+    /* Separar los botones */
+}
+
+/* Estilo para la fila seleccionada */
+.selected {
+    background-color: #d3d3d3 !important;
+    /* Color gris claro para la fila seleccionada */
+}

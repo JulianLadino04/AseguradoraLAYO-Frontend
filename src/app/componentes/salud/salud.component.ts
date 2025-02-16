@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../servicios/cliente.service';
 import { CrearCotizacionSaludDTO } from '../../dto/SaludDTOs/CrearCotizacionSaludDTO';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
+import { CommonModule } from '@angular/common';
+import { AdminSaludComponent } from "../admin-salud/admin-salud.component";
 
 @Component({
   selector: 'app-cotizacion-salud',
   standalone: true,
-  imports: [ReactiveFormsModule],  
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, AdminSaludComponent],
   templateUrl: './salud.component.html',
   styleUrls: ['./salud.component.css']
 })
 export class SaludComponent {
   cotizacionSaludForm!: FormGroup;
+  isChecked: boolean = false;
+  btnText: string = "Solicitar Cotización";
   aseguradoras: string[] = Object.keys(Aseguradora);
 
   constructor(
@@ -25,11 +29,16 @@ export class SaludComponent {
     this.crearFormulario();
   }
 
+  toggleShowing() {
+    this.isChecked = !this.isChecked;
+    this.btnText = this.isChecked ? "Ocultar" : "Solicitar Cotización";
+  }
+
   private crearFormulario(): void {
     this.cotizacionSaludForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
       nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required,  Validators.pattern('^[0-9]*$')]],
+      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
@@ -60,7 +69,7 @@ export class SaludComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/seguros']); 
+          this.router.navigate(['/seguros']);
         });
       },
       error: (error) => {
