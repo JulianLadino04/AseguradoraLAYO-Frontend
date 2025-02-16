@@ -6,10 +6,12 @@
       <!-- Tamaño reducido de la imagen -->
     </figure>
   </div>
+  @if (!isLoggedIn) {
   <div class="title">Contáctanos</div>
   <div style="width: 100%;margin-bottom: 2rem;">
     <app-registro [mostrarElementos]="false"></app-registro>
   </div>
+  }
 
   <!-- Imagen del logo al principio de la página -->
   <div class="title">Asesores</div>
