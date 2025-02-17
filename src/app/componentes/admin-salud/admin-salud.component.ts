@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-salud',
@@ -16,8 +17,9 @@ export class AdminSaludComponent implements OnInit {
   selectedSaludId: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
-    private router: Router
+    private administradorService: AdministradorService,
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,19 @@ export class AdminSaludComponent implements OnInit {
 
   // Método para listar los seguros de salud
   public obtenerSaluds(): void {
-    this.administradorService.listarSalud().subscribe({
-      next: (data) => {
-        this.saluds = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar los seguros de salud:', err);
-      }
-    });
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarSalud(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.saluds = data.respuesta;
+          } else {
+            console.error('Error al cargar los seguros de salud:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"], { replaceUrl: true });
+    }
   }
 
   // Método para seleccionar una fila de la tabla

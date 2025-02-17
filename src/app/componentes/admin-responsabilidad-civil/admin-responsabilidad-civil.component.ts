@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-responsabilidad-civil',
@@ -16,8 +17,9 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
   selectedResponsabilidadId: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
-    private router: Router
+    private administradorService: AdministradorService,
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,19 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
 
   // Método para listar las responsabilidades civiles
   public obtenerResponsabilidades(): void {
-    this.administradorService.listarResponsabilidadCivil().subscribe({
-      next: (data) => {
-        this.responsabilidadCiviles = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar las responsabilidades civiles:', err);
-      }
-    });
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarResponsabilidadCivil(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.responsabilidadCiviles = data.respuesta;
+          } else {
+            console.error('Error al cargar los seguros de responsabilidad social:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"], { replaceUrl: true });
+    }
   }
 
   // Método para seleccionar una fila de la tabla

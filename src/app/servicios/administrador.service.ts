@@ -31,25 +31,25 @@ export class AdministradorService {
   public listarProteccionCredito(token: string): Observable<MensajeDTO> {
     return this.listarPorTipo(token, 2);
   }
-  
+
   public listarPyme(token: string): Observable<MensajeDTO> {
     return this.listarPorTipo(token, 3);
   }
 
-  public listarResponsabilidadCivil(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/responsabilidad-civil/listar`);
+  public listarResponsabilidadCivil(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 4);
   }
 
-  public listarSalud(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/salud/listar`);
+  public listarSalud(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 5);
   }
 
-  public listarSoat(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/soat/listar`);
+  public listarSoat(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 7);
   }
 
-  public listarVida(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.baseURL}/vida/listar`);
+  public listarVida(token: string): Observable<MensajeDTO> {
+    return this.listarPorTipo(token, 6);
   }
 
   public listarPeticiones(): Observable<MensajeDTO> {

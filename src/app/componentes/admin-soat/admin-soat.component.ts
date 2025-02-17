@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from '../../servicios/administrador.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-admin-soat',
@@ -16,8 +17,9 @@ export class AdminSoatComponent implements OnInit {
   selectedPlaca: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
-    private router: Router
+    private administradorService: AdministradorService,
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,19 @@ export class AdminSoatComponent implements OnInit {
 
   // Método para listar los SOAT
   public obtenerSoats(): void {
-    this.administradorService.listarSoat().subscribe({
-      next: (data) => {
-        this.soats = data.respuesta;
-      },
-      error: (err) => {
-        console.error('Error al cargar los SOAT:', err);
-      }
-    });
+    if (this.tokenService.isLogged()) {
+      this.administradorService.listarSoat(this.tokenService.getToken() || "").subscribe({
+        next: (data) => {
+          if (!data.error) {
+            this.soats = data.respuesta;
+          } else {
+            console.error('Error al cargar los soats:', data.respuesta);
+          }
+        }
+      });
+    } else {
+      this.router.navigate(["/signin"], { replaceUrl: true });
+    }
   }
 
   // Método para seleccionar una fila de la tabla
