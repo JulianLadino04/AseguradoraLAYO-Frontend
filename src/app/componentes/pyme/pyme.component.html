@@ -134,7 +134,7 @@
         <!-- Tipo -->
         <div class="col-md-6 text-start">
           <label class="form-label">Tipo</label>
-          <select class="form-select" formControlName="tipo">
+          <select class="form-select" formControlName="tipoPyme">
             <option value="" disabled selected>Selecciona un tipo</option>
             @for (tipo of tiposInmuebles; track tipo) {
             <option [value]="tiposInmuebles">{{ tipo }}</option>

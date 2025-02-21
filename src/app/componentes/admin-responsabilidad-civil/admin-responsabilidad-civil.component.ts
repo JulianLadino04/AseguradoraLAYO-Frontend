@@ -26,6 +26,14 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
     this.obtenerResponsabilidades();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar las responsabilidades civiles
   public obtenerResponsabilidades(): void {
     if (this.tokenService.isLogged()) {
@@ -34,7 +42,16 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
           if (!data.error) {
             this.responsabilidadCiviles = data.respuesta;
           } else {
-            console.error('Error al cargar los seguros de responsabilidad social:', data.respuesta);
+            if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
+              this.tokenService.logout("Debes iniciar sesión");
+            } else {
+              Swal.fire({
+                title: 'Error',
+                text: data.respuesta || 'Ocurrió un error inesperado',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
           }
         }
       });

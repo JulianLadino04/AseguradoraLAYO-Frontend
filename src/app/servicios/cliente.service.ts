@@ -24,43 +24,51 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   // Crear Cotización para Autos
-  public crearCotizacionAuto(cotizacionAutoDTO: CrearCotizacionAutoDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/autos/cotizar`, cotizacionAutoDTO);
+  public crearCotizacionAuto(cotizacionAutoDTO: CrearCotizacionAutoDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionAutoDTO, token: token, action: "addSeguro", tipoSeguro: 0 }, { headers: headers });
   }
 
   // Crear Cotización para Hogar
-  public crearCotizacionHogar(cotizacionHogarDTO: CrearCotizacionHogarDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/hogar/cotizar`, cotizacionHogarDTO);
+  public crearCotizacionHogar(cotizacionHogarDTO: CrearCotizacionHogarDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionHogarDTO, token: token, action: "addSeguro", tipoSeguro: 1 }, { headers: headers });
   }
 
   // Crear Cotización para Protección de Crédito
-  public crearCotizacionProteccionCredito(cotizacionProteccionDTO: CrearCotizacionProteccionCreditoDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/proteccion-credito/cotizar`, cotizacionProteccionDTO);
+  public crearCotizacionProteccionCredito(cotizacionProteccionDTO: CrearCotizacionProteccionCreditoDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionProteccionDTO, token: token, action: "addSeguro", tipoSeguro: 2 }, { headers: headers });
   }
 
   // Crear Cotización para Pyme
-  public crearCotizacionPyme(cotizacionPymeDTO: CrearCotizacionPymeDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/pyme/cotizar`, cotizacionPymeDTO);
+  public crearCotizacionPyme(cotizacionPymeDTO: CrearCotizacionPymeDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionPymeDTO, token: token, action: "addSeguro", tipoSeguro: 3 }, { headers: headers });
   }
 
   // Crear Cotización para Responsabilidad Civil
-  public crearCotizacionResponsabilidadCivil(cotizacionResponsabilidadCivilDTO: CrearCotizacionResponsabilidadCivilDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/responsabilidad-civil/cotizar`, cotizacionResponsabilidadCivilDTO);
+  public crearCotizacionResponsabilidadCivil(cotizacionResponsabilidadCivilDTO: CrearCotizacionResponsabilidadCivilDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionResponsabilidadCivilDTO, token: token, action: "addSeguro", tipoSeguro: 4 }, { headers: headers });
   }
 
   // Crear Cotización para Salud
-  public crearCotizacionSalud(cotizacionSaludDTO: CrearCotizacionSaludDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/salud/cotizar`, cotizacionSaludDTO);
+  public crearCotizacionSalud(cotizacionSaludDTO: CrearCotizacionSaludDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionSaludDTO, token: token, action: "addSeguro", tipoSeguro: 5 }, { headers: headers });
   }
 
   // Crear Cotización para Vida
-  public crearCotizacionVida(cotizacionVidaDTO: CrearCotizacionVidaDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/vida/cotizar`, cotizacionVidaDTO);
+  public crearCotizacionVida(cotizacionVidaDTO: CrearCotizacionVidaDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...cotizacionVidaDTO, token: token, action: "addSeguro", tipoSeguro: 6 }, { headers: headers });
   }
 
   // Crear Cotización para Soat
-  public crearCotizacionSoat(soatDTO: CrearSoatDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.baseURL}/soat/cotizar`, soatDTO);
+  public crearCotizacionSoat(soatDTO: CrearSoatDTO, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { ...soatDTO, token: token, action: "addSeguro", tipoSeguro: 7 }, { headers: headers });
   }
 
   // Crear Peticion

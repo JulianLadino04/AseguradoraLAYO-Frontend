@@ -9,7 +9,7 @@
   <form class="col-md-12 mt-3 needs-validation" [formGroup]="cotizacionVidaForm" (ngSubmit)="crearCotizacionVida()">
     <div class="row g-3">
       <!-- Aseguradora -->
-      <div class="col-md-6 text-start">
+      <div class="col-12 text-center">
         <label class="form-label">Aseguradora</label>
         <select class="form-select" formControlName="aseguradora">
           <option value="" disabled selected>Selecciona una aseguradora</option>
@@ -19,70 +19,6 @@
           <option disabled>No hay aseguradoras disponibles</option>
           }
         </select>
-      </div>
-
-      <!-- Nombre -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-        @if (cotizacionVidaForm.get('nombre')?.touched && cotizacionVidaForm.get('nombre')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">El nombre no puede tener más de 30 caracteres.</div>
-        }
-      </div>
-
-      <!-- Cédula -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Cédula</label>
-        <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
-      </div>
-
-      <!-- Correo -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Correo</label>
-        <input type="email" class="form-control" formControlName="correo" placeholder="Correo Electrónico">
-        @if (cotizacionVidaForm.get('correo')?.touched && cotizacionVidaForm.get('correo')?.hasError('email')) {
-        <div class="alert alert-danger" role="alert">El correo no es válido.</div>
-        }
-      </div>
-
-      <!-- Teléfono -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Teléfono</label>
-        <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
-        @if (cotizacionVidaForm.get('telefono')?.touched && cotizacionVidaForm.get('telefono')?.hasError('maxlength'))
-        {
-        <div class="alert alert-danger" role="alert">El teléfono no puede tener más de 10 caracteres.</div>
-        }
-        @if (cotizacionVidaForm.get('telefono')?.touched && cotizacionVidaForm.get('telefono')?.hasError('minlength'))
-        {
-        <div class="alert alert-danger" role="alert">El teléfono debe tener 10 caracteres.</div>
-        }
-      </div>
-
-      <!-- Dirección -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Dirección</label>
-        <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
-        @if (cotizacionVidaForm.get('direccion')?.touched &&
-        cotizacionVidaForm.get('direccion')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">La dirección no puede tener más de 50 caracteres.</div>
-        }
-      </div>
-
-      <!-- Ocupación -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Ocupación</label>
-        <input type="text" class="form-control" formControlName="ocupacion" placeholder="Ocupación">
-        @if (cotizacionVidaForm.get('ocupacion')?.touched &&
-        cotizacionVidaForm.get('ocupacion')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">La ocupación no puede tener más de 30 caracteres.</div>
-        }
-      </div>
-
-      <!-- Fecha de Nacimiento -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" formControlName="fechaNacimiento">
       </div>
 
       <!-- Botones -->

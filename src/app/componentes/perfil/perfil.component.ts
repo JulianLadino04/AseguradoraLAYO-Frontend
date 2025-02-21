@@ -32,7 +32,8 @@ export class PerfilComponent implements OnInit {
       name: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9]+$')]], // Acepta solo números
       address: ['', [Validators.required]],
-      email: [{ value: '', disabled: true }]
+      email: [{ value: '', disabled: true }],
+      ocupacion: ['', [Validators.required]],
     });
   }
 
@@ -70,11 +71,12 @@ export class PerfilComponent implements OnInit {
 
   public editarPerfil(): void {
     // Verificar si el formulario es válido
-    if (this.perfilForm.valid) {
+    const token = this.tokenService.getToken();
+    if (this.perfilForm.valid && token) {
       // Usar getRawValue() para enviar campos deshabilitados
       const nuevoPerfil = this.perfilForm.getRawValue() as EditarCuentaDTO;
 
-      nuevoPerfil.token = this.tokenService.getToken() || "";
+      nuevoPerfil.token = token;
 
       // Realizar la solicitud para editar la cuenta
       this.cuentaService.editarCuenta(nuevoPerfil).subscribe({
@@ -88,7 +90,7 @@ export class PerfilComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then(() => {
               // Redirigir a la página deseada después del éxito
-              this.router.navigate(['/pagina-principal']);
+              this.router.navigate(['/']);
             });
           } else {
             Swal.fire({
@@ -101,6 +103,10 @@ export class PerfilComponent implements OnInit {
         }
       });
     } else {
+      if (!token) {
+        this.tokenService.logout("Debes iniciar sesión");
+        return;
+      }
       // Mostrar los errores de validación del formulario
       console.log('Errores de validación del formulario:', this.perfilForm.errors);
 
@@ -127,8 +133,20 @@ export class PerfilComponent implements OnInit {
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
+      const token = this.tokenService.getToken();
+      if (!token) {
+        Swal.fire({
+          title: 'Error',
+          text: "Debes iniciar sesión",
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        }).then(() => {
+          this.tokenService.logout("Debes iniciar sesión");
+        })
+        return;
+      }
       if (result.isConfirmed) {
-        this.cuentaService.eliminarCuenta(this.tokenService.getToken() || "").subscribe({
+        this.cuentaService.eliminarCuenta(token).subscribe({
           next: (data) => {
             if (!data.error)
               Swal.fire({
@@ -147,7 +165,7 @@ export class PerfilComponent implements OnInit {
                 confirmButtonText: 'Aceptar'
               });
             }
-          },
+          }, error: (e) => { console.error({ e }) },
         });
       }
     });

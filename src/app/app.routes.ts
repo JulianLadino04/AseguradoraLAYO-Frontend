@@ -2,15 +2,12 @@ import { Routes } from '@angular/router';
 import { LoginGuard } from './guards/permiso.service';
 import { RolesGuard } from './guards/roles.service';
 import {
-    LoginComponent, RegistroComponent, CotizacionesAdminComponent,
+    LoginComponent, RegistroComponent,
     PaginaPrincipalComponent, ContactenosComponent, NosotrosComponent,
     AlianzasComponent, SegurosComponent, AutosComponent,
     HogarComponent, ProteccionCreditoComponent, PymeComponent,
     ResponsabilidadCivilComponent, SaludComponent, SoatComponent,
-    VidaComponent, PerfilComponent, AdminAutosComponent,
-    AdminHogarComponent, AdminProteccionCreditoComponent, AdminPymeComponent,
-    AdminResponsabilidadCivilComponent, AdminSaludComponent, AdminSoatComponent,
-    AdminVidaComponent, AdminPeticionComponent, AdminAfiliacionesComponent,
+    VidaComponent, PerfilComponent, AdminPeticionComponent, AdminAfiliacionesComponent,
     AfiliacionesTrasladosComponent
 } from './componentes'
 
@@ -38,14 +35,6 @@ export const routes: Routes = [
     { path: 'afiliaciones-traslados', component: AfiliacionesTrasladosComponent, canActivate: [RolesGuard] },
 
     //Administrador
-    { path: 'cotizaciones-admin', component: CotizacionesAdminComponent, canActivate: [RolesGuard] },
-    { path: 'admin-hogar', component: AdminHogarComponent, canActivate: [RolesGuard] },
-    { path: 'admin-proteccion-credito', component: AdminProteccionCreditoComponent, canActivate: [RolesGuard] },
-    { path: 'admin-pyme', component: AdminPymeComponent, canActivate: [RolesGuard] },
-    { path: 'admin-responsabilidad-civil', component: AdminResponsabilidadCivilComponent, canActivate: [RolesGuard] },
-    { path: 'admin-vida', component: AdminVidaComponent, canActivate: [RolesGuard] },
-    { path: 'admin-salud', component: AdminSaludComponent, canActivate: [RolesGuard] },
-    { path: 'admin-soat', component: AdminSoatComponent, canActivate: [RolesGuard] },
     { path: 'admin-peticion', component: AdminPeticionComponent, canActivate: [RolesGuard] },
     { path: 'admin-afiliaciones', component: AdminAfiliacionesComponent, canActivate: [RolesGuard] },
 

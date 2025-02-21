@@ -4,13 +4,8 @@
             <tr>
                 <th class="text-center">ID</th>
                 <th class="text-center">Aseguradora</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Cédula</th>
-                <th class="text-center">Correo</th>
-                <th class="text-center">Teléfono</th>
-                <th class="text-center">Dirección</th>
-                <th class="text-center">Ocupación</th>
-                <th class="text-center">Fecha de Nacimiento</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Hora</th>
             </tr>
         </thead>
         <tbody>
@@ -19,13 +14,8 @@
             <tr (click)="selectRow(vida.id)">
                 <td class="text-center">{{ vida.id }}</td>
                 <td class="text-center">{{ vida.aseguradora }}</td>
-                <td class="text-center">{{ vida.nombre }}</td>
-                <td class="text-center">{{ vida.cedula }}</td>
-                <td class="text-center">{{ vida.correo }}</td>
-                <td class="text-center">{{ vida.telefono }}</td>
-                <td class="text-center">{{ vida.direccion }}</td>
-                <td class="text-center">{{ vida.ocupacion }}</td>
-                <td class="text-center">{{ vida.fechaNacimiento }}</td>
+                <td class="text-center">{{ getDate(vida.fechaCreacion) }}</td>
+                <td class="text-center">{{ getTime(vida.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>

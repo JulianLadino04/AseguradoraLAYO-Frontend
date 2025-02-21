@@ -8,6 +8,7 @@ import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoInmueble } from '../../dto/Enums/TipoInmueble';
 import { CommonModule, Location } from '@angular/common';
 import { AdminPymeComponent } from "../admin-pyme/admin-pyme.component";
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-cotizacion-pyme',
@@ -28,7 +29,8 @@ export class PymeComponent {
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private tokenService: TokenService
   ) {
     this.crearFormulario();
   }
@@ -36,18 +38,12 @@ export class PymeComponent {
   private crearFormulario(): void {
     this.cotizacionPymeForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
-      nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
-      direccion: ['', [Validators.required, Validators.maxLength(50)]],
-      fechaNacimiento: ['', Validators.required],
       valorMercancia: ['', [Validators.required, Validators.min(0)]],
       valorMaquinaria: ['', [Validators.required, Validators.min(0)]],
       valorComercial: ['', [Validators.required, Validators.min(0)]],
       valorElectrico: ['', [Validators.required, Validators.min(0)]],
       valorMuebles: ['', [Validators.required, Validators.min(0)]],
-      tipo: ['', Validators.required]
+      tipoPyme: ['', Validators.required]
     });
   }
 
@@ -66,27 +62,41 @@ export class PymeComponent {
         return; // Detener la ejecución si algún campo está vacío
       }
     }
+    const token = this.tokenService.getToken();
 
-    this.clienteService.crearCotizacionPyme(cotizacionPymeData).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Cotización Pyme creada correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          this.router.navigate(['/seguros']);
-        });
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta || 'Ocurrió un error inesperado',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+    if (token)
+      this.clienteService.crearCotizacionPyme(cotizacionPymeData, token).subscribe({
+        next: (data) => {
+          if (!data.error) {
+            Swal.fire({
+              title: 'Éxito',
+              text: 'Cotización Pyme creada correctamente',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              window.location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: data.respuesta || 'Ocurrió un error inesperado',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        },
+        error: () => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error inesperado',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
+    else {
+      this.router.navigate(["/signin"], { replaceUrl: true, queryParams: { source: "Debes iniciar sesión" } });
+    }
   }
 
   public campoEsValido(campo: string): boolean {

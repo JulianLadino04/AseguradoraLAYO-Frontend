@@ -22,8 +22,8 @@
                 <td class="text-center">{{ hogar.valorElectrico | number: '1.0-0' }}</td>
                 <td class="text-center">{{ hogar.valorMuebles | number: '1.0-0' }}</td>
                 <td class="text-center">{{ hogar.direccion }}</td>
-                <td class="text-center">{{ hogar.fechaCreacion }}</td>
-                <td class="text-center">{{ hogar.fechaCreacion }}</td>
+                <td class="text-center">{{ getTime(hogar.fechaCreacion) }}</td>
+                <td class="text-center">{{ getDate(hogar.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>

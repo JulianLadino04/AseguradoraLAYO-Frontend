@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { AdminResponsabilidadCivilComponent } from "../admin-responsabilidad-civil/admin-responsabilidad-civil.component";
 import { CommonModule, Location } from '@angular/common';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-cotizacion-responsabilidad-civil',
@@ -25,7 +26,8 @@ export class ResponsabilidadCivilComponent {
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private tokenService: TokenService
   ) {
     this.crearFormulario();
   }
@@ -38,12 +40,7 @@ export class ResponsabilidadCivilComponent {
   private crearFormulario(): void {
     this.cotizacionResponsabilidadCivilForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
-      nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
-      fechaNacimiento: ['', Validators.required],
       ocupacion: ['', [Validators.required, Validators.maxLength(50)]],
       ciudad: ['', [Validators.required, Validators.maxLength(50)]]
     });
@@ -64,27 +61,42 @@ export class ResponsabilidadCivilComponent {
         return; // Detener la ejecución si algún campo está vacío
       }
     }
-
-    this.clienteService.crearCotizacionResponsabilidadCivil(cotizacionData).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Cotización de Responsabilidad Civil creada correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          this.router.navigate(['/seguros']);
-        });
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta || 'Ocurrió un error inesperado',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+    const token = this.tokenService.getToken();
+    if (token)
+      this.clienteService.crearCotizacionResponsabilidadCivil(cotizacionData, token).subscribe({
+        next: (data) => {
+          if (!data.error)
+            Swal.fire({
+              title: 'Éxito',
+              text: 'Cotización de Responsabilidad Civil creada correctamente',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              window.location.reload();
+            });
+          else {
+            if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
+              this.tokenService.logout("Debes iniciar sesión");
+            } else {
+              Swal.fire({
+                title: 'Error',
+                text: data.respuesta || 'Ocurrió un error inesperado',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          }
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: error.error.respuesta || 'Ocurrió un error inesperado',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
+    else this.tokenService.logout("Debes iniciar sesión");
   }
 
   public campoEsValido(campo: string): boolean {

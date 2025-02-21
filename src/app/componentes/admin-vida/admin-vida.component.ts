@@ -26,6 +26,14 @@ export class AdminVidaComponent implements OnInit {
     this.obtenerVidas();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar los seguros de vida
   public obtenerVidas(): void {
     if (this.tokenService.isLogged()) {
@@ -39,7 +47,7 @@ export class AdminVidaComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(["/signin"], { replaceUrl: true });
+      this.tokenService.logout("Debes iniciar sesión");
     }
   }
 

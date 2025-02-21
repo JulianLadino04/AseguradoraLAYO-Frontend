@@ -16,8 +16,8 @@
                 <td class="text-center">{{ proteccionCredito.id }}</td>
                 <td class="text-center">{{ proteccionCredito.aseguradora }}</td>
                 <td class="text-center">{{ proteccionCredito.valorDeuda }}</td>
-                <td class="text-center">{{ proteccionCredito.fechaCreacion }}</td>
-                <td class="text-center">{{ proteccionCredito.fechaCreacion }}</td>
+                <td class="text-center">{{ getDate(proteccionCredito.fechaCreacion) }}</td>
+                <td class="text-center">{{ getTime(proteccionCredito.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>

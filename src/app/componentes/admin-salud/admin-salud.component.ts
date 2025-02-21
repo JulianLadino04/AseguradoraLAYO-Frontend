@@ -26,10 +26,19 @@ export class AdminSaludComponent implements OnInit {
     this.obtenerSaluds();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar los seguros de salud
   public obtenerSaluds(): void {
-    if (this.tokenService.isLogged()) {
-      this.administradorService.listarSalud(this.tokenService.getToken() || "").subscribe({
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.administradorService.listarSalud(token).subscribe({
         next: (data) => {
           if (!data.error) {
             this.saluds = data.respuesta;
@@ -39,7 +48,7 @@ export class AdminSaludComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(["/signin"], { replaceUrl: true });
+      this.tokenService.logout("Debes iniciar sesión")
     }
   }
 

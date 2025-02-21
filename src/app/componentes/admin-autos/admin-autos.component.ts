@@ -26,6 +26,13 @@ export class AdminAutosComponent implements OnInit {
     this.obtenerAutos();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
   // Método para listar los autos
   public obtenerAutos(): void {
     if (this.tokenService.isLogged()) {
@@ -34,7 +41,9 @@ export class AdminAutosComponent implements OnInit {
           if (!data.error) {
             this.autos = data.respuesta;
           } else {
-            console.error('Error al cargar los autos:', data.respuesta);
+            const queryParams = { email: this.tokenService.getCorreo(), source: "Tu sesión se venció" };
+            this.tokenService.logout();
+            this.router.navigate(["/signin"], { replaceUrl: true, queryParams });
           }
         }
       });

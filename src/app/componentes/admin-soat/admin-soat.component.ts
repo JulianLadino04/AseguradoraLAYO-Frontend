@@ -26,6 +26,14 @@ export class AdminSoatComponent implements OnInit {
     this.obtenerSoats();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar los SOAT
   public obtenerSoats(): void {
     if (this.tokenService.isLogged()) {

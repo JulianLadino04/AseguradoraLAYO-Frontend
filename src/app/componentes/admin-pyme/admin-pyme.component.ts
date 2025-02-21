@@ -26,6 +26,14 @@ export class AdminPymeComponent implements OnInit {
     this.obtenerPymes();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar las pymes
   public obtenerPymes(): void {
 

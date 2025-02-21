@@ -6,9 +6,9 @@
   </div>
   <form *ngIf="isChecked" class="col-md-12 mt-3 needs-validation" [formGroup]="cotizacionSaludForm"
     (ngSubmit)="crearCotizacionSalud()">
-    <div class="row g-3">
+    <div class="row col-12">
       <!-- Aseguradora -->
-      <div class="col-md-6 text-start">
+      <div class="text-start">
         <label class="form-label">Aseguradora</label>
         <select class="form-select" formControlName="aseguradora">
           <option value="" disabled selected>Selecciona una aseguradora</option>
@@ -18,64 +18,6 @@
           <option disabled>No hay aseguradoras disponibles</option>
           }
         </select>
-      </div>
-
-      <!-- Nombre -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-        @if (cotizacionSaludForm.get('nombre')?.touched && cotizacionSaludForm.get('nombre')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">El nombre no puede tener más de 30 caracteres.</div>
-        }
-      </div>
-
-      <!-- Cédula -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Cédula</label>
-        <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
-      </div>
-
-      <!-- Correo -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Correo</label>
-        <input type="email" class="form-control" formControlName="correo" placeholder="Correo Electrónico">
-        @if (cotizacionSaludForm.get('correo')?.touched && cotizacionSaludForm.get('correo')?.hasError('email')) {
-        <div class="alert alert-danger" role="alert">El correo no es válido.</div>
-        }
-      </div>
-
-      <!-- Teléfono -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Teléfono</label>
-        <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
-        @if (cotizacionSaludForm.get('telefono')?.touched &&
-        cotizacionSaludForm.get('telefono')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">El teléfono no puede tener más de 10 caracteres.</div>
-        }
-        @if (cotizacionSaludForm.get('telefono')?.touched &&
-        cotizacionSaludForm.get('telefono')?.hasError('minlength')) {
-        <div class="alert alert-danger" role="alert">El teléfono debe tener 10 caracteres.</div>
-        }
-      </div>
-
-      <!-- Dirección -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Dirección</label>
-        <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
-        @if (cotizacionSaludForm.get('direccion')?.touched &&
-        cotizacionSaludForm.get('direccion')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">La dirección no puede tener más de 50 caracteres.</div>
-        }
-      </div>
-
-      <!-- Fecha de Nacimiento -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Fecha de Nacimiento</label>
-        <input type="date" class="form-control" formControlName="fechaNacimiento">
-        @if (cotizacionSaludForm.get('fechaNacimiento')?.touched &&
-        cotizacionSaludForm.get('fechaNacimiento')?.hasError('required')) {
-        <div class="alert alert-danger" role="alert">La fecha de nacimiento es obligatoria.</div>
-        }
       </div>
 
       <!-- Botones -->

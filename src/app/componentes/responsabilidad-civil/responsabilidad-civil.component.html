@@ -4,7 +4,7 @@
     <button type="button" [ngClass]="isChecked?'btn btn-success':'btn btn-danger'" (click)="toggleShowing()">{{
       btnText}}</button>
   </div>
-  <form  *ngIf="isChecked" class="col-md-12 mt-3 needs-validation row" [formGroup]="cotizacionResponsabilidadCivilForm"
+  <form *ngIf="isChecked" class="col-md-12 mt-3 needs-validation row" [formGroup]="cotizacionResponsabilidadCivilForm"
     (ngSubmit)="crearCotizacionResponsabilidadCivil()">
     <div class="row g-3">
       <!-- Aseguradora -->
@@ -20,45 +20,6 @@
         </select>
       </div>
 
-      <!-- Nombre -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
-        @if (cotizacionResponsabilidadCivilForm.get('nombre')?.touched &&
-        cotizacionResponsabilidadCivilForm.get('nombre')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">El nombre no puede tener más de 30 caracteres.</div>
-        }
-      </div>
-
-      <!-- Cédula -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Cédula</label>
-        <input type="text" class="form-control" formControlName="cedula" placeholder="Cédula">
-      </div>
-
-      <!-- Correo -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Correo</label>
-        <input type="email" class="form-control" formControlName="correo" placeholder="Correo Electrónico">
-        @if (cotizacionResponsabilidadCivilForm.get('correo')?.touched &&
-        cotizacionResponsabilidadCivilForm.get('correo')?.hasError('email')) {
-        <div class="alert alert-danger" role="alert">El correo no es válido.</div>
-        }
-      </div>
-
-      <!-- Teléfono -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Teléfono</label>
-        <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono">
-        @if (cotizacionResponsabilidadCivilForm.get('telefono')?.touched &&
-        cotizacionResponsabilidadCivilForm.get('telefono')?.hasError('maxlength')) {
-        <div class="alert alert-danger" role="alert">El teléfono no puede tener más de 10 caracteres.</div>
-        }
-        @if (cotizacionResponsabilidadCivilForm.get('telefono')?.touched &&
-        cotizacionResponsabilidadCivilForm.get('telefono')?.hasError('minlength')) {
-        <div class="alert alert-danger" role="alert">El teléfono debe tener 10 caracteres.</div>
-        }
-      </div>
 
       <!-- Dirección -->
       <div class="col-md-6 text-start">
@@ -68,12 +29,6 @@
         cotizacionResponsabilidadCivilForm.get('direccion')?.hasError('maxlength')) {
         <div class="alert alert-danger" role="alert">La dirección no puede tener más de 50 caracteres.</div>
         }
-      </div>
-
-      <!-- Fecha de Nacimiento -->
-      <div class="col-md-6 text-start">
-        <label class="form-label">Fecha de Nacimiento</label>
-        <input type="datetime-local" class="form-control" formControlName="fechaNacimiento">
       </div>
 
       <!-- Ocupación -->
@@ -103,5 +58,6 @@
     </div>
   </form>
   <app-admin-responsabilidad-civil></app-admin-responsabilidad-civil>
-  <div class="d-flex" style="justify-content: center; "><button class="btn btn-danger mt-4" (click)="volver()">Volver</button></div>
+  <div class="d-flex" style="justify-content: center; "><button class="btn btn-danger mt-4"
+      (click)="volver()">Volver</button></div>
 </section>

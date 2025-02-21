@@ -25,9 +25,9 @@
         <!-- Valor de Deuda -->
         <div class="col-md-6 text-start">
           <label class="form-label">Valor de Deuda</label>
-          <input type="number" class="form-control" formControlName="valorDeuda" placeholder="Valor de Deuda">
-          @if (proteccionCreditoForm.get('valorDeuda')?.touched &&
-          proteccionCreditoForm.get('valorDeuda')?.hasError('min')) {
+          <input type="number" class="form-control" formControlName="deuda" placeholder="Valor de Deuda">
+          @if (proteccionCreditoForm.get('deuda')?.touched &&
+          proteccionCreditoForm.get('deuda')?.hasError('min')) {
           <div class="alert alert-danger" role="alert">El valor de la deuda debe ser mayor que 0.</div>
           }
         </div>

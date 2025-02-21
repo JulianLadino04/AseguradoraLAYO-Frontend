@@ -20,8 +20,8 @@
                 <td class="text-center">{{ auto.placa }}</td>
                 <td class="text-center">{{ auto.ciudadCirculacion }}</td>
                 <td class="text-center">{{ auto.tipoVehiculo }}</td>
-                <td class="text-center">{{ auto.fechaCreacion }}</td>
-                <td class="text-center">{{ auto.fechaCreacion }}</td>
+                <td class="text-center">{{ getTime(auto.fechaCreacion) }}</td>
+                <td class="text-center">{{ getDate(auto.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>

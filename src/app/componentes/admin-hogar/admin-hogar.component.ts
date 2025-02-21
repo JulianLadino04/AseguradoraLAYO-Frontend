@@ -17,13 +17,21 @@ export class AdminHogarComponent implements OnInit {
   selectedHogarId: string = "";
 
   constructor(
-    private administradorService: AdministradorService, 
+    private administradorService: AdministradorService,
     private router: Router,
     private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
     this.obtenerHogares();
+  }
+
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
   }
 
   // Método para listar los hogares

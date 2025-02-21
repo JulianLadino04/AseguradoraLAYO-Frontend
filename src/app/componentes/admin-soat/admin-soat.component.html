@@ -4,13 +4,10 @@
             <tr>
                 <th class="text-center">ID</th>
                 <th class="text-center">Número Placa</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Cédula</th>
-                <th class="text-center">Correo</th>
-                <th class="text-center">Teléfono</th>
-                <th class="text-center">Dirección</th>
                 <th class="text-center">Aseguradora</th>
                 <th class="text-center">Tipo de Vehículo</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Hora</th>
             </tr>
         </thead>
         <tbody>
@@ -19,13 +16,10 @@
             <tr (click)="selectRow(soat.numeroPlaca)">
                 <td class="text-center">{{ soat.id }}</td>
                 <td class="text-center">{{ soat.numeroPlaca }}</td>
-                <td class="text-center">{{ soat.nombre }}</td>
-                <td class="text-center">{{ soat.cedula }}</td>
-                <td class="text-center">{{ soat.correo }}</td>
-                <td class="text-center">{{ soat.telefono }}</td>
-                <td class="text-center">{{ soat.direccion }}</td>
                 <td class="text-center">{{ soat.aseguradora }}</td>
-                <td class="text-center">{{ soat.tipo }}</td>
+                <td class="text-center">{{ soat.tipoVehiculo }}</td>
+                <td class="text-center">{{ getDate(soat.fechaCreacion) }}</td>
+                <td class="text-center">{{ getTime(soat.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>

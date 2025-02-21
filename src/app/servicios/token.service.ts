@@ -45,13 +45,13 @@ export class TokenService {
     return expDate < new Date();
   }
 
-  public logout(source?:string) {
-    const email = this.cookieService.get(EMAIL);
+  public logout(source?: string, setEmail: boolean = true) {
+    const email = setEmail ? this.cookieService.get(EMAIL) : undefined;
     this.cookieService.delete(TOKEN_KEY);
     this.cookieService.delete(EMAIL);
     this.cookieService.delete(EXP);
     this.isLoggedInSubject.next(false);  // Emitir que el usuario ha cerrado sesión
-    this.router.navigate(["/signin"], { queryParams: { email: email, source } }).then(() => {
+    this.router.navigate(["/signin"], { queryParams: { email, source } }).then(() => {
       window.location.reload();
     });
   }

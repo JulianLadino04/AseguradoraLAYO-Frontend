@@ -26,6 +26,14 @@ export class AdminProteccionCreditoComponent implements OnInit {
     this.obtenerProteccionesCredito();
   }
 
+  public getDate(datetime: string) {
+    return new Date(datetime).toLocaleDateString();
+  }
+
+  public getTime(datetime: string) {
+    return new Date(datetime).toLocaleTimeString();
+  }
+
   // Método para listar las protecciones de crédito
   public obtenerProteccionesCredito(): void {
     if (this.tokenService.isLogged()) {

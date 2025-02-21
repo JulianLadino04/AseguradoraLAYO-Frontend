@@ -8,6 +8,7 @@ import { Aseguradora } from '../../dto/Enums/Aseguradora';
 import { TipoVehiculo } from '../../dto/Enums/TipoVehiculo';
 import { CommonModule, Location } from '@angular/common';
 import { AdminSoatComponent } from "../admin-soat/admin-soat.component";
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-cotizacion-soat',
@@ -27,7 +28,8 @@ export class SoatComponent {
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private tokenService: TokenService
   ) {
     this.crearFormulario();
   }
@@ -40,13 +42,8 @@ export class SoatComponent {
   private crearFormulario(): void {
     this.cotizacionSoatForm = this.formBuilder.group({
       aseguradora: ['', Validators.required],
-      tipo: ['', Validators.required],
+      tipoVehiculo: ['', Validators.required],
       placa: ['', [Validators.required, Validators.maxLength(6), Validators.pattern('^[A-Za-z0-9]*$')]],
-      nombre: ['', [Validators.required, Validators.maxLength(30)]],
-      cedula: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]*$')]],
-      direccion: ['', [Validators.required, Validators.maxLength(50)]],
-      correo: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -64,27 +61,42 @@ export class SoatComponent {
         return;
       }
     }
-
-    this.clienteService.crearCotizacionSoat(cotizacionData).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Cotización de SOAT creada correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          this.router.navigate(['/seguros']);
-        });
-      },
-      error: (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.error.respuesta || 'Ocurrió un error inesperado',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+    const token = this.tokenService.getToken();
+    if (token)
+      this.clienteService.crearCotizacionSoat(cotizacionData, token).subscribe({
+        next: (data) => {
+          if (!data.error)
+            Swal.fire({
+              title: 'Éxito',
+              text: 'Cotización de SOAT creada correctamente',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              window.location.reload();
+            });
+          else {
+            if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
+              this.tokenService.logout("Debes iniciar sesión");
+              return
+            }
+            Swal.fire({
+              title: 'Error',
+              text: data.respuesta || 'Ocurrió un error inesperado',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: error.error.respuesta || 'Ocurrió un error inesperado',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
+    else this.tokenService.logout("Debes iniciar sesión");
   }
 
   public campoEsValido(campo: string): boolean {
