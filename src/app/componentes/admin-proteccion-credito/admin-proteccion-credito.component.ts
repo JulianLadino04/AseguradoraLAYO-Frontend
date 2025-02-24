@@ -53,11 +53,19 @@ export class AdminProteccionCreditoComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(proteccionCreditoId: string): void {
-    this.selectedProteccionCreditoId = proteccionCreditoId;
+    this.selectedProteccionCreditoId = this.selectedProteccionCreditoId === proteccionCreditoId ? '' : proteccionCreditoId;
   }
 
   // Método para eliminar una protección de crédito
-  public eliminarProteccionCredito(proteccionCreditoId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedProteccionCreditoId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminada, no podrás recuperar este registro de protección de crédito!',
@@ -68,24 +76,35 @@ export class AdminProteccionCreditoComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarla!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarProteccionCredito(proteccionCreditoId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminada!',
-              'La protección de crédito ha sido eliminada.',
-              'success'
-            );
-            this.obtenerProteccionesCredito();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar la protección de crédito.',
-              'error'
-            );
-            console.error('Error al eliminar la protección de crédito:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedProteccionCreditoId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminada!',
+                  'La protección de crédito ha sido eliminada.',
+                  'success'
+                ).then(() => window.location.reload());
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar la protección de crédito.',
+                  'error'
+                );
+                console.error('Error al eliminar la protección de crédito.', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar la protección de crédito.',
+                'error'
+              );
+              console.error('Error al eliminar la protección de crédito:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

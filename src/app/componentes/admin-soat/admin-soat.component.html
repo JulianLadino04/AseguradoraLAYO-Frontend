@@ -13,7 +13,7 @@
         <tbody>
             <!-- Usamos @for para iterar sobre el array soat y llenar la tabla -->
             @for (soat of soats; track $index) {
-            <tr (click)="selectRow(soat.numeroPlaca)">
+            <tr (click)="selectRow(soat.id)" [ngClass]="{'selected': soat.id === selectedPlaca}">
                 <td class="text-center">{{ soat.id }}</td>
                 <td class="text-center">{{ soat.numeroPlaca }}</td>
                 <td class="text-center">{{ soat.aseguradora }}</td>
@@ -24,4 +24,8 @@
             }
         </tbody>
     </table>
+    <div class="col-12 text-center">
+        <button class="btn btn-success mt-4 me-2 btn-danger" *ngIf="selectedPlaca!==''"
+            (click)="eliminarSeguro()">Eliminar cotización</button>
+    </div>
 </div>

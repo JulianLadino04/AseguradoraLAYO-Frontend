@@ -77,6 +77,10 @@ export class PymeComponent {
               window.location.reload();
             });
           } else {
+            if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
+              this.tokenService.logout("Debes iniciar sesión");
+              return;
+            }
             Swal.fire({
               title: 'Error',
               text: data.respuesta || 'Ocurrió un error inesperado',
@@ -106,7 +110,7 @@ export class PymeComponent {
   volver(): void {
     this.location.back();
   }
-  
+
   toggleVerForm() {
     this.viewForm = !this.viewForm;
     this.viewFormBtn = this.viewForm ? "Ocultar" : "Solicitar Cotización";

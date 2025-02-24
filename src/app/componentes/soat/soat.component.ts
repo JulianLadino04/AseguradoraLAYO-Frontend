@@ -77,7 +77,7 @@ export class SoatComponent {
           else {
             if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
               this.tokenService.logout("Debes iniciar sesión");
-              return
+              return;
             }
             Swal.fire({
               title: 'Error',

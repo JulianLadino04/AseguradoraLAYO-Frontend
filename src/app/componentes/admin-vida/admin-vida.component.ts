@@ -53,11 +53,19 @@ export class AdminVidaComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(vidaId: string): void {
-    this.selectedVidaId = vidaId;
+    this.selectedVidaId = this.selectedVidaId === vidaId ? '' : vidaId;
   }
 
   // Método para eliminar un seguro de vida
-  public eliminarVida(vidaId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedVidaId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminado, no podrás recuperar este seguro de vida!',
@@ -68,24 +76,35 @@ export class AdminVidaComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarVida(vidaId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminado!',
-              'El seguro de vida ha sido eliminado.',
-              'success'
-            );
-            this.obtenerVidas();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar el seguro de vida.',
-              'error'
-            );
-            console.error('Error al eliminar el seguro de vida:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedVidaId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminado!',
+                  'El seguro de vida ha sido eliminado.',
+                  'success'
+                ).then(() => window.location.reload());
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar el seguro de vida.',
+                  'error'
+                );
+                console.error('Error al eliminar el seguro de vida:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar el seguro de vida.',
+                'error'
+              );
+              console.error('Error al eliminar el seguro de vida:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

@@ -13,6 +13,7 @@ import { TokenService } from '../../servicios/token.service';
   styleUrls: ['./admin-soat.component.css']
 })
 export class AdminSoatComponent implements OnInit {
+
   soats: any[] = [];
   selectedPlaca: string = "";
 
@@ -53,14 +54,22 @@ export class AdminSoatComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(placa: string): void {
-    this.selectedPlaca = placa;
+    this.selectedPlaca = this.selectedPlaca === placa ? '' : placa;
   }
 
   // Método para eliminar un SOAT
-  public eliminarSoat(placa: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedPlaca) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Una vez eliminado, no podrás recuperar este registro de SOAT!',
+      text: 'Una vez eliminado, no podrás recuperar el SOAT!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -68,24 +77,34 @@ export class AdminSoatComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarSoat(placa).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminado!',
-              'El SOAT ha sido eliminado.',
-              'success'
-            );
-            this.obtenerSoats();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar el SOAT.',
-              'error'
-            );
-            console.error('Error al eliminar el SOAT:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedPlaca, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminado!',
+                  'El SOAT ha sido eliminado.',
+                  'success'
+                ).then(() => window.location.reload())
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar el SOAT.',
+                  'error'
+                );
+                console.error('Error al eliminar el SOAT:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar el SOAT.',
+                'error'
+              );
+              console.error('Error al eliminar el SOAT:', err);
+            }
+          });
       }
     });
   }

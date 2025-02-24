@@ -41,24 +41,30 @@ export class AdminAutosComponent implements OnInit {
           if (!data.error) {
             this.autos = data.respuesta;
           } else {
-            const queryParams = { email: this.tokenService.getCorreo(), source: "Tu sesión se venció" };
-            this.tokenService.logout();
-            this.router.navigate(["/signin"], { replaceUrl: true, queryParams });
+            this.tokenService.logout("Tu sesión se venció");
           }
         }
       });
     } else {
-      this.router.navigate(["/signin"], { replaceUrl: true });
+      this.tokenService.logout("Debes iniciar sesión");
     }
   }
 
   // Método para seleccionar una fila de la tabla
   public selectRow(autoId: string): void {
-    this.selectedAutoId = autoId;
+    this.selectedAutoId = this.selectedAutoId === autoId ? '' : autoId;
   }
 
   // Método para eliminar un auto
-  public eliminarAuto(autoId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedAutoId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminado, no podrás recuperar este registro de auto!',
@@ -68,25 +74,37 @@ export class AdminAutosComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
+      //this.selectedAutoId
       if (result.isConfirmed) {
-        this.administradorService.eliminarAuto(autoId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminado!',
-              'El auto ha sido eliminado.',
-              'success'
-            );
-            this.obtenerAutos();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar el auto.',
-              'error'
-            );
-            console.error('Error al eliminar el auto:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedAutoId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminado!',
+                  'El auto ha sido eliminado.',
+                  'success'
+                ).then(() => window.location.reload())
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar el seguro de auto.',
+                  'error'
+                );
+                console.error('Error al eliminar el auto:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar el auto.',
+                'error'
+              );
+              console.error('Error al eliminar el auto:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

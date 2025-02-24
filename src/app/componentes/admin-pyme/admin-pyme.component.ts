@@ -54,11 +54,19 @@ export class AdminPymeComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(pymeId: string): void {
-    this.selectedPymeId = pymeId;
+    this.selectedPymeId = this.selectedPymeId === pymeId ? '' : pymeId;
   }
 
   // Método para eliminar una pyme
-  public eliminarPyme(pymeId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedPymeId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminada, no podrás recuperar esta pyme!',
@@ -69,24 +77,35 @@ export class AdminPymeComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarla!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarPyme(pymeId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminada!',
-              'La pyme ha sido eliminada.',
-              'success'
-            );
-            this.obtenerPymes();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar la pyme.',
-              'error'
-            );
-            console.error('Error al eliminar la pyme:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedPymeId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminada!',
+                  'La pyme ha sido eliminada.',
+                  'success'
+                ).then(() => window.location.reload());
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar la pyme.',
+                  'error'
+                );
+                console.error('Error al eliminar la pyme:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar la pyme.',
+                'error'
+              );
+              console.error('Error al eliminar la pyme:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

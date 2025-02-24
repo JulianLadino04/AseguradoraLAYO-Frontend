@@ -62,36 +62,9 @@ export class AdministradorService {
 
   // Métodos para eliminar
 
-  public eliminarAuto(placa: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/autos/eliminar/${placa}`);
-  }
-
-  public eliminarHogar(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/hogar/eliminar/${cedula}`);
-  }
-
-  public eliminarProteccionCredito(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/proteccion-credito/eliminar/${cedula}`);
-  }
-
-  public eliminarPyme(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/pyme/eliminar/${cedula}`);
-  }
-
-  public eliminarResponsabilidadCivil(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/responsabilidad-civil/eliminar/${cedula}`);
-  }
-
-  public eliminarSalud(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/salud/eliminar/${cedula}`);
-  }
-
-  public eliminarVida(cedula: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/vida/eliminar/${cedula}`);
-  }
-
-  public eliminarSoat(placa: string): Observable<MensajeDTO> {
-    return this.http.delete<MensajeDTO>(`${this.baseURL}/soat/eliminar/${placa}`);
+  public eliminarSeguro(id: string, token: string): Observable<MensajeDTO> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post<MensajeDTO>(`${this.baseURL}`, { token: token, id, action: "eliminarSeguro" }, { headers: headers });
   }
 
   public eliminarPeticion(cedula: string): Observable<MensajeDTO> {

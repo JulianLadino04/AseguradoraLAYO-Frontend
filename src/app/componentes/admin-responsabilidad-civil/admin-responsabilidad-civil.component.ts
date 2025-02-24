@@ -56,17 +56,25 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(["/signin"], { replaceUrl: true });
+      this.tokenService.logout("Debes iniciar sesión");
     }
   }
 
   // Método para seleccionar una fila de la tabla
   public selectRow(responsabilidadId: string): void {
-    this.selectedResponsabilidadId = responsabilidadId;
+    this.selectedResponsabilidadId = this.selectedResponsabilidadId === responsabilidadId ? '' : responsabilidadId;
   }
 
   // Método para eliminar una responsabilidad civil
-  public eliminarResponsabilidadCivil(responsabilidadId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedResponsabilidadId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminada, no podrás recuperar esta responsabilidad civil!',
@@ -77,24 +85,33 @@ export class AdminResponsabilidadCivilComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarla!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarResponsabilidadCivil(responsabilidadId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminada!',
-              'La responsabilidad civil ha sido eliminada.',
-              'success'
-            );
-            this.obtenerResponsabilidades();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar la responsabilidad civil.',
-              'error'
-            );
-            console.error('Error al eliminar la responsabilidad civil:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedResponsabilidadId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminada!',
+                  'La responsabilidad civil ha sido eliminada.',
+                  'success'
+                ).then(() => window.location.reload());
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar la responsabilidad civil.',
+                  'error'
+                );
+              }
+            },
+            error: () => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar la responsabilidad civil.',
+                'error'
+              );
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

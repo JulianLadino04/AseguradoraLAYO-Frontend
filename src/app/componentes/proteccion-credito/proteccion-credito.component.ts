@@ -71,6 +71,10 @@ export class ProteccionCreditoComponent {
               window.location.reload();
             });
           } else {
+            if (data.respuesta === "Sesión expirada" || data.respuesta === "Token inválido") {
+              this.tokenService.logout("Debes iniciar sesión");
+              return;
+            }
             Swal.fire({
               title: 'Error',
               text: data.respuesta || 'Ocurrió un error inesperado',

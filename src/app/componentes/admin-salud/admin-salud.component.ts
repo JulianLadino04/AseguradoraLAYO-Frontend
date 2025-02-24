@@ -54,11 +54,19 @@ export class AdminSaludComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(saludId: string): void {
-    this.selectedSaludId = saludId;
+    this.selectedSaludId = this.selectedSaludId === saludId ? '' : saludId;
   }
 
   // Método para eliminar un seguro de salud
-  public eliminarSalud(saludId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedSaludId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminado, no podrás recuperar este seguro de salud!',
@@ -69,24 +77,35 @@ export class AdminSaludComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarSalud(saludId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminado!',
-              'El seguro de salud ha sido eliminado.',
-              'success'
-            );
-            this.obtenerSaluds();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar el seguro de salud.',
-              'error'
-            );
-            console.error('Error al eliminar el seguro de salud:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedSaludId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminado!',
+                  'El seguro de salud ha sido eliminado.',
+                  'success'
+                ).then(() => window.location.reload());
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar el seguro de salud.',
+                  'error'
+                );
+                console.error('Error al eliminar el seguro de salud:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar el seguro de salud.',
+                'error'
+              );
+              console.error('Error al eliminar el seguro de salud:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

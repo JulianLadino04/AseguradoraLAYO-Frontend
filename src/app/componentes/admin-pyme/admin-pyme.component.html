@@ -17,7 +17,7 @@
         <tbody>
             <!-- Usamos @for para iterar sobre el array pymes y llenar la tabla -->
             @for (pyme of pymes; track $index) {
-            <tr (click)="selectRow(pyme.id)">
+            <tr (click)="selectRow(pyme.id)" [ngClass]="{'selected': pyme.id === selectedPymeId}">
                 <td class="text-center">{{ pyme.id }}</td>
                 <td class="text-center">{{ pyme.aseguradora }}</td>
                 <td class="text-center">{{ pyme.valorMercancia }}</td>
@@ -26,10 +26,13 @@
                 <td class="text-center">{{ pyme.valorElectrico }}</td>
                 <td class="text-center">{{ pyme.valorMuebles }}</td>
                 <td class="text-center">{{ pyme.tipo }}</td>
-                <td class="text-center">{{ pyme.fechaCreacion }}</td>
-                <td class="text-center">{{ pyme.fechaCreacion }}</td>
+                <td class="text-center">{{ getDate(pyme.fechaCreacion) }}</td>
+                <td class="text-center">{{ getTime(pyme.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>
     </table>
+    <div class="col-12 text-center">
+        <button class="btn btn-success mt-4 me-2 btn-danger" *ngIf="selectedPymeId!==''" (click)="eliminarSeguro()">Eliminar cotización</button>
+    </div>
 </div>

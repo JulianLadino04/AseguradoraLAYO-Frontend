@@ -53,11 +53,19 @@ export class AdminHogarComponent implements OnInit {
 
   // Método para seleccionar una fila de la tabla
   public selectRow(hogarId: string): void {
-    this.selectedHogarId = hogarId;
+    this.selectedHogarId = this.selectedHogarId === hogarId ? '' : hogarId;
   }
 
   // Método para eliminar un hogar
-  public eliminarHogar(hogarId: string): void {
+  public eliminarSeguro(): void {
+    if (!this.selectedHogarId) {
+      Swal.fire(
+        'Error!',
+        'Primero selecciona una fila',
+        'error'
+      );
+      return;
+    }
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Una vez eliminado, no podrás recuperar este registro de hogar!',
@@ -68,24 +76,35 @@ export class AdminHogarComponent implements OnInit {
       confirmButtonText: 'Sí, eliminarlo!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.administradorService.eliminarHogar(hogarId).subscribe({
-          next: (response) => {
-            Swal.fire(
-              'Eliminado!',
-              'El hogar ha sido eliminado.',
-              'success'
-            );
-            this.obtenerHogares();
-          },
-          error: (err) => {
-            Swal.fire(
-              'Error!',
-              'Ocurrió un error al eliminar el hogar.',
-              'error'
-            );
-            console.error('Error al eliminar el hogar:', err);
-          }
-        });
+        const token = this.tokenService.getToken();
+        if (token)
+          this.administradorService.eliminarSeguro(this.selectedHogarId, token).subscribe({
+            next: (response) => {
+              if (!response.error) {
+                Swal.fire(
+                  'Eliminado!',
+                  'El hogar ha sido eliminado.',
+                  'success'
+                ).then(() => window.location.reload())
+              } else {
+                Swal.fire(
+                  'Error!',
+                  response.respuesta || 'Ocurrió un error al eliminar el hogar.',
+                  'error'
+                );
+                console.error('Error al eliminar el hogar:', response.respuesta);
+              }
+            },
+            error: (err) => {
+              Swal.fire(
+                'Error!',
+                'Ocurrió un error al eliminar el hogar.',
+                'error'
+              );
+              console.error('Error al eliminar el hogar:', err);
+            }
+          });
+        else this.tokenService.logout("Debes iniciar sesión");
       }
     });
   }

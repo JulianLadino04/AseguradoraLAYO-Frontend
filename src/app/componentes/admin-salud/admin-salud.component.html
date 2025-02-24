@@ -11,7 +11,7 @@
         <tbody>
             <!-- Usamos @for para iterar sobre el array salud y llenar la tabla -->
             @for (salud of saluds; track $index) {
-            <tr (click)="selectRow(salud.id)">
+            <tr (click)="selectRow(salud.id)" [ngClass]="{'selected': salud.id === selectedSaludId}">
                 <td class="text-center">{{ salud.id }}</td>
                 <td class="text-center">{{ salud.aseguradora }}</td>
                 <td class="text-center">{{ getDate(salud.fechaCreacion) }}</td>
@@ -20,4 +20,8 @@
             }
         </tbody>
     </table>
+    <div class="col-12 text-center">
+        <button class="btn btn-success mt-4 me-2 btn-danger" *ngIf="selectedSaludId!==''"
+            (click)="eliminarSeguro()">Eliminar cotización</button>
+    </div>
 </div>

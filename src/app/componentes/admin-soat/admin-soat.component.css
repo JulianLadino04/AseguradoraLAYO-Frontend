@@ -1,11 +1,16 @@
-    /* Añadir márgenes entre los botones */
-    .button-container button {
-        margin-right: 15px;
-        /* Separar los botones */
-    }
+/* Añadir márgenes entre los botones */
+.button-container button {
+    margin-right: 15px;
+    /* Separar los botones */
+}
 
-    /* Estilo para la fila seleccionada */
-    .selected {
-        background-color: #d3d3d3 !important;
-        /* Color gris claro para la fila seleccionada */
-    }
+/* Estilo para la fila seleccionada */
+.selected {
+    background-color: #95e2ac;
+    /* Color de fondo */
+    /* Negrita */
+}
+
+.selected td {
+    background-color: #95e2ac !important;
+}

@@ -7,23 +7,27 @@
                 <th class="text-center">Número Placa</th>
                 <th class="text-center">Ciudad de Circulación</th>
                 <th class="text-center">Tipo de Vehículo</th>
-                <th class="text-center">Hora</th>
                 <th class="text-center">Fecha</th>
+                <th class="text-center">Hora</th>
             </tr>
         </thead>
         <tbody>
             <!-- Usamos @for para iterar sobre el array autos y llenar la tabla -->
             @for (auto of autos; track $index) {
-            <tr (click)="selectRow(auto.id)">
+                <tr (click)="selectRow(auto.id)" [ngClass]="{'selected': auto.id === selectedAutoId}">
                 <td class="text-center">{{ auto.id }}</td>
                 <td class="text-center">{{ auto.aseguradora }}</td>
                 <td class="text-center">{{ auto.placa }}</td>
                 <td class="text-center">{{ auto.ciudadCirculacion }}</td>
                 <td class="text-center">{{ auto.tipoVehiculo }}</td>
-                <td class="text-center">{{ getTime(auto.fechaCreacion) }}</td>
                 <td class="text-center">{{ getDate(auto.fechaCreacion) }}</td>
+                <td class="text-center">{{ getTime(auto.fechaCreacion) }}</td>
             </tr>
             }
         </tbody>
     </table>
+    <div class="col-12 text-center">
+        <button class="btn btn-success mt-4 me-2 btn-danger" *ngIf="selectedAutoId!==''"
+            (click)="eliminarSeguro()">Eliminar cotización</button>
+    </div>
 </div>
