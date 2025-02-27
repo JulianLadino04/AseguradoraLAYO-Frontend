@@ -33,7 +33,7 @@ export class PerfilComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9]+$')]], // Acepta solo números
       address: ['', [Validators.required]],
       email: [{ value: '', disabled: true }],
-      ocupacion: ['', [Validators.required]],
+      ocupation: ['', [Validators.required]],
     });
   }
 
@@ -50,12 +50,13 @@ export class PerfilComponent implements OnInit {
               name: cuenta.name,
               phone: cuenta.phone,
               address: cuenta.address,
-              email: cuenta.email
+              email: cuenta.email,
+              ocupation: cuenta.ocupation
             });
           } else {
             // logout
             if (data.respuesta == "Sesión expirada") {
-              this.tokenService.logout();
+              this.tokenService.logout("Sesión expirada");
             } else
               Swal.fire({
                 title: 'Error',

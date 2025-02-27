@@ -38,7 +38,8 @@ export class RegistroComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.maxLength(10)]],
       address: ['', [Validators.required, Validators.maxLength(35)]],
-      birthDate: ['', [Validators.required]] // Agrega el campo para confirmar contraseña
+      birthDate: ['', [Validators.required]], // Agrega el campo para confirmar contraseña
+      ocupation: ['', [Validators.required, Validators.maxLength(35)]],
     });
   }
 

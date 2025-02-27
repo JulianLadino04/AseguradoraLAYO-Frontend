@@ -4,5 +4,6 @@ export interface CrearCuentaDTO {
    phone:string,
    address:string,
    email:string,
-   birthDate:string
+   birthDate:string,
+   ocupation:string
  }

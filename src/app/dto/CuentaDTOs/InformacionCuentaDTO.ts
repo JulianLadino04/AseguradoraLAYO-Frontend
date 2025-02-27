@@ -4,5 +4,6 @@ export interface InformacionCuentaDTO {
     email : string,
     phone : string,
     birthDate : string,
-    address : string
+    address : string,
+    ocupation : string
 }

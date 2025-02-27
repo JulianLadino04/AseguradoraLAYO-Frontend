@@ -37,6 +37,11 @@
           <input type="date" class="form-control" formControlName="birthDate"
             placeholder="Fecha de Nacimiento" />
         </div>
+        <div class="col-md-6 text-start">
+          <label [ngStyle]="labels" class="form-label">Ocupación</label>
+          <input type="text" class="form-control" formControlName="ocupation"
+            placeholder="Ocupación" />
+        </div>
       </div>
       <a *ngIf="!mostrarElementos" routerLink="/signin" style="align-self: center;">¿Ya tienes cuenta? <strong>Inicia Sesión</strong> </a>
       <a *ngIf="mostrarElementos" class="ablack" routerLink="/signin" style="align-self: center;">¿Ya tienes cuenta? <strong>Inicia Sesión</strong> </a>
